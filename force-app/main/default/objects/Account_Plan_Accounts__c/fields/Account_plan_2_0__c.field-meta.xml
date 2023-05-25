@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_plan_2_0__c</fullName>
+    <externalId>false</externalId>
+    <label>Account plan 2.0</label>
+    <referenceTo>Account_plan_2_0__c</referenceTo>
+    <relationshipLabel>Account Plan Accounts</relationshipLabel>
+    <relationshipName>Account_Plan_Accounts</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
