@@ -5,7 +5,6 @@ import createRecord from '@salesforce/apex/AccountPlanTableController.createReco
 import linkContact from '@salesforce/apex/AccountPlanTableController.linkContact';
 import linkAccount from '@salesforce/apex/AccountPlanTableController.linkAccount';
 import deleteRecord from '@salesforce/apex/AccountPlanTableController.deleteRecord';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 const actions = [
@@ -30,6 +29,10 @@ export default class AccountPlanTable extends LightningElement {
     dataColumns = [];
     
     connectedCallback(){
+        this.startTable();
+    }
+
+    startTable(){
         getAccountPlanTableSettings({
             tabName: this.tabName,
             recordId: this.recordId
@@ -93,7 +96,7 @@ export default class AccountPlanTable extends LightningElement {
         const promises = inputsItems.map(recordInput => updateRecord(recordInput));
         Promise.all(promises).then(res => {
             fireToast(this, 'success', 'Success', 'Records Updated Successfully!!');
-            return this.refresh();
+            return this.startTable();
         }).catch(error => {
             fireToast(this, 'error', 'Error', error.body.message);
         }).finally(() => {
@@ -115,7 +118,7 @@ export default class AccountPlanTable extends LightningElement {
                 if (result['error']) {
                     fireToast(this, 'error', 'Error', result['message']);
                 }else{
-                    this.refresh();
+                    this.startTable();
                 }
             });
         }
@@ -131,7 +134,7 @@ export default class AccountPlanTable extends LightningElement {
                     fireToast(this, 'error', 'Error', result['message']);
                 }else{
                     fireToast(this, 'success', 'Success', result['message']);
-                    this.refresh();
+                    this.startTable();
                 }
             })
         }else if(this.objectName == 'Account_Plan_Accounts__c'){
@@ -143,7 +146,7 @@ export default class AccountPlanTable extends LightningElement {
                     fireToast(this, 'error', 'Error', result['message']);
                 }else{
                     fireToast(this, 'success', 'Success', result['message']);
-                    this.refresh();
+                    this.startTable();
                 }
             })
         }
@@ -162,7 +165,7 @@ export default class AccountPlanTable extends LightningElement {
                     fireToast(this, 'error', 'Error', result['message']);
                 }else{
                     fireToast(this, 'success', 'Success', result['message']);
-                    this.refresh();
+                    this.startTable();
                 }
             });
         }
