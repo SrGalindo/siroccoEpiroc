@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ship_to_address_to_ship_to_account</fullName>
+    <active>false</active>
+    <description>Ship To accounts can have only Ship To addresses.</description>
+    <errorConditionFormula>AND(Account__r.RecordType.Name = &quot;Ship To&quot;,
+ TEXT(Address_Type_old__c)  &lt;&gt;  &quot;Ship-to&quot;
+)</errorConditionFormula>
+    <errorMessage>Only Ship to addresses may be tied to Ship to Accounts</errorMessage>
+</ValidationRule>

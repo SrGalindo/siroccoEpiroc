@@ -1,0 +1,28 @@
+<template>
+    <lightning-card>
+
+                
+        <lightning-record-edit-form object-api-name="Opportunity" onsubmit={handleSubmit} onsuccess={handleSuccess}>
+            
+            <lightning-messages> </lightning-messages>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="Name" value={oppName} disabled> </lightning-input-field>
+                <lightning-input-field field-name="CurrencyIsoCode" value={currency}> </lightning-input-field>
+                <lightning-input-field field-name="Amount" value={amount}> </lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="CloseDate" value={closeDate} onchange={handleFieldUpdate}> </lightning-input-field>
+                <lightning-input-field field-name="Description" value={description} onchange={handleFieldUpdate}> </lightning-input-field>
+                </div>
+            </div>
+            <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Create new"
+            >
+            </lightning-button>
+        </lightning-record-edit-form>
+    </lightning-card>
+
+</template>

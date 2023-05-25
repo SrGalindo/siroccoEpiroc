@@ -1,0 +1,9 @@
+.slds-accordion{
+    background-color: darkgray;
+    display: flex;
+}
+
+.slds-accordion__section{
+    background-color: darkgray;
+    display: flex;
+}

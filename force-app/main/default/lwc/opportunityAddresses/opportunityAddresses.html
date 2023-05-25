@@ -1,0 +1,114 @@
+<template>
+        <c-expandable-section id="1" label="Addresses">
+            
+    <div class="slds-grid slds-grid_vertical-align-start slds-gutters slds-p-horizontal_xxx-small slds-p-vertical_none">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-layout horizontal-align="center"  multiple-rows="true">
+                <lightning-layout-item class="slds-m-right_small slds-m-left_xx-small slds-p-bottom_xxx-small">
+                     <div class="slds-text-title">Ship-To:</div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="8" medium-device-size="10" large-device-size="9" padding="around-small">
+                    <label if:true={showPill}><span class="label-font">{label}</span></label>
+                    <div if:true={showPill} class="slds-pill-container slds-m-bottom_x-small">
+                    <!-- <span class="slds-pill slds-pill_link"> -->
+                        <lightning-pill style="width: 100%;" label={selectedRecord.Name} name={selectedRecord.Name} onremove={clear}>
+                            <lightning-icon icon-name={iconName} size="small" class="slds-m-right_small" variant="circle" alternative-text={selectedRecord.Name}></lightning-icon>
+                        </lightning-pill>
+                    <!-- <lightning-pill style="width: 100%;" label={selectedRecord.Name} name="SelectedId" onremove={clear}>
+                    </lightning-pill> -->
+                    </div>
+                    <div if:false={showPill} >
+                    <lightning-input class="slds-m-vertical_none" disabled={disableInput} type="search" value={searchKey} onchange={handleKeyChange}
+                        label={label}>
+                    </lightning-input>
+                    </div>
+                    <template if:true={records}>
+                    <div class="slds-m-vertical_none slds-text-body_small">
+                        <template for:each={records} for:item="record">
+                        <li value={record.Id} style="cursor: pointer;" class="slds-m-around_small" key={record.Id}
+                            onclick={addToSelected}>
+                            <lightning-icon icon-name={iconName} size="small"></lightning-icon>&nbsp;{record.Name}
+                        </li>
+                        </template>
+                    </div>
+                    </template>
+                    <template if:true={noRecords}>
+                    <template if:true={loading}>
+                        
+                        <lightning-spinner class="slds-is-relative" variant="brand" alternative-text="Loading..." size="small">
+                        </lightning-spinner>
+                    
+                    </template>
+                    <template if:false={loading}>
+                        
+                        <div class="dropDown">
+                            No results Found !
+                        </div>
+                    
+                    </template>
+                    </template>
+                
+                    <template if:true={selectedRecords}>
+                    <template for:each={selectedRecords} for:item="record">
+                        <lightning-pill name={record.Id} key={record.Id} label={record.Name} onremove={handleRemove}>
+                        <lightning-icon icon-name={iconName} variant="circle" alternative-text={record.Name}></lightning-icon>
+                        </lightning-pill>
+                    </template>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+            
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-layout horizontal-align="center"  multiple-rows="true">
+                <lightning-layout-item class="slds-m-right_small slds-m-left_xx-small slds-p-bottom_xxx-small">
+                     <div class="slds-text-title">Bill-To:</div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="8" medium-device-size="10" large-device-size="9" padding="around-small">
+                    <label if:true={showPill2}><span class="label-font">{label2}</span></label>
+                    <div if:true={showPill2} class="slds-pill-container slds-m-bottom_x-small">
+                    <!-- <span class="slds-pill slds-pill_link"> -->
+                   
+                        <lightning-pill style="width: 100%;" label={selectedRecord2.Name} name={selectedRecord2.Name} onremove={clear2}>
+                            <lightning-icon icon-name={iconName} size="small" class="slds-m-right_small" variant="circle" alternative-text={selectedRecord2.Name}></lightning-icon>
+                        </lightning-pill>
+                    </div>
+                    <div if:false={showPill2} >
+                    <lightning-input disabled={disableInput2} type="search" value={searchKey2} onchange={handleKeyChange2} class=""
+                        label={label2}>
+                    </lightning-input>
+                    </div>
+                    <template if:true={records2}>
+                    <div class="slds-m-vertical_none slds-text-body_small">
+                        <template for:each={records2} for:item="record">
+                        <li value={record.Id} style="cursor: pointer;" class="SingleResult slds-m-around_small" key={record.Id}
+                            onclick={addToSelected2}>
+                            <lightning-icon icon-name={iconName} size="small"></lightning-icon>&nbsp;{record.Name}
+                        </li>
+                        </template>
+                    </div>
+                    </template>
+                    <template if:true={noRecords2}>
+                    <template if:true={loading2}>
+                        
+                        <lightning-spinner class="slds-is-relative" variant="brand" alternative-text="Loading..." size="small">
+                        </lightning-spinner>
+                    
+                    </template>
+                    <template if:false={loading2}>
+                        
+                        <div class="dropDown">
+                            No results Found !
+                        </div>
+                    
+                    </template>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+            
+        </div>
+        
+    </div>
+</c-expandable-section>
+
+  </template>

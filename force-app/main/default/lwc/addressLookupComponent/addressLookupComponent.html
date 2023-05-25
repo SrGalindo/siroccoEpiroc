@@ -1,0 +1,36 @@
+<template>
+    <c-expandable-section id="1" label="Addresses">
+        <div class="section-content slds-grid slds-section__content">
+            <div class="slds-m-left_small slds-col slds-size_1-of-8">
+                <span class="slds-float_left" style="font-size: 12px">Ship to</span>
+            </div>
+                <div class="slds-col slds-size_3-of-8">
+                    <c-lookup-component class="slds-float_left" style="width:300px"
+                    name="addressLookup"
+                    child-object-api-name={type}
+                    target-field-api-name="Ship_to__c"
+                    value={Ship_to__c}
+                    required={required}
+                    add-to-recent="true"
+                    onvalueselected={handleSelectedLookup}
+                    record-id={recordId}
+                    ></c-lookup-component>
+                </div>
+            <div class="slds-col slds-size_1-of-8">
+                <span class="slds-float_left" style="font-size: 12px">Bill to</span>
+            </div>
+            <div class="slds-size_3-of-8"> 
+                    <c-lookup-component class="slds-float_left" style="width:300px"
+                    name="addressLookup"
+                    child-object-api-name={type}
+                    target-field-api-name="Bill_to__c"
+                    value={Bill_to__c}
+                    required={required}
+                    add-to-recent="true"
+                    record-id={recordId}
+                    onvalueselected={handleSelectedLookup}
+                    ></c-lookup-component>
+            </div>
+        </div>
+    </c-expandable-section>
+</template>

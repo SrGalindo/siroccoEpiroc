@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>As a user I want to be able to add a visit report with all needed information So I can keep my visit notes in a structured way</description>
+    <motif>Custom62: Chalkboard</motif>
+</CustomTab>

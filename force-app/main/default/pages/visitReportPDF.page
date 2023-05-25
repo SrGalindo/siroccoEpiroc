@@ -1,0 +1,210 @@
+<apex:page Controller="Casepdf" renderAs="pdf">
+    <apex:variable var="index" value="{!1}"/>
+    <body>
+        
+         <div class="" style="min-height: 2in;">
+            <!-- SECTION: header w/ company address and logo -->
+            <table class="header-table">
+                <tr>
+                    <td style="width: 75%">
+                        <apex:image width="2.75in" url="{!$Resource.Epiroc_Logo}"/>
+                    </td>
+                    <td style="">
+                        <table style="width: 3.5in;border: solid 1px black; border-collapse: separate; ">
+                            <tr>
+                                <td style="width: 2.0in;text-align: center; font-size: 16pt; font-weight: bold; border-bottom: solid 1px black"
+                                    colspan="2">Visit Report
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Date:</b></td>
+                                <td style="text-align:right;"> 
+                                    {!YEAR(TODAY())}-{!MONTH(TODAY())}-{!DAY(TODAY())}&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Visit Report:</b></td>
+                                <td style="text-align:right;">{! VR.Name  }&nbsp;&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table >
+            <tr>
+                <td ><b>Account:</b></td>
+                <td>{! VR.Account__r.Name }</td>
+            </tr>
+            <tr>
+                <td ><b>Created By:</b></td>
+                <td>{! VR.CreatedBy.Name }</td>
+            </tr>
+        </table>
+        
+        
+        <br/>
+        <h2>Visit Report Information</h2>
+        <div style="min-height: 5.7in;">
+            <table style="width: 100%;border: solid 1px black;">
+                <tr>
+                    <th style="width: 50%;">Agenda of Visit</th>
+                    <th>Reason for Visit</th>
+                  </tr>
+                  <tr>
+                    <td>{! VR.Agenda_of_visit__c   }</td>
+                    <td>{! VR.Reason_for_visit__c   }</td>
+                  </tr>
+                <tr>
+                    <th>Status</th>
+                    <th>Divisions</th>
+                  </tr>
+                  <tr>
+                    <td>{! VR.Status__c   }</td>
+                    <td>{! VR.Division_Multi__c   }</td>
+                  </tr>
+                 
+            </table>
+            <h2>Meeting Information</h2>
+            <table style="width: 100%;border: solid 1px black;">
+                <tr>
+                    <th>Subject</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>{! VR.Subject__c   }</td>
+                    <td></td>
+                  </tr>
+                <tr>
+                    <th>Date/Time</th>
+                    <th>Type of Visit</th>
+                  </tr>
+                  <tr>
+                    <td>{! VR.Date_Time__c   }</td>
+                    <td>{! VR.Type_of_Visit__c   }</td>
+                  </tr>
+                <tr>
+                    <th>Additional attendance to the meeting</th>
+                    <th>Attendance: Contact person in meeting</th>
+                  </tr>
+                  <tr>
+                    <td>{! VR.Additional_attendance_to_the_meeting__c   }</td>
+                    <td>{! VR.Attendance_Contact_person_in_meeting__r.Name   }</td>
+                  </tr>
+            </table>
+                
+            <table style="width: 100%;">
+                <tr>
+                    <td ><h2>Description:</h2></td>
+                    
+                </tr>
+                <tr>
+                    <td>{! VR.Description__c  }</td>
+                </tr>
+            </table> 
+            <hr />
+            <h2>Visit Report</h2>
+            <table style="width: 100%;border: solid 1px black;">
+                <tr>
+                    <td ><b>Positive Feedback:</b></td>
+                    <td ><b>Negative Feedback:</b></td>
+                </tr>
+                <tr>
+                    <td>{! VR.Positive_feedback__c  }</td>
+                    <td>{! VR.Negative_feedback__c  }</td>
+                </tr>
+                <tr>
+                    <td ><b>Pain Points:</b></td>
+                    <td ><b>Accomplishments:</b></td>
+                </tr>
+                <tr>
+                    <td>{! VR.Pain_Points__c  }</td>
+                    <td>{! VR.Accomplishments__c  }</td> 
+                </tr>
+                <tr>
+                    <td ><b>Notes:</b></td>
+                    <td ><b></b></td>
+                </tr>
+                <tr>
+                    <td>{! VR.Notes__c  }</td>
+                    <td></td>
+                </tr>
+            </table>  
+        </div>   
+        
+        
+        <br/>
+        <h2>Related Tasks</h2>
+        <apex:form >
+            <div id="maincontainer">
+                <apex:pageblock >
+                    <table width="700px" style="margin-top:30px;border: 1px solid;border-collapse: collapse;">
+                        <tr>
+                            <th style="border: 1px solid;text-align:left">
+
+                            </th>
+                            <th style="border: 1px solid;text-align:left">
+                                <apex:outputLabel value="{!$ObjectType.Task.fields.Subject.Label}"/>
+                            </th>
+                            <th style="border: 1px solid;">
+                                <apex:outputLabel value="Due Date"/>
+                            </th>
+                            <th style="border: 1px solid;">
+                                <apex:outputLabel value="Assigned To"/>
+                            </th>
+                            <th style="border: 1px solid;">
+                                <apex:outputLabel value="Status"/>
+                            </th>
+                            <th style="border: 1px solid;">
+                                <apex:outputLabel value="Priority"/>
+                            </th>
+                        </tr>
+                        <apex:repeat value="{!Tasks}" var="line" id="theRepeat" >
+                            <tr>
+                                <td style="border: 1px solid;">
+                                    <apex:outputLabel value="{!index}" style="text-align:center"/>
+                                    <apex:variable var="index" value="{!index+1}"/>
+                                </td>
+                                <td style="border: 1px solid;"> {!line.Subject}</td>
+                                <td style="border: 1px solid;">
+                                    <apex:outputText value="{0,date,yyyy.MM.dd}">
+                                        <apex:param value="{!line.ActivityDate}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td style="border: 1px solid;"> {!line.Owner.Name}</td>
+                                <td style="border: 1px solid;"> {!line.Status}</td>
+                                <td style="border: 1px solid;"> {!line.Priority}</td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </apex:pageblock>
+
+            </div>
+
+        </apex:form>
+        
+        
+        <div class="footer" style="">
+            <hr/>
+            <table align="center" style="width: 100%;">   
+                <tr>
+                    <td colspan="2" style="font-size: 10pt; color: blue;">
+                        <table style="width: 100%; border-collapse: collapse; border: 1px solid black; ">
+                            <tr>
+                                <td style="text-align: left;"></td>                         
+                                <td style="text-align: right;">Source : Epiroc CRM</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>      
+       </div>
+    </body>
+    <!--<apex:pageBlock title="Case Details">
+        <apex:pageBlockSection >
+            <apex:outputField value="{! values.Name }"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>  -->  
+    
+</apex:page>

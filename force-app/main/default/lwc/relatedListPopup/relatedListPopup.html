@@ -1,0 +1,44 @@
+<!--
+ - Created by Sirocco on 2022-11-30.
+ -->
+
+<!-- Related List Popup -->
+<template>
+    <template if:true={showModal}>
+        <c-modal onclosedialog={handleDialogClose}>
+            <template if:true={isDelete}>
+                <span slot="header">{header}</span>
+                <slot class="slds-align_absolute-center">
+                    {body}
+                </slot>
+                <span slot="footer">
+                    <lightning-button variant="neutral" label="Cancel" title="Cancel"
+                                      onclick={handleClose}></lightning-button>
+                    <lightning-button variant="brand" label="Delete" title="Delete" onclick={handleDelete}
+                                      class="slds-m-left_x-small"></lightning-button>
+                </span>
+            </template>
+            <template if:false={isDelete}>
+                <span slot="header">{header}</span>
+                <slot>
+                    <lightning-record-form
+                            class="record-form"
+                            record-id={recordId}
+                            object-api-name={sobjectApiName}
+                            layout-type="Full"
+                            columns="2"
+                            density="compact"
+                            mode="edit"
+                            onsuccess={handleSuccess}>
+                    </lightning-record-form>
+                </slot>
+                <span slot="footer">
+                    <lightning-button variant="neutral" label="Cancel" title="Cancel"
+                                      onclick={handleClose}></lightning-button>
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave}
+                                      class="slds-m-left_x-small"></lightning-button>
+                </span>
+            </template>
+        </c-modal>
+    </template>
+</template>

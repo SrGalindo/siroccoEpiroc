@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Add on for changing owner permission for most objects</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Epiroc Change Owner</label>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>TransferAnyEntity</name>
+    </userPermissions>
+</PermissionSet>

@@ -1,0 +1,53 @@
+<!--
+  @description       : 
+  @author            : Ahmad Nawaz
+  @group             : 
+  @last modified on  : 09-08-2022
+  @last modified by  : Ahmad Nawaz
+-->
+
+<template>
+    <template if:true={showLoadingSpinner}>
+        <div style="z-index: 10000 !important;">
+            <lightning-spinner alternative-text="Uploading......" size="medium" style="z-index: 10000 !important;"></lightning-spinner>
+        </div>
+    </template>
+
+<lightning-card title="Process CSV File">
+    <div style="margin-left:4%; margin:0px auto; width: 300px;">
+        <div>
+            <lightning-input label="" name="file uploader" onchange ={handleFilesChange} type="file" multiple></lightning-input>
+        </div><br/>
+        <div class="slds-text-body_small" style={color}>{fileName}
+        </div><br/>
+        <!--<div>
+            <lightning-button class="slds-m-top--medium" label={UploadFile} onclick   ={handleSave} variant="brand" disabled={isTrue}></lightning-button>
+        </div>-->
+    </div>
+    <div class="slds-modal__footer" style="margin-top: 42px;width: 635px;margin-left: -28px;">
+        <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeAction}>Cancel</button>
+        <lightning-button variant="brand"
+                          label={UploadFile}
+                          title="Generate File"
+                          onclick={handleSave}
+                          class="slds-m-left_x-small">
+        </lightning-button>
+    </div>
+</lightning-card>
+
+
+
+<!--<lightning-card title="Quote Lines" icon-name="standard:account">
+        <div style="width: auto;">
+            <template if:true={data}>
+                    <lightning-datatable
+                            data={data}
+                            columns={columns}
+                            key-field="id">
+                    </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>-->
+
+
+</template>

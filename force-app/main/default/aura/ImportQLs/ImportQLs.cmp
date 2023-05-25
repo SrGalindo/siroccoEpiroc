@@ -1,0 +1,7 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" > 
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="closeModel" type="boolean"/>
+    <c:importQuoteLines onvaluechange="{!c.getValueFromLwc}" recId="{!v.recordId}"/>
+    
+</aura:component>

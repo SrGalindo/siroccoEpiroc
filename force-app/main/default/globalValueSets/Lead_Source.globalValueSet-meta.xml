@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Web</fullName>
+        <default>false</default>
+        <label>Web</label>
+    </customValue>
+    <customValue>
+        <fullName>Research</fullName>
+        <default>false</default>
+        <label>Research</label>
+    </customValue>
+    <customValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Partner</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal referral</fullName>
+        <default>false</default>
+        <label>Internal referral</label>
+    </customValue>
+    <customValue>
+        <fullName>General Marketing &amp; PR</fullName>
+        <default>false</default>
+        <label>General Marketing &amp; PR</label>
+    </customValue>
+    <customValue>
+        <fullName>External referral</fullName>
+        <default>false</default>
+        <label>External referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Event - internal</fullName>
+        <default>false</default>
+        <label>Event - internal</label>
+    </customValue>
+    <customValue>
+        <fullName>Event - external</fullName>
+        <default>false</default>
+        <label>Event - external</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Request</fullName>
+        <default>false</default>
+        <label>Customer Request</label>
+    </customValue>
+    <masterLabel>Lead Source</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

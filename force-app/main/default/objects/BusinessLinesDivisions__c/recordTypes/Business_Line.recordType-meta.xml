@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_Line</fullName>
+    <active>true</active>
+    <label>Business Line</label>
+    <picklistValues>
+        <picklist>Business_LinePL__c</picklist>
+        <values>
+            <fullName>Epiroc Digital Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Epiroc Drilling Solutions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hydraulic Attachment Tools Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mining %26 Rock Excavation Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rock Drilling Tools %28Secoroc%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rock Drilling Tools - Exploration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rock Drilling Tools - Ground Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rocvolt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surface Mining Technology</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surface and Exploration Drilling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Underground Rock Excavation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DivisionPL__c</picklist>
+        <values>
+            <fullName>Digital Solutions Division</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parts %26 Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surface</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology %26 Innovation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tools %26 Attachments</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Underground</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Account Layout</layout>
+        <sections>
+            <label></label>
+            <section>Account Summary</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Customer Direct Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Indirect Customer Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Partner Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospect Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>TEST Account Layout C360</layout>
+        <sections>
+            <label></label>
+            <section>Account Summary</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Child_Account</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Create_Opp</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Create_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>New_Simple_Opportuniy</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Submit_to_Credit_Controller</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Visit_Report</name>
+    </quickActions>
+    <recordTypes>
+        <label></label>
+        <name>Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Indirect_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Partner</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Prospect</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>ERP_Sync_lock</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>RSA_Need</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label></label>
+        <name>See_news</name>
+    </webLinks>
+</CustomObjectTranslation>

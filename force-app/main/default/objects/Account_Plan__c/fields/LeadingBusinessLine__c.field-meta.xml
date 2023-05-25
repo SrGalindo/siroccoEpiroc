@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeadingBusinessLine__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Leading Business Line</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) OR 3</booleanFilter>
+        <errorMessage>Please select a Business Line</errorMessage>
+        <filterItems>
+            <field>BusinessLinesDivisions__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Division</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessLinesDivisions__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Relation</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessLinesDivisions__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value></value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessLinesDivisions__c</referenceTo>
+    <relationshipLabel>Account Plans</relationshipLabel>
+    <relationshipName>Account_Plans</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

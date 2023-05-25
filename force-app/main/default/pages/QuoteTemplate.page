@@ -1,0 +1,526 @@
+<apex:page applyHtmlTag="false" showHeader="false" standardController="Quote" extensions="QT_Controller"
+           language="{!If(quote.Language__c=='Mozambique - English' || quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Namibia - English' || quote.Language__c=='Botswana - English' ,'en',quote.Language__c)}" sidebar="false" renderAs="pdf" standardStylesheets="false">
+    <apex:variable var="index" value="{!1}"/>
+    <apex:variable var="index2" value="{!1}"/>
+    <apex:variable var="bankDetailsMargin" value="{! If(quote.Language__c=='en' || quote.Language__c=='Mozambique - English' || quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Namibia - English' || quote.Language__c=='Botswana - English','-15.5','-21')}"/>
+    <!--<apex:variable var="bankDetailsMargin" value="{! If(quote.Language__c!='en' && language=='en' ,'-15.5',quote.Language__c)}"/>-->
+    <apex:variable var="language" value="{! If(quote.Language__c=='Mozambique - English' || quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Namibia - English' || quote.Language__c=='Botswana - English' ,'en',quote.Language__c)}"/>
+    <apex:variable var="netAmount" value="{! quote.TaxFormula__c + quote.TotalPrice}"/>
+    <html>
+        <head>
+            <title>Quote Document</title>
+            <style>
+                .slds-modal__container{
+                width: 80% !important;
+                max-width: 80% !important;
+                }
+                @page {
+                size: A4;
+                margin-top: 2cm;
+                margin-bottom: 2.8cm;
+                margin-left: 1cm;
+                margin-right: 1cm;
+                
+                @top-center {
+                content: element(header);
+                }
+                @bottom-left {
+                content: element(footer);
+                }
+                }
+                div.header {
+                position: running(header);
+                }
+                div.footer {
+                display: block;
+                position: running(footer);
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+            </style>
+        </head>
+        <body style="font-family:Arial, Helvetica, sans-serif;">
+            <div class="header">
+                <apex:image url="{!$Resource.Quote_Template_Header}" width="800px"
+                            style="margin-left:-50px;margin-top:-50px;"/>
+            </div>
+            <div class="footer" style="margin-top:1px;font-size:9px;"> 
+                <b style="display:{! If(quote.Language__c=='es' ,'','none') }">Epiroc España</b>
+                <b style="display:{! If(quote.Language__c=='pt_BR' ,'','none') }">Epiroc Portugal</b>
+                <b style="display:{! If(quote.Language__c=='Namibia - English' ,'','none') }">Epiroc Namibia</b> 
+                <b style="display:{! If(quote.Language__c=='Botswana - English' ,'','none') }">Epiroc Botswana</b>
+                <b style="display:{! If(quote.Language__c=='Zimbabwe - English' ,'','none') }">Epiroc Zimbabwe</b>
+                <b style="display:{! If(quote.Language__c=='Mozambique - English' ,'','none') }">Epiroc Mozambique</b>
+                <b style="display:{! If(quote.Language__c=='en' ,'','none') }">Epiroc South Africa</b>
+                
+                <hr/>
+                <div>    
+                    <table width="100%" style="font-size:7px;">
+                        <tr style="display:{! If(quote.Language__c=='pt_BR' ,'','none') }">
+                            <td style="vertical-align: text-top;padding-right:15px;">Epiroc
+                                Portugal Unipessoal, Lda<br/>Lagoas Park,Edificio 15, piso 0<br/>2740-265 Poto Salvo<br/>Portugal
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;">
+                                Endereco de visita:<br/>Lagoas Park, Edificio 15, piso 0<br/>2740-265 Porto, Salvo<br/>Delegacao
+                                Norte:<br/>Lake Towers - Edificio D, 2° piso<br/>4400-617 VilaNova de Gaia
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;">
+                                Telefone: +351 210 400 300<br/>Email: info.portugal@epiroc.com<br/><br/>Telefone: +351 221 202
+                                374<br/>www.epiroc.com
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;">
+                                Matriculada na C.R.C. de Lisboa<br/>NIPC / NIF: 514 511 273<br/>Capital Social Realizado:<br/>900.000
+                                Euros
+                            </td>
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='es' ,'','none') }">
+                            <td style="vertical-align: text-top;padding-right:15px;">Epiroc
+                                Minería e Ingeniería Civil España S.L.U.<br/>Avda. José Gárate nº 3, Pol. Ind. Coslada<br/>28823 Madrid
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;">
+                                Telephone: +34 91 991 59 90<br/>Fax: +34 91 671 31 16 <br/>www.epiroc.com
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;">
+                                Sociedad Limitada Unipersonal<br/>Reg. Mer. Madrid – T. 35.876, F. 150, <br/>Sección 8, Hoja M-644.614 - Inscrip. 1ª<br />CIF. B87857231
+                                
+                            </td>
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='en' ,'','none') };">
+                            <td style="vertical-align: text-top;padding-right:15px;"
+                                width="25%">H/Office:<br/>16 Innes Road<br/>Jet Park, Boksburg, 1459<br/>TEL: (011) 821 9000
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Rustenburg:<br/>Mabe Business park<br/>Kgwebo nr 7 Kgwebo Street<br/>Waterval East,
+                                Ext 4<br/>Tel: (011) 821 9094
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Kuruman:<br/>11 Marietta Circle<br/> Kuruman, 8460<br/>TEL: 05371 22831/71
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;"
+                                width="25%">Steelpoort:<br/>No 16A Bergsering Street<br/>Steelpoort , 1133<br/>Tel: 013 230
+                                9826/50
+                            </td>
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='Zimbabwe - English' ,'','none') };">
+                            <td style="vertical-align: text-top;padding-right:15px;"
+                                width="25%">H/Office:<br/>16 Innes Road<br/>Jet Park, Boksburg, 1459<br/>TEL: (011) 821 9000
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Rustenburg:<br/>Mabe Business park<br/>Kgwebo nr 7 Kgwebo Street<br/>Waterval East,
+                                Ext 4<br/>Tel: (011) 821 9094
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Kathu:<br/>4 York Street<br/> Bestwood Supply Park<br/>Kathu, 8446
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;"
+                                width="25%">Steelpoort:<br/>No 16A Bergsering Street<br/>Steelpoort , 1133<br/>Tel: 013 230
+                                9826/50
+                            </td>
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='Botswana - English' ,'','none') };">
+                            <td style="vertical-align: text-top;padding-right:15px;"
+                                width="25%">Head Office:<br/>Plot 175, Unit 1<br/>Gaborone International<br/>Commerce Park<br/>PO Box 41565
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Tel: +267 395 9155<br/><br/>Website<br/>www.epiroc.com
+                                
+                            </td>    
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='Namibia - English' ,'','none') };">
+                            <td style="vertical-align: text-top;padding-right:15px;"
+                                width="25%">Head Office:<br/>33 Copper Street<br/>Properita, Windhock<br/>PO Box 559<br/>Tel: +264 84 000 9400
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Swakopmund:<br/>Erf No. 4821<br/>New Industrial Area<br/>PO Box 6037<br/>Tel: +264 84 000 9400
+                                
+                            </td>    
+                        </tr>
+                        <tr style="display:{! If(quote.Language__c=='Mozambique - English' ,'','none') };">
+                            <td style="vertical-align: text-top;padding-right:15px;"
+                                width="25%">Head Office:<br/>Rua Beijo da Mulata<br/>n.111<br/>Bairro Sommerschield 2<br/>Maputo
+                            </td>
+                            <td style="vertical-align: text-top;padding-left:15px;border-left:1px solid;border-color:orange;padding-right:15px;"
+                                width="25%">Tel: +258 21 494 383<br/><br/>Website<br/>www.epiroc.com
+                                
+                            </td>    
+                        </tr>
+                    </table>
+                </div>
+                <div style="font-size:7px;float:right;margin-top:-17px;margin-right:-35px;">Page <span class="pagenumber"/> of <span class="pagecount"/></div>
+            </div>
+            <div class="content">
+                <apex:form >
+                    <apex:pageBlock >
+                        <table width="300px" style="text-align:right;float:right;margin-top:30px;margin-right:33px;font-size:{! If(Language=='en' ,'12px','') };">
+                            <tr>
+                                <td style="text-align:right;width:300px;">
+                                    <text style="display:{! If(language=='en' ,'block','none') };"><b>Date:</b>
+                                        <apex:outputText value="{0, date, yyyy-MM-dd}">
+                                            <apex:param value="{!quote.CreatedDate}"/>
+                                        </apex:outputText> 
+                                    </text>
+                                    <text style="display:{! If(language=='es' ,'block','none') };"><b>Fecha:</b>
+                                        <apex:outputText value="{0, date, yyyy-MM-dd}">
+                                            <apex:param value="{!quote.CreatedDate}"/>
+                                        </apex:outputText> 
+                                    </text>
+                                    <text style="display:{! If(language=='pt_BR' ,'block','none') };"><b>Data:</b>
+                                        <apex:outputText value="{0, date, yyyy-MM-dd}">
+                                            <apex:param value="{!quote.CreatedDate}"/>
+                                        </apex:outputText> 
+                                    </text>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right;margin-right:33px;">
+                                    
+                                    <text style="display:{! If(language=='en' ,'block','none') };"><b>
+                                        <apex:outputLabel value="{!$ObjectType.Quote.fields.QuoteNumber.Label}:"/></b>
+                                        {!quote.QuoteNumber}
+                                    </text>
+                                    <text style="display:{! If(language=='es' ,'block','none') };"><b>
+                                        <apex:outputLabel value="Número de Oferta:"/></b>
+                                        {!quote.QuoteNumber}
+                                    </text>
+                                    <text style="display:{! If(language=='pt_BR' ,'block','none') };"><b>
+                                        
+                                        <apex:outputLabel value="Cotação nº:"/></b>
+                                        {!quote.QuoteNumber}
+                                    </text>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right;width:320px;">   
+                                    <text style="display:{! If(language=='en' ,'block','none') };"><b>No. of Pages:</b>
+                                        <span class="pagecount"/>
+                                    </text>
+                                    <text style="display:{! If(language=='es' ,'block','none') };"><b>Páginas:</b>
+                                        <span class="pagecount"/>
+                                    </text>
+                                    <text style="display:{! If(language=='pt_BR' ,'block','none') };"><b>Nº Páginas:</b>
+                                        <span class="pagecount"/>
+                                    </text> 
+                                    
+                                </td>
+                                
+                            </tr>
+                        </table>
+                    </apex:pageBlock>
+                </apex:form>
+                <apex:form style="margin-top:100px;">
+                    <hr style="margin-top:-15px;"/>
+                    
+                    <apex:pageBlock >
+                        <table width="600px" style="font-size:{! If(quote.Language__c=='pt_BR' || quote.Language__c=='es' ,'10px','12px') };">
+                            <tr>
+                                <th colspan="2" style="display:{! If(quote.Language__c!='pt_BR' && quote.Language__c!='es' ,'','none') };">Customer</th>
+                                <th colspan="2" style="display:{! If(quote.Language__c=='pt_BR' ,'','none') };">Cliente</th>
+                                <th colspan="2" style="display:{! If(quote.Language__c=='es' ,'','none') };">Cliente</th>
+                                <th colspan="2" style="display:{! If(quote.Language__c!='pt_BR' && quote.Language__c!='es','','none') };padding-left:30px;">Epiroc</th> 
+                                <th colspan="2" style="padding-left:30px;display:{! If(quote.Language__c=='pt_BR' ,'','none') };">Epiroc Portugal, Lda</th> 
+                                <th colspan="2" style="padding-left:30px;display:{! If(quote.Language__c=='es' ,'','none') };">Epiroc Minería E Ingeniería Civil España, S.L.U.</th> 
+                            </tr>
+                            <tr>
+                                <td style="width:120px;">
+                                    <apex:outputLabel style="display:{! If(quote.Language__c!='pt_BR' && quote.Language__c!='es','','none') };" value="{!$ObjectType.Account.fields.Name.Label}:"/>
+                                    <apex:outputLabel style="display:{! If(quote.Language__c=='pt_BR','','none') };" value="Nome:"/>
+                                    <apex:outputLabel style="display:{! If(quote.Language__c=='es','','none') };" value="Nombre:"/>
+                                </td>
+                                <td style="width:200px;">{!quote.Account.Name}</td>
+                                <td style="padding-left:30px;width:110px;"><apex:outputLabel value="{!$ObjectType.Account.fields.Account_owner__c.Label}"/>:</td>
+                                <td style="text-align:left;">{!quote.Account.Owner.Name}</td>
+                            </tr>
+                            <tr>
+                                <td><apex:outputLabel value="{!$ObjectType.Account.fields.CCUST__c.Label}"/>:</td>
+                                <td >{!quote.Account.CCUST__c}</td>
+                                <td style="padding-left:30px;">
+                                    <apex:outputLabel style="display:{! If(quote.Language__c!='es' ,'','none') };" value="{!$ObjectType.User.fields.Email.Label}:"/>
+                                    <apex:outputLabel style="display:{! If(quote.Language__c=='es' ,'','none') };" value="Email:"/>
+                                </td>
+                                <td style="text-align:left;">{!quote.Account.Owner.Email}</td>
+                                
+                            </tr>
+                            <tr>
+                                <td><apex:outputLabel value="{!$ObjectType.Quote.fields.Bill_to__c.Label}"/>:  </td>
+                                <td>{!quote.Bill_to__r.Name}</td>
+                                <td style="padding-left:30px;display:{! If(quote.Language__c!='en' ,'','none') };"><apex:outputLabel value="{!$ObjectType.User.fields.Phone.Label}"/>:</td>
+                                <td style="display:{! If(quote.Language__c!='en' ,'','none') };text-align:left;">{!quote.Account.Owner.Phone}</td>
+                                
+                            </tr>
+                            <tr>
+                                <td><apex:outputLabel value="{!$ObjectType.Quote.fields.Ship_to__c.Label}"/>:</td>
+                                <td>{!quote.Ship_to__r.Name}</td>
+                                
+                            </tr> 
+                            <tr style="display:{! If(Language=='en' ,'none','') };">
+                                <td><apex:outputLabel value="{!$ObjectType.Quote.fields.Contact_Name__c.Label}"/>:</td>
+                                <td>{!quote.Contact_Name__c}</td> 
+                            </tr>
+                            <tr style="display:{! If(Language=='en' ,'none','') };">
+                                <td><apex:outputLabel value="{!$ObjectType.Quote.fields.Contact_Email__c.Label}"/>:</td>
+                                <td>{!quote.Contact_Email__c}</td>
+                            </tr>
+                            <tr style="display:{! If(Language=='en' ,'none','') };">
+                                <td><apex:outputLabel value="{!$ObjectType.Quote.fields.Contact_Phone__c.Label}"/>:</td>
+                                <td>{!quote.Contact_Phone__c }</td> 
+                            </tr>
+                        </table>
+                    </apex:pageBlock>
+                </apex:form>
+                <div style="display:{! If(quote.Language__c!='Botswana - English' && quote.Language__c!='Namibia - English' && quote.Language__c!='Mozambique - English' && quote.Language__c!='Zimbabwe - English' ,'block','none') };">
+                    
+                    <apex:form style="margin-top:20px;font-size:{! If(quote.Language__c=='pt_BR' || quote.Language__c=='es' ,'10px','12px') };">
+                        
+                        <hr style="margin-top:-15px;"/>
+                        <h5 style="display:{! If(Language=='pt_BR' ,'block','none') }">Detalhes da Cotação</h5>
+                        <h5 style="display:{! If(Language=='en' ,'block','none') };font-size:{! If(quote.Language__c=='en','12px','') };">Quote details</h5>
+                        <h5 style="display:{! If(Language=='es' ,'block','none') }">Detalles de Oferta</h5>
+                        <apex:pageBlock >
+                            <table width="600px" style="margin-top:-10px;">
+                                <tr>
+                                    <td style="width:120px;"><apex:outputLabel value="{!$ObjectType.Quote.fields.Customer_Reference__c.Label}"/>:</td>
+                                    <td style="width:200px;">{!quote.Customer_Reference__c}</td>
+                                    <td style="padding-left:30px;width:120px;display:{! If(quote.Language__c=='en' ,'none','') };">
+                                        <apex:outputLabel value="{!$ObjectType.Quote.fields.Quote_Expiration_Date__c.Label}"/>:
+                                    </td>
+                                    <td style="display:{! If(quote.Language__c=='en' ,'none','') };">
+                                        <apex:outputText value="{0,date,yyyy.MM.dd}" >
+                                        <apex:param value="{!quote.Quote_Expiration_Date__c}"/>
+                                        </apex:outputText>
+                                    </td>  
+                                </tr>
+                                <tr> 
+                                    <td>
+                                        <apex:outputLabel value="{!$ObjectType.Quote.fields.Payment_Terms__c.Label}:" style="display:{! If(quote.Language__c!='en' ,'','none') };" />
+                                    </td>
+                                    <td>
+                                        <text style="display:{! If(quote.Language__c!='en' ,'','none') };">{!quote.Payment_Terms__c}</text>
+                                    </td>
+                                    <td style="padding-left:30px;">
+                                        <apex:outputLabel style="display:{! If(Language=='en' && quote.Language__c!='en' ,'block','none') };" value="{!$ObjectType.Quote.fields.Transport_Fee__c.Label}:"/>
+                                        <apex:outputLabel style="display:{! If(Language=='es' || Language=='pt_BR' ,'block','none') };" value="{!$ObjectType.Quote.fields.Incoterms__c.Label}:"/>
+                                    </td>
+                                    <td>
+                                        <text style="display:{! If(Language=='en' && quote.Language__c!='en' ,'block','none') };">{!quote.Transport_Fee__c }</text>
+                                        <text style="display:{! If(Language=='es' || Language=='pt_BR' ,'block','none') };">{!quote.Incoterms__c} </text>
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td >
+                                        <apex:outputLabel value="{!$ObjectType.Quote.fields.Other_Payment_Terms__c .Label}:" style="display:{! If((quote.Language__c=='es' || quote.Language__c=='pt_BR') && quote.Payment_Terms__c=='Other' ,'','none') };" />
+                                    </td>
+                                    <td >
+                                        <text style="display:{! If((quote.Language__c=='es' || quote.Language__c=='pt_BR') && quote.Payment_Terms__c=='Other' ,'','none') };">{!quote.Other_Payment_Terms__c }</text>
+                                    </td>
+                                    <td style="padding-left:30px;">
+                                        <apex:outputLabel style="display:{! If(Language=='en' && quote.Language__c!='en' ,'block','none') };" value="{!$ObjectType.Quote.fields.Admin_Fee__c.Label}:"/>
+                                        <apex:outputLabel style="display:{! If(Language=='es' || Language=='pt_BR' ,'block','none') };" value="{!$ObjectType.Quote.fields.Transport__c.Label}:"/>
+                                    </td>
+                                    <td>
+                                        <text style="display:{! If(Language=='en' && quote.Language__c!='en' ,'block','none') };">{!quote.Admin_Fee__c  }</text>
+                                        <text style="display:{! If(Language=='es' || Language=='pt_BR' ,'block','none') };">{!quote.Transport__c} </text>
+                                    </td>
+                                </tr>
+                                <tr style="display:{! If(Language=='es' || Language=='pt_BR' ,'','none') };"> 
+                                    <td >
+                                    <apex:outputLabel style="vertical-align: top;" value="{!$ObjectType.Quote.fields.Estimated_Time_of_Delivery__c.Label}:"/>
+                                    </td>
+                                    <td colspan="3" >
+                                    <text style="">{!quote.Estimated_Time_of_Delivery__c  }</text>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            
+                        </apex:pageBlock>
+                    </apex:form>
+                </div>
+                
+                
+                <apex:form >
+                    <apex:include pagename="QuoteTemplateIberia"></apex:include>
+                    <apex:include pagename="QuoteTemplateSA"></apex:include>
+                    
+                    <!-- SA M--> 
+                    <apex:include pagename="QuoteTemplateSACountries"></apex:include>
+                    
+                </apex:form>
+                
+                <apex:form >
+                    <div id="maincontainer">
+                        <apex:pageblock >       
+                            
+                            <table width="700px" style="margin-top:{! If(language!='en' && quote.Language__c!='pt_BR' && quote.Language__c!='es' ,'-24',bankDetailsMargin)}px;border-top:none;border: 1px solid;border-collapse: collapse;font-size:{! If(quote.Language__c=='pt_BR' || quote.Language__c=='es' ,'10px','12px') };"> 
+                                <tr >
+                                    <td style="background-color: #c0c0c0;border-top: 0px;border-top:none;border-bottom: 1px solid;border-right: 1px solid;border-left: 1px solid;text-align:center;height:100px;width:200px;padding-left:10px;" >
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='pt_BR' ,'block','none') }">
+                                            <b>Dados Bancários</b><br/>      
+                                            Deutsche Bank<br/>
+                                            IBAN PT50-0043-0001-03214366801-77<br/> 
+                                            SWIFT DEUTPTPLXXX
+                                        </p>
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='es' ,'block','none') }">
+                                            <b>Datos bancarios</b><br/>
+                                            Deutsche Bank<br/>
+                                            IBAN ES85 0019 0030 61 4010206303<br/>
+                                            SWITCH DEUTESBBXXX
+                                        </p>
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='Mozambique - English' ,'block','none') }">
+                                            <b>Bank Account Details</b><br/>
+                                            Account Name : Standard Bank<br/>
+                                            Account Number (USD): 108-470425-101-7<br/>
+                                            Account Number (MZN): 108-470425-100-1
+                                        </p>
+                                        <p style="font-size:12px;text-align:left;display:{! If(quote.Language__c=='en' || quote.Language__c=='Zimbabwe - English' ,'block','none') }">
+                                            <b>Bank Account Details (ZAR)</b><br/>
+                                            Account Name : Epiroc South Africa (Pty) Ltd<br/> 
+                                            Bank: Citibank (EFT)<br/>
+                                            Account Number: 0200636082<br/>
+                                            Swift Code: CITIZAJX<br/> 
+                                            Branch Code: 350005
+                                        </p>
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='Zimbabwe - English' ,'block','none') }">
+                                            <b>Bank Account Details (USD)</b><br/>
+                                            Account Name : Epiroc South Africa (Pty) Ltd<br/> 
+                                            Bank: Citibank (EFT)<br/>
+                                            Account Number: 0200636058<br/>
+                                            Swift Code: CITIZAJX<br/> 
+                                            Branch Code: 350005
+                                        </p>
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='Botswana - English' ,'block','none') }">
+                                            <b>Our banking details are provided below:</b><br/>
+                                            Bank: Stanbic Bank<br/>
+                                            Account Number: 9060000713061<br/>
+                                            Branch Code: FAIRGROUND 064967
+                                        </p>
+                                        <p style="text-align:left;display:{! If(quote.Language__c=='Namibia - English' ,'block','none') }">
+                                            <b>Our banking details are provided below:</b><br/>
+                                            Branch Name: FNB Business<br/>
+                                            Branch Number: 281872<br/>
+                                            Account Number: 62261948338<br/>
+                                            Swift Code: FIRNNANX
+                                        </p>
+                                    </td>     
+                                    <td style="display:{! If(quote.Language__c!='pt_BR' && quote.Language__c!='es' ,'','none') };border-right: 1px solid;border-bottom: 1px solid;padding-left:5px;border-top: 0px;" >
+                                        <text style="display:{! If(quote.Language__c=='en','block','none') };">
+                                            General Terms and Conditions :
+                                            <ol>
+                                                <li>This quotation is valid for 30 days from date printed above.</li>
+                                                <li>Our terms of payment are strictly 30 days net.</li>
+                                                <li>On acceptance of this quote, kindly email your purchase order to customer.care@epiroc.com and include the quotation reference number.</li>
+                                                <li>Epiroc will only be able to arrange deliveries once we have confirmation that payment is reflected in our Citibank account.</li>
+                                                <li>To ensure timeous order readiness, please use EFT payment method with immediate release.</li>
+                                                <li>Please access our full standard terms and conditions using this hyperlink<a href="https://www.epiroc.com/content/dam/epiroc/local-countries/south-africa/documents/Standard%20Terms%20and%20Conditions%2020190131.pdf"> Epiroc Standard Terms and Conditions of Sales</a> </li>
+                                            </ol>
+                                        </text>
+                                        <text style="display:{! If(quote.Language__c=='Zimbabwe - English','block','none') };">
+                                            General Terms and Conditions :
+                                            <ol>
+                                                <li>This quotation is valid for 30 days from date printed above. Our terms of payment are strictly 30 days net.</li>
+                                                <li>On acceptance of this quote, kindly email your purchase order to ZWE.CustomerCare@epiroc.com and include the quotation reference number.</li>
+                                                <li>If you wish to collect goods directly from South Africa, please note you will be liable to VAT @15%</li>
+                                                <li>Duties and Clearing Agency fee not included in the quotation</li>
+                                                <li>Please access our full standard terms and conditions using this hyperlink<a href='https://www.epiroc.com/content/dam/epiroc/local-countries/south-africa/documents/Zimbabwe%20Terms%20and%20Conditions.pdf'> Epiroc Standard Terms and Conditions of Sales</a></li>
+                                                
+                                            </ol>
+                                        </text>
+                                        <text style="display:{! If(quote.Language__c=='Mozambique - English','block','none') };">
+                                            General Terms and Conditions : 
+                                            <ol>
+                                                <li>This quotation is valid for 30 days from date printed above. Our terms of payment are strictly 30 days net. </li>
+                                                <li>On acceptance of this quote, kindly email your purchase order to mzasupport@epiroc.com and include the quotation reference number. </li>
+                                                <li>Please access our full standard terms and conditions using this hyperlink<a href='https://www.epiroc.com/content/dam/epiroc/local-countries/south-africa/documents/Mozambique%20Terms%20and%20Conditions.pdf'> Epiroc Standard Terms and Conditions of Sales</a></li>
+                                                
+                                            </ol>
+                                        </text>
+                                        <text style="display:{! If(quote.Language__c=='Botswana - English','block','none') };">
+                                            General Terms and Conditions : 
+                                            <ol>
+                                                <li>This quotation is valid for 30 days from date printed above. Our terms of payment are strictly 30 days net. </li>
+                                                <li>On acceptance of this quote, kindly email your purchase order to cc.botswana@epiroc.com and include the quotation reference number. </li>
+                                                <li>Please access our full standard terms and conditions using this hyperlink<a href='https://www.epiroc.com/content/dam/epiroc/local-countries/south-africa/documents/Botswana%20Terms%20and%20Conditions.pdf'> Epiroc Standard Terms and Conditions of Sales</a></li>
+                                                
+                                            </ol>
+                                        </text>
+                                        <text style="display:{! If(quote.Language__c=='Namibia - English','block','none') };">
+                                            General Terms and Conditions : 
+                                            <ol>
+                                                <li>This quotation is valid for 30 days from date printed above. Our terms of payment are strictly 30 days net. </li>
+                                                <li>On acceptance of this quote, kindly email your purchase order to customercare.nam@epiroc.com and include the quotation reference number.  </li>
+                                                <li>Please access our full standard terms and conditions using this hyperlink<a href='https://www.epiroc.com/content/dam/epiroc/local-countries/south-africa/documents/Standard%20Terms%20and%20Conditions%2020190131.pdf'> Epiroc Standard Terms and Conditions of Sales</a></li>
+                                                
+                                            </ol>
+                                        </text>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                <tr style="display:{! If(quote.Language__c=='pt_BR' || quote.Language__c=='es' ,'','none') };">
+                                    <td style="display:{! If(quote.Language__c=='pt_BR' ,'','none') };border: 1px solid;">
+                                        <text><b>Condições gerais de fornecimento :</b> <a href="https://www.epiroc.com/pt-pt/epiroc-em-portugal/termos-condicoes.html">https://www.epiroc.com/pt-pt/epiroc-em-portugal/termos-condicoes.html</a></text>
+                                    </td>
+                                    
+                                    <td style="display:{! If(quote.Language__c=='es' ,'','none') };border: 1px solid;">
+                                        <text><b>Condiciones Generales De Venta :</b> <a href="https://www.epiroc.com/es-es/acerca-de-nosotros/condiciones-venta.html">https://www.epiroc.com/es-es/acerca-de-nosotros/condiciones-venta.html</a></text>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            <br/><br/><br/><br/><br/>
+                            <div style="font-size:{! If(quote.Language__c=='pt_BR' || quote.Language__c=='es' ,'10px','12px') };">
+                                
+                                <div style="display:{! If(Language=='en' && quote.Language__c!='Botswana - English' && quote.Language__c!='Namibia - English' ,'block','none') }">
+                                    Best Regards,
+                                </div>
+                                <div style="display:{! if(quote.Language__c=='Botswana - English' ,'block','none') };">
+                                    Thank you for your business!<br /><br />
+                                    EPIROC BOTSWANA (PTY) LTD
+                                </div>
+                                <div style="display:{! if(quote.Language__c=='Namibia - English' ,'block','none') };">
+                                    Thank you for your business!<br /><br />
+                                    EPIROC MINING (NAMIBIA) (PTY) LTD
+                                </div>
+                                <div style="display:{! If(Language=='es' ,'block','none') }"> 
+                                    Saludos,
+                                </div> 
+                                <div style="display:{! If(Language=='pt_BR' ,'block','none') }">
+                                    Cumprimentos,
+                                </div>
+                                <br/>
+                                <div style="display:{! If(quote.Language__c=='en' ,'block','none') }">
+                                    The Epiroc Team
+                                </div>
+                                <div style="display:{! If(quote.Language__c=='es' || quote.Language__c=='pt_BR' ,'block','none') }">
+                                    {!quote.Account.Account_owner__c}
+                                </div>
+                                <div style="display:{! If(quote.Language__c=='Zimbabwe - English' ,'block','none') }">
+                                    Epiroc South Africa (Pty) Ltd
+                                </div>
+                                <div style="display:{! If(quote.Language__c=='Mozambique - English' ,'block','none') }">
+                                    Epiroc Moçambique Limitada
+                                </div>
+                            </div>
+                            
+                        </apex:pageblock>
+                        
+                    </div>
+                    
+                </apex:form>  
+                <apex:form >
+                    <apex:pageBlock >
+                        <table width="700px" style="border: 1px solid;border-collapse: collapse;">
+                            
+                        </table>
+                        
+                    </apex:pageBlock>
+                </apex:form>
+                
+            </div>
+        </body>
+    </html>
+</apex:page>

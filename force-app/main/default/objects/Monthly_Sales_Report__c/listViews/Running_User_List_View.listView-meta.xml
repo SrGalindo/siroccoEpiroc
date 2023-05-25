@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Running_User_List_View</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Done__c</columns>
+    <columns>Key_Activities__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Running Users Reports</label>
+</ListView>

@@ -1,0 +1,14 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card title="Mol" icon-name="custom:custom98" if:true={mainWindowOpen}>
+        <lightning-datatable data={data} columns={molcolumns} key-field="modelName"
+            hide-checkbox-column>
+        </lightning-datatable>
+    </lightning-card>
+    <lightning-card title="Mol" icon-name="custom:custom98" if:true={loadingWindowOpen}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </lightning-card>
+    <lightning-card title="Mol" icon-name="custom:custom98" if:true={errorWindowOpen}>
+        <lightning-textarea name="error" disabled value={errorData}></lightning-textarea>
+    </lightning-card>
+</template>

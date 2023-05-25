@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Chat</fullName>
+        <default>false</default>
+        <label>Chat</label>
+    </customValue>
+    <customValue>
+        <fullName>Epiroc Website</fullName>
+        <default>false</default>
+        <label>Epiroc Website</label>
+    </customValue>
+    <customValue>
+        <fullName>Social Media</fullName>
+        <default>false</default>
+        <label>Social Media</label>
+    </customValue>
+    <customValue>
+        <fullName>Procurement Database</fullName>
+        <default>false</default>
+        <label>Procurement Database</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Databases</fullName>
+        <default>false</default>
+        <label>Other Databases</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Partner</label>
+    </customValue>
+    <customValue>
+        <fullName>Sister Companies</fullName>
+        <default>false</default>
+        <label>Sister Companies</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Visits</fullName>
+        <default>false</default>
+        <label>Customer Visits</label>
+    </customValue>
+    <customValue>
+        <fullName>Product Specialist</fullName>
+        <default>false</default>
+        <label>Product Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Rental Fleet</fullName>
+        <default>false</default>
+        <label>Rental Fleet</label>
+    </customValue>
+    <customValue>
+        <fullName>Service and contract Renewal</fullName>
+        <default>false</default>
+        <label>Service and contract Renewal</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Technicians</fullName>
+        <default>false</default>
+        <label>Service Technicians</label>
+    </customValue>
+    <customValue>
+        <fullName>TTM</fullName>
+        <default>false</default>
+        <label>TTM</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Contacts</fullName>
+        <default>false</default>
+        <label>Sales Contacts</label>
+    </customValue>
+    <customValue>
+        <fullName>Epiroc Magazine</fullName>
+        <default>false</default>
+        <label>Epiroc Magazine</label>
+    </customValue>
+    <customValue>
+        <fullName>Marketing Efforts</fullName>
+        <default>false</default>
+        <label>Marketing Efforts</label>
+    </customValue>
+    <customValue>
+        <fullName>Media (PR)</fullName>
+        <default>false</default>
+        <label>Media (PR)</label>
+    </customValue>
+    <customValue>
+        <fullName>Competitor</fullName>
+        <default>false</default>
+        <label>Competitor</label>
+    </customValue>
+    <customValue>
+        <fullName>Constultants/project House</fullName>
+        <default>false</default>
+        <label>Constultants/project House</label>
+    </customValue>
+    <customValue>
+        <fullName>NPI</fullName>
+        <default>false</default>
+        <label>NPI</label>
+    </customValue>
+    <customValue>
+        <fullName>Webinar</fullName>
+        <default>false</default>
+        <label>Webinar</label>
+    </customValue>
+    <customValue>
+        <fullName>Tradeshow</fullName>
+        <default>false</default>
+        <label>Tradeshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Networking Events</fullName>
+        <default>false</default>
+        <label>Networking Events</label>
+    </customValue>
+    <customValue>
+        <fullName>Tender - RFQ</fullName>
+        <default>false</default>
+        <label>Tender - RFQ</label>
+    </customValue>
+    <customValue>
+        <fullName>Phone calls</fullName>
+        <default>false</default>
+        <label>Phone calls</label>
+    </customValue>
+    <customValue>
+        <fullName>Mail</fullName>
+        <default>false</default>
+        <label>Mail</label>
+    </customValue>
+    <masterLabel>Lead Subsource</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

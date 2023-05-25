@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountHasPrimary</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(
+AND(
+Primary__c = true,
+Account__r.HasPrimaryAddress__c = true, 
+ISCHANGED(Primary__c) ),
+True, False)</errorConditionFormula>
+    <errorMessage>The account you are trying to make this address primary for already has a primary address.</errorMessage>
+</ValidationRule>

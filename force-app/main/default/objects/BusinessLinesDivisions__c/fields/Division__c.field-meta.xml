@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Division__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Division</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>You can only select a Division value in the Division field</errorMessage>
+        <filterItems>
+            <field>BusinessLinesDivisions__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Division</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessLinesDivisions__c</referenceTo>
+    <relationshipLabel>Business Lines</relationshipLabel>
+    <relationshipName>Business_Line</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

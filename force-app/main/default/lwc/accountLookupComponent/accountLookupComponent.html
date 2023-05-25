@@ -1,0 +1,21 @@
+<template>
+    <div class="slds-card" style="font-family: 'Open Sans', sans-serif">
+        <div class="slds-p-around_small">
+            <div class="slds-text-align_center slds-container_center" style="font-size: 15px;">
+                <div class="slds-size_2-of-3 slds-align_absolute-center slds-p-bottom_small">
+                    <c-lookup-component
+                            name="accountLookup"
+                            field-label="Account"
+                            child-object-api-name="Address__c"
+                            target-field-api-name="Account__c"
+                            value={Account__c}
+                            required="false"
+                            add-to-recent="true"
+                            onvalueselected={handleSelectedLookup}
+                    >
+                    </c-lookup-component>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

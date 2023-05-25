@@ -1,0 +1,54 @@
+<!--
+ - Created by EP on 3/15/2023.
+ -->
+
+<apex:page showHeader="false">
+    <head>
+        <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    </head>
+    <apex:includeLightning />
+
+    <div id="lightningvf" />
+
+    <script>
+        var recordId = "{!$CurrentPage.parameters.id}";
+        var typeOfRecord = "{!$CurrentPage.parameters.type}";
+
+        $Lightning.use("c:productPickerAuraApp", function() {
+            $Lightning.createComponent("c:productPicker",
+                { "recordId" : recordId,
+                  "objectType" : typeOfRecord,
+                  "navigate" : navigateToRecord,
+                  "toast" : showToast
+                },
+                "lightningvf",
+                function(cmp) {
+                    console.log("product picker component was created");
+                }
+            );
+        });
+
+        function navigateToRecord(recordId) {
+            console.log("VF navigateToRecord");
+            if(typeof sforce != 'undefined' && sforce && sforce.one) {
+                //sforce.one.navigateToSObject(recordId);
+                sforce.one.navigateToURL('/'+recordId);
+            } else {
+                window.location.href = '/' + recordId;
+            }
+        }
+
+        function showToast(title, message, type) {
+            console.log("VF showToast");
+            if(typeof sforce != 'undefined' && sforce && sforce.one) {
+                sforce.one.showToast({
+                    "title": title,
+                    "message": message,
+                    "type": type
+                });
+            } else {
+                window.alert(message);
+            }
+        }
+    </script>
+</apex:page>

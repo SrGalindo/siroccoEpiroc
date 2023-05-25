@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Parts &amp; Services</fullName>
+        <default>false</default>
+        <label>Parts &amp; Services</label>
+    </customValue>
+    <customValue>
+        <fullName>Surface</fullName>
+        <default>false</default>
+        <label>Surface</label>
+    </customValue>
+    <customValue>
+        <fullName>Tools &amp; Attachments</fullName>
+        <default>false</default>
+        <label>Tools &amp; Attachments</label>
+    </customValue>
+    <customValue>
+        <fullName>Underground</fullName>
+        <default>false</default>
+        <label>Underground</label>
+    </customValue>
+    <customValue>
+        <fullName>Technology &amp; Innovation</fullName>
+        <default>false</default>
+        <label>Technology &amp; Innovation</label>
+    </customValue>
+    <customValue>
+        <fullName>Digital Solutions Division</fullName>
+        <default>false</default>
+        <label>Digital Solutions Division</label>
+    </customValue>
+    <customValue>
+        <fullName>All</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>All</label>
+    </customValue>
+    <customValue>
+        <fullName>Hydraulics</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hydraulics</label>
+    </customValue>
+    <customValue>
+        <fullName>Technology &amp; Digital</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Technology &amp; Digital</label>
+    </customValue>
+    <masterLabel>Division</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

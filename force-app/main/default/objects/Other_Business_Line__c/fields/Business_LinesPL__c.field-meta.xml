@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_LinesPL__c</fullName>
+    <externalId>false</externalId>
+    <label>Business Lines</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>DivisionPL__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Business_Lines</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Parts &amp; Services</controllingFieldValue>
+            <valueName>Mining &amp; Rock Excavation Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Surface</controllingFieldValue>
+            <valueName>Epiroc Drilling Solutions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Surface</controllingFieldValue>
+            <valueName>Surface and Exploration Drilling</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Surface</controllingFieldValue>
+            <valueName>Surface Mining Technology</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
+            <valueName>Hydraulic Attachment Tools Service</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
+            <valueName>Rock Drilling Tools (Secoroc)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
+            <valueName>Rock Drilling Tools - Exploration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
+            <valueName>Rock Drilling Tools - Ground Support</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Underground</controllingFieldValue>
+            <valueName>Rocvolt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Underground</controllingFieldValue>
+            <valueName>Underground Rock Excavation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Digital Solutions Division</controllingFieldValue>
+            <valueName>Epiroc Digital Business</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

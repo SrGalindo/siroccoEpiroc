@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <description>Related List Component</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Related List Component</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property label="Object API Name" name="sobjectApiName" type="String" description="The api name of the object to be displayed in the related list." required="true"/>
+            <property label="Related Field API Name" name="relatedFieldApiName" type="String" description="The api name of the field with the recordId to be matched. (WHERE XXXXX )" required="true"/>
+            <property label="Match to field" name="matchTo" type="String" description="If another field should be used to match the records for the related list. 99% of the time default value is fine." required="true" default="recordId"/>
+            <property label="Amount of records to show" name="numberOfRecords" type="Integer" min="0" default="6" description="Amount of records to be shown in the component. 0 for show all." required="true"/>
+            <property label="Filter by" name="filterBy" type="String" description="Filter records by this. SOQL. EX: (Name LIKE '%David%' AND isPrimary = TRUE)" />
+            <property label="Order by" name="sortedBy" type="String" description="Order records by this field."/>
+            <property label="Sorting Direction" name="sortedDirection" type="String" datasource="ASC,DESC" default="ASC" description="Sorting Direction. Will only be used if Order By is filled in."/>
+            <property label="Fields to show" name="fields" type="String" description="Comma separated list of api-name of the fields to show. First field will be the link to the record. EX: Name,Address__c,Parent" required="true"/>
+            <property label="Columns" name="columns" type="String" description="Comma separated list of the columnnames. Same order and amount as fields." required="true"/>
+            <property label="FieldTypes" name="fieldTypes" type="String" description="Comma separated list of the types of the fields. Add text if nothing else fits. !URL is for links to records! Possible types: text,boolean,date,currency,email,url" required="true" default="url"/>
+            <property label="Wrap output text" name="wrapText" type="Boolean" default="true" description="Check this box when textfields should be wrapped instead of clipped when they are too long."/>
+            <property label="Render component" name="renderComponent" type="Boolean" default="false" description="Check this box when the component is configured and should be rendered."/>
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

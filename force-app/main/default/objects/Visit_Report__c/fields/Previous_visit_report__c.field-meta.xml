@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Previous_visit_report__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Liked to previous visit report from same account same user</description>
+    <externalId>false</externalId>
+    <label>Previous visit report</label>
+    <referenceTo>Visit_Report__c</referenceTo>
+    <relationshipLabel>Visit Reports</relationshipLabel>
+    <relationshipName>Visit_Reports</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>jonathan.almqvist@sirocco.se</contactEmail>
+    <label>BPCS_Integration</label>
+    <oauthConfig>
+        <callbackUrl>https://epirocrockdrills.lightning.force.com/bpcscallback</callbackUrl>
+        <certificate>MIIErDCCA5SgAwIBAgIOAYOxot5lAAAAAD9Rf2swDQYJKoZIhvcNAQELBQAwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzA3T2N0MjAyMl8wODQ5NDQxGDAWBgNVBAsMDzAwRDdRMDAwMDA2SEZucjEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0EwHhcNMjIxMDA3MDg0OTQ0WhcNMjMxMDA3MDAwMDAwWjCBkDEoMCYGA1UEAwwfU2VsZlNpZ25lZENlcnRfMDdPY3QyMDIyXzA4NDk0NDEYMBYGA1UECwwPMDBEN1EwMDAwMDZIRm5yMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIpy8eJo8dOIfW6ATy0HhUqQ6INdx50pNCXBmdSNOPuH60HFZVcsfUx2ZGZ9GskTb8wKjdIwZxkAz3WoUwwCnNSL1BAeEdTO2wSkxyLUEX9iJtXYknVi18UWlKyCvvgaDtJPYAdij4iot+U+kQQ9hmsM1dmAkp18RcaxGTPhBa6je5/P+YGOrpVQerau3MCiFZ6jf78HVPERkWUetSNdMnRKvi6QVKsgOM2ylOPrkidfXXCvGuhw9cqy1xSWOvQSZdmDxbPUUwTP8/1w5ggLh4mTTvP9IcS2XJXKiebgy1fcZrCKSCKKInr2HBxzcU0zjqDhYQpTlsY0i0Lr0O98Hq8CAwEAAaOCAQAwgf0wHQYDVR0OBBYEFBEgf3ln6edqZfm1VERM1Gm8zcmbMA8GA1UdEwEB/wQFMAMBAf8wgcoGA1UdIwSBwjCBv4AUESB/eWfp52pl+bVUREzUabzNyZuhgZakgZMwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzA3T2N0MjAyMl8wODQ5NDQxGDAWBgNVBAsMDzAwRDdRMDAwMDA2SEZucjEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0GCDgGDsaLeZQAAAAA/UX9rMA0GCSqGSIb3DQEBCwUAA4IBAQB9oBmqXUg1mRTONgRJxsMpp/LyGdanzR1QmI0OEmcCwvUrdbA6apwoq5sLXq6lACCT620i5gtpgQtSqHLP2xIFjViIXKHT+3uksbPt4aJC74FvOV6bFICRi3X1QPg1YZJJvkMxDNeefKKt/i3yyx7cqvNGh/29ytwJS0BCD3wpvTNWjOn8Z0VR9STd4LY8x7l41RnBg0R37TLTE+SifItAO1cKRToT3BdXeoK2pa2qfFaJmBQJOFV7xm1U9Fx53TQZstZrFnJZRW16TcIzMdwmSUQwREOP2E9ndLKZvnNxoc6LN24g1PQRl7hA2VpS9VgTRSFRCgT0qvic+R4i+qq4</certificate>
+        <consumerKey>3MVG9t0sl2P.pByqbOGNRGQZG4MeklE3aAIS562ZfdY.odZPvY.dCaMiuZKroGIM4CuOwQb7Xd_FKWkdPvsTS</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

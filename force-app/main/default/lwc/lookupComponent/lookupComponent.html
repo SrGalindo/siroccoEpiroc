@@ -1,0 +1,15 @@
+<template>
+    <lightning-record-edit-form object-api-name={childObjectApiName} record-id={recordId}>
+        <div class="slds-form-element">
+            <label class="slds-float_left"><abbr if:true={required} title="required" class="slds-required">*</abbr>{fieldLabel}</label>
+                <lightning-input-field 
+                        variant={variant}
+                        field-name={targetFieldApiName}
+                        value={value}
+                        required={required}
+                        onchange={handleChange}
+                >
+                </lightning-input-field>
+        </div>
+    </lightning-record-edit-form>
+</template>

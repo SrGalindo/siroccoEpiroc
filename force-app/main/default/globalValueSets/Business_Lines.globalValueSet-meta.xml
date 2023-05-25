@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Mining &amp; Rock Excavation Services</fullName>
+        <default>false</default>
+        <label>Mining &amp; Rock Excavation Services</label>
+    </customValue>
+    <customValue>
+        <fullName>Epiroc Drilling Solutions</fullName>
+        <default>false</default>
+        <label>Epiroc Drilling Solutions</label>
+    </customValue>
+    <customValue>
+        <fullName>Surface and Exploration Drilling</fullName>
+        <default>false</default>
+        <label>Surface and Exploration Drilling</label>
+    </customValue>
+    <customValue>
+        <fullName>Surface Mining Technology</fullName>
+        <default>false</default>
+        <label>Surface Mining Technology</label>
+    </customValue>
+    <customValue>
+        <fullName>Hydraulic Attachment Tools Service</fullName>
+        <default>false</default>
+        <label>Hydraulic Attachment Tools Service</label>
+    </customValue>
+    <customValue>
+        <fullName>Rock Drilling Tools (Secoroc)</fullName>
+        <default>false</default>
+        <label>Rock Drilling Tools (Secoroc)</label>
+    </customValue>
+    <customValue>
+        <fullName>Rock Drilling Tools - Exploration</fullName>
+        <default>false</default>
+        <label>Rock Drilling Tools - Exploration</label>
+    </customValue>
+    <customValue>
+        <fullName>Rock Drilling Tools - Ground Support</fullName>
+        <default>false</default>
+        <label>Rock Drilling Tools - Ground Support</label>
+    </customValue>
+    <customValue>
+        <fullName>Rocvolt</fullName>
+        <default>false</default>
+        <label>Rocvolt</label>
+    </customValue>
+    <customValue>
+        <fullName>Underground Rock Excavation</fullName>
+        <default>false</default>
+        <label>Underground Rock Excavation</label>
+    </customValue>
+    <customValue>
+        <fullName>Epiroc Digital Business</fullName>
+        <default>false</default>
+        <label>Epiroc Digital Business</label>
+    </customValue>
+    <customValue>
+        <fullName>Mining &amp; Rock Excavation Service</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Mining &amp; Rock Excavation Service</label>
+    </customValue>
+    <description>Epiroc business lines</description>
+    <masterLabel>Business Lines</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

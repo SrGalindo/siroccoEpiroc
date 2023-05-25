@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Epiroc_Default</fullName>
+    <fields>Name</fields>
+    <fields>Alpha_2_Code__c</fields>
+    <fields>Alpha_3_Code__c</fields>
+    <fields>Tax_level__c</fields>
+    <label>Epiroc Default</label>
+</CompactLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Divisions</fullName>
+    <columns>NAME</columns>
+    <columns>Abbreviation__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>BusinessLinesDivisions__c.Division</value>
+    </filters>
+    <label>Divisions</label>
+</ListView>

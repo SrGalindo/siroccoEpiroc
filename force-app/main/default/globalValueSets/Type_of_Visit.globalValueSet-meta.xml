@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Business Review meeting</fullName>
+        <default>false</default>
+        <label>Business Review meeting</label>
+    </customValue>
+    <customValue>
+        <fullName>Standard Sales Call/Site visit</fullName>
+        <default>false</default>
+        <label>Standard Sales Call</label>
+    </customValue>
+    <customValue>
+        <fullName>Site Visit</fullName>
+        <default>false</default>
+        <label>Site Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Proposal presentation</fullName>
+        <default>false</default>
+        <label>Proposal presentation</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>Type of Visit</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

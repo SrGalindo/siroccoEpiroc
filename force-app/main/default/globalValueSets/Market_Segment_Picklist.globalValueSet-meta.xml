@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Dimension - Stone Industry</fullName>
+        <default>false</default>
+        <label>Dimension - Stone Industry</label>
+    </customValue>
+    <customValue>
+        <fullName>Aggregates</fullName>
+        <default>false</default>
+        <label>Aggregates</label>
+    </customValue>
+    <customValue>
+        <fullName>Water Well</fullName>
+        <default>false</default>
+        <label>Water Well</label>
+    </customValue>
+    <customValue>
+        <fullName>Exploration</fullName>
+        <default>false</default>
+        <label>Exploration</label>
+    </customValue>
+    <customValue>
+        <fullName>Urban Development</fullName>
+        <default>false</default>
+        <label>Urban Development</label>
+    </customValue>
+    <customValue>
+        <fullName>Civil Engineering</fullName>
+        <default>false</default>
+        <label>Civil Engineering</label>
+    </customValue>
+    <customValue>
+        <fullName>Mining</fullName>
+        <default>false</default>
+        <label>Mining</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Industries</fullName>
+        <default>false</default>
+        <label>Other Industries</label>
+    </customValue>
+    <masterLabel>Market Segment Picklist</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

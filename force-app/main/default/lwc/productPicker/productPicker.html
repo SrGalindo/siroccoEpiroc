@@ -1,0 +1,490 @@
+<template>
+  <lightning-card title={productPickerName} icon-name="standard:products" class="main noborder">
+      <div slot="actions">
+          <lightning-button-icon
+                  icon-name="utility:close"
+                  alternative-text="Close"
+                  title="Close"
+                  onclick={close}>
+          </lightning-button-icon>
+      </div>
+      <lightning-spinner if:true={activeSearch} alternative-text="Loading" size="small"></lightning-spinner>
+
+      <lightning-tabset variant="scoped">
+          <lightning-tab label="Product search" end-icon-name="utility:search">
+              <!-- Debug: recordId: {recordId}, objectType: {objectType} -->
+<!-- slds-gutters slds-p-horizontal_small slds-p-vertical_none -->
+              <div class="slds-grid slds-wrap details">
+                  <div class="slds-col slds-grid slds-wrap slds-size_1-of-1 slds-p-top_small searchArea" data-id="searchArea">
+
+                      <div class="slds-col slds-grid slds-wrap slds-size_1-of-2 slds-grid_vertical-align-end searchInput" data-id="searchInput">
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_small">
+                              <lightning-combobox name="searchProductTypeDropdownlist" label="Product" value={searchOptionValue}
+                                          placeholder={searchProductTypePlaceholder} options={searchProductOptions}
+                                          onchange={handleChangeSearchProductType} class="slds-m-right_small">
+                              </lightning-combobox>
+                          </div>
+
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-m-bottom_small">
+                              <lightning-input name="enter-search" label="Search for a product name or article number"
+                                           type="search" data-id="searchInput" onkeyup={searchEnterPressed} class="slds-m-right_small">
+                              </lightning-input>
+                          </div>
+
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-6 slds-m-bottom_small ">
+                              <lightning-button variant="brand" label="Search" onclick={searchClicked}></lightning-button>
+                          </div>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-1">
+                          <template lwc:if={hasDataToDisplay}>
+                              <lightning-datatable if:true={simpleProductPickerActivated} data-id="simpledt" data={displayedData} columns={columns}
+                                                   selected-rows={setSelectedRows} key-field="Product_Model" onrowselection={searchResultsClick}
+                                                   max-row-selection="1" show-row-number-column>
+                              </lightning-datatable>
+                              <lightning-datatable if:false={simpleProductPickerActivated} data-id="complexdt" data={displayedData} columns={columns}
+                                                   selected-rows={setSelectedRows} key-field="Product_Model_Code_Internal" onrowselection={searchResultsClick}
+                                                   max-row-selection="1" show-row-number-column>
+                              </lightning-datatable>
+                          </template>
+                          <template lwc:else>
+                              <div class="slds-m-around_small">There are no search results to display.</div>
+                          </template>
+
+                          <template lwc:if={paginationNeeded}>
+                              <!-- <div class="page-footer page-section slds-p-top_x-large slds-align_absolute-center"> -->
+                                  <div class="slds-grid slds-p-horizontal_xxx-small slds-p-vertical_large slds-align_absolute-center" >
+                                      <div class="slds-col slds-size_1-of-5 paginationbuttons">
+                                          <lightning-button if:true={displayedDataHasPreviousEntries} label="&#x00AB;" onclick={first}></lightning-button>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-5 paginationbuttons">
+                                          <lightning-button if:true={displayedDataHasPreviousEntries} label="&lt;" onclick={previous}></lightning-button>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-5 paginationbuttons">
+                                          <div class="slds-p-horizontal_small slds-p-vertical_x-small">{pageNumberDisplayed}</div>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-5 paginationbuttons">
+                                          <lightning-button if:true={displayedDataHasFurtherEntries} label="&gt;" onclick={next}></lightning-button>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-5 paginationbuttons">
+                                          <lightning-button if:true={displayedDataHasFurtherEntries} label="&#x00BB;" onclick={last}></lightning-button>
+                                      </div>
+                                  </div>
+                              <!-- </div> -->
+                          </template>
+                      </div>
+                  </div> <!-- end of search results area - div with data-id="searchArea" -->
+
+                  <div if:true={chosenProduct} class="slds-col slds-size_1-of-2 productDetailBackground slds-p-around_small">
+                      <!--
+                      <lightning-layout horizontal-align="center" vertical-align="end" class="slds-m-bottom_medium">
+                          <lightning-layout-item size="2">  empty space  </lightning-layout-item>
+                          <lightning-layout-item size="4">
+                              <lightning-input type="number" name="input2" label="Quantity" onchange={handleQuantityChange} value={quantityChosen}></lightning-input>
+                          </lightning-layout-item>
+                          <lightning-layout-item size="6">
+                              <lightning-button class="slds-p-horizontal_x-small slds-p-vertical_medium" label="Add to basket" variant="brand" title="Add to basket" onclick={addToBasket}></lightning-button>
+                              <lightning-button class="slds-p-vertical_medium" label="Hide product details >" variant="neutral" title="Hide product details >" onclick={hideProductDetails}></lightning-button>
+                          </lightning-layout-item>
+                      </lightning-layout>
+                      -->
+                      <div class="slds-grid slds-wrap slds-grid_align-center slds-grid_vertical-align-end">
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-m-bottom_x-small">
+                              <lightning-input type="number" name="input2" label="Quantity" onchange={handleQuantityChange} value={quantityChosen}></lightning-input>
+                          </div>
+                          <div class="slds-col slds-grow-none slds-m-bottom_x-small">
+                              <lightning-button class="slds-p-horizontal_x-small slds-p-vertical_medium" label="Add to basket" variant="brand" title="Add to basket" onclick={addToBasket}></lightning-button>
+                          </div>
+                          <div class="slds-col slds-grow-none slds-m-bottom_x-small">
+                              <lightning-button class="slds-p-vertical_medium" label="Hide product details >" variant="neutral" title="Hide product details >" onclick={hideProductDetails}></lightning-button>
+                          </div>
+                      </div>
+
+                      <div if:true={simpleProductPickerActivated} class="item">
+                          <div class="slds-form" role="list">
+                              <div class="slds-form__row">
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">
+                                              ItemNumber
+                                          </span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.itemNumber}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">itemDescription</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.itemDescription}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">extraItemDescription</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.extraItemDescription}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">unitOfMessure</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.unitOfMessure}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">lastTransactionDate</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.lastTransactionDate}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">listPrice</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  <lightning-formatted-number
+                                                          value={chosenProduct.cPlistPrice}
+                                                          format-style="currency"
+                                                          currency-code={accountData.currency}
+                                                          currency-display-as="code"
+                                                          maximum-fraction-digits="2"
+                                                  ></lightning-formatted-number>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Net price</span>
+                                          <div class="slds-form-element__control">
+                                              <div if:true={chosenProduct.cPnetPrice} class="slds-form-element__static">
+                                                  <lightning-formatted-number
+                                                          value={chosenProduct.cPnetPrice}
+                                                          format-style="currency"
+                                                          currency-code={accountData.currency}
+                                                          currency-display-as="code"
+                                                          maximum-fraction-digits="2"
+                                                  ></lightning-formatted-number>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Discount %</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.cPdiscountPercent}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">weight</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.weight}&nbsp;Grams
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">productDivision</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.productDivision}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">productLineCode</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.productLineCode}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">gac</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.gac}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">gacDescription</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.gacDescription}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">pgc</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.pgc}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">pgcDescription</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.pgcDescription}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">vendorNumber</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.vendorNumber}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">vendorName</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.vendorName}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="slds-p-left_none slds-p-top_medium slds-grid">
+                                  <div class="slds-p-left_none slds-col">
+                                      <lightning-icon icon-name="custom:custom57" title="Final Report" size="small"></lightning-icon>
+                                      <lightning-formatted-text class="slds-col slds-p-left_xx-small" value="Availability"></lightning-formatted-text>
+                                  </div>
+                              </div>
+
+                              <div class="slds-p-vertical_medium">
+                                  <lightning-datatable id="Availabilitytable" data={chosenProduct.freeStockDetail}
+                                                       columns={availabilityColumns} key-field="item.id" hide-checkbox-column>
+                                  </lightning-datatable>
+                              </div>
+                          </div>
+                      </div> <!-- end of div with product details if:true={simpleProductPickerActivated} class="item" -->
+
+                      <div if:false={simpleProductPickerActivated} class="item">
+                          <div class="slds-form" role="list">
+                              <div class="slds-form__row">
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">
+                                              Product model code internal
+                                          </span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Product_Model_Code_Internal}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Product_Line</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Product_Line}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Business Line</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Business_Line}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Product_Family</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Product_Family}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Product_Model_Internal</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Product_Model_Internal}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">GAC</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.GAC}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-form__item" role="listitem">
+                                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                          <span class="slds-form-element__label">Factory</span>
+                                          <div class="slds-form-element__control">
+                                              <div class="slds-form-element__static">
+                                                  {chosenProduct.Factory}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> <!-- end of div with product details if:false={simpleProductPickerActivated} class="item" -->
+                  </div> <!-- end of product detail div -->
+              </div>
+          </lightning-tab>
+
+          <lightning-tab label={basketLabel} end-icon-name="utility:cart">
+              <div class="slds-align_absolute-center">
+                  <lightning-button if:true={simpleProductPickerActivated} class="slds-m-right_xx-small" label="Quick add..." title="Quick add..." onclick={quickAddClick}></lightning-button>
+                  <lightning-button variant="brand" type="number" name="input2" label="Save Basket and Close" onclick={saveToQuoteClick} value={quantityChosen} disabled={noProductsAdded} class="slds-m-right_xx-small"></lightning-button>
+                  <lightning-button variant="neutral" label="Close" title="Close" onclick={close}></lightning-button>
+              </div>
+              <div class="slds-align_absolute-center" if:true={quickAddTextEnabled}>
+                  <lightning-textarea class="quickAddTextarea" value={quickAddValue} label="Quick add" title="Quick add" onpaste={checkPasteLength}>Quick add</lightning-textarea > <!-- onchange={quickAddAction} -->
+              </div>
+
+              <div if:true={anyProductsAdded}>
+                  <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-no-row-hover slds-m-top_small basketTable">
+                      <thead>
+                          <tr class="slds-line-height_reset">
+                              <th class="alignCenter" scope="col" colspan="3">
+                                  <div class="slds-truncate" title="Quantity">Quantity</div>
+                              </th>
+                              <th class="" scope="col">
+                                  <div class="slds-truncate" title="Item">Item</div>
+                              </th>
+                              <template lwc:if={simpleProductPickerActivated}>
+                                  <th class="alignCenter" scope="col">
+                                      <div class="slds-truncate" title="Item Number">Item Number</div>
+                                  </th>
+                                  <th class="alignCenter" scope="col">
+                                      <div class="slds-truncate" title="Net Price">Net Price</div>
+                                  </th>
+                                  <th class="alignCenter" scope="col">
+                                      <div class="slds-truncate" title="Discount %">Discount %</div>
+                                  </th>
+                                  <th class="alignCenter" scope="col">
+                                      <div class="slds-truncate" title="List Price">List Price</div>
+                                  </th>
+                                  <th class="alignCenter" scope="col">
+                                      <div class="slds-truncate" title="Total Price">Total Price</div>
+                                  </th>
+                              </template>
+                              <template lwc:else>
+                                  <th class="" scope="col">
+                                      <div class="slds-truncate" title="Decription">Description</div>
+                                  </th>
+                              </template>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <template for:each={basketList} for:item="item">
+                              <tr class="slds-hint-parent" key={item.itemNumber}>
+                                  <td data-label="Quantity increase" width="50">
+                                      <lightning-button-icon icon-name="utility:add" alternative-text="Increase quantity" title="Increase quantity" onclick={increaseQuantityClick} data-itemnr={item.itemNumber}></lightning-button-icon>
+                                  </td>
+                                  <td data-label="Quantity" width="60">
+                                      <lightning-input type="number" variant="label-hidden" value={item.quantity} disabled="true"></lightning-input>
+                                  </td>
+                                  <td data-label="Quantity decrease" width="50">
+                                      <lightning-button-icon icon-name="utility:dash"  alternative-text="Decrease quantity" title="Decrease quantity" onclick={decreaseQuantityClick} data-itemnr={item.itemNumber}></lightning-button-icon>
+                                  </td>
+                                  <td data-label="Item description">
+                                      <lightning-pill class="slds-col" label={item.itemDescription} onremove={removePillItem}
+                                                      key={item.itemNumber} data-itemnr={item.itemNumber}>
+                                      </lightning-pill>
+                                      <div class="slds-text-body_small basketitemextra" key={item.itemNumber} data-item={item}>{item.extraTextOnBasket}</div>
+                                  </td>
+                                  <template lwc:if={simpleProductPickerActivated}>
+                                      <td data-label="Item Number" class="alignCenter">{item.itemNumber}</td>
+                                      <td data-label="Net Price" class="alignCenter">{item.cPnetPrice}&nbsp;{item.cPcurrency}</td>
+                                      <td data-label="Discount %" class="alignCenter">{item.cPdiscountPercent}</td>
+                                      <td data-label="List Price" class="alignCenter">{item.cPlistPrice}&nbsp;{item.cPcurrency}</td>
+                                      <td data-label="Total Price" class="alignCenter">{item.totalPrice}&nbsp;{item.cPcurrency}</td>
+                                  </template>
+                                  <template lwc:else>
+                                      <td data-label="Description" class="">{item.itemNumber}</td>
+                                  </template>
+                              </tr>
+                          </template>
+                      </tbody>
+                  </table>
+
+                  <div if:true={hasNonRealProducts} class="productsNotAdded slds-m-vertical_medium slds-p-around_medium">
+                      <div class="slds-text-heading_small">
+                          <lightning-icon icon-name="utility:warning" size="small" alternative-text="warning" title="warning" class="slds-m-right_medium"></lightning-icon>
+                          Products not added:
+                      </div>
+                      <div class="slds-m-top_small">
+                          <template for:each={quickProductsNotRealList} for:item="item">
+                              <div class="slds-text-body_regular" key={item.itemNumber}>{item.itemNumber}</div>
+                          </template>
+                      </div>
+                      <div class="slds-text-align_center slds-m-top_medium">
+                          <lightning-button label="Ok" title="Ok" onclick={nonAddedProductsOkClick}></lightning-button>
+                      </div>
+                  </div>
+                  <div class="map-root" lwc:dom="manual"></div>
+              </div>
+
+              <div if:false={anyProductsAdded} class="slds-p-vertical_medium slds-p-horizontal_small">
+                  <p>Empty</p>
+                  <p>Try adding some products</p>
+              </div>
+          </lightning-tab>
+      </lightning-tabset>
+  </lightning-card>
+</template>

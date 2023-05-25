@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>BLM_approval</fullName>
+        <field>Approval_Criteria_BLM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>BLM approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>GM_approval</fullName>
+        <field>Approval_Criteria_GM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>GM approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Move_stage_back</fullName>
+        <field>StageName</field>
+        <literalValue>Understand Request</literalValue>
+        <name>Move stage back</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opportunity_approval_approved</fullName>
+        <field>Approval_Process_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Opportunity approval approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Record_is_locked_checkbox_checked</fullName>
+        <field>Record_Under_Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Record is locked checkbox checked</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Record_is_locked_checkbox_unchecked</fullName>
+        <field>Record_Under_Approval__c</field>
+        <literalValue>0</literalValue>
+        <name>Record is locked checkbox unchecked</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SM_approval</fullName>
+        <field>Approval_Criteria_SM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>SM approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Gates_Approve_proposal_quote</fullName>
+        <description>Sales Gates - Approve proposal/quote’ to Yes</description>
+        <field>Approve_Proposal__c</field>
+        <literalValue>Yes</literalValue>
+        <name>Sales Gates - Approve proposal/quote</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Gates_Approve_proposal_quote_2</fullName>
+        <description>Sales Gates - Approve proposal/quote’ to Yes</description>
+        <field>Approve_Proposal__c</field>
+        <literalValue>Yes</literalValue>
+        <name>Sales Gates - Approve proposal/quote</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approved_By_SM</fullName>
+        <field>Approval_Criteria_SM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Set Approved By SM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_approved_checkbox</fullName>
+        <field>Approval_Process_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Approval approved checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_stage_to_SM_approved</fullName>
+        <field>Approval_Criteria_SM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Update approval stage to SM approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_back_opp</fullName>
+        <field>StageName</field>
+        <literalValue>Create Proposal</literalValue>
+        <name>set back opp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>PreviousValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_back_the_opp</fullName>
+        <field>StageName</field>
+        <name>set back the opp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>PreviousValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <tasks>
+        <fullName>Approval_request_approved</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Your Approval request for this opportunity has been approved, please take the next necessary steps.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>In progress</status>
+        <subject>Approval request approved</subject>
+    </tasks>
+    <tasks>
+        <fullName>Approval_request_rejected</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Your Approval request for this opportunity has been rejected, please take the next necessary steps to resubmit this opportunity.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>In progress</status>
+        <subject>Approval request rejected</subject>
+    </tasks>
+</Workflow>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Quote</entityName>
+    <fieldName>Quote_Stage__c</fieldName>
+    <masterLabel>Quote Path for Complex Opportunity</masterLabel>
+    <recordTypeName>Quote_Standard</recordTypeName>
+</PathAssistant>

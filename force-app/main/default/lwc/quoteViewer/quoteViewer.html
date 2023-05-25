@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Quotes" icon-name="standard:partner_fund_request" if:true={mainWindowOpen}>
+        <lightning-datatable data={displayedData} columns={columns} key-field="oRHorderNo" hide-checkbox-column></lightning-datatable>
+    </lightning-card>
+    <lightning-card title="Quotes" icon-name="standard:partner_fund_request" if:true={loadingWindowOpen}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </lightning-card>
+    <lightning-card title="Quotes" icon-name="standard:partner_fund_request" if:true={errorWindowOpen}>
+        <lightning-textarea name="error" disabled value={errorData}></lightning-textarea>
+    </lightning-card>
+</template>

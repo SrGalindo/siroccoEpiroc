@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Previous Visit Report Tasks" icon-name="standard:report" if:true={mainWindowOpen}>
+        <lightning-accordion class="previous-accordion" onsectiontoggle={handleToggleSection} active-section-name="activeReport" allow-multiple-sections-open>
+            <div class="slds-section open-activity-group">
+                <template for:each={preVisitsReports} for:item="preVisitsReport" >
+                    <lightning-accordion-section name={preVisitsReport.name} label={preVisitsReport.name} key={preVisitsReport.id}>
+                        <div class="timelineRow slds-media__body slds-grid">
+                            <div class="slds-box slds-text-heading_small">
+                                <lightning-icon icon-name="standard:task" size="small" alternative-text="task" title="task"></lightning-icon>
+                            </div>
+                            <div class="hoverable slds-grid slds-var-p-around_xx-small">
+                                <div class="slds-col slds-truncate timelineGridItemLeft">
+                                     Visit Report Name: {preVisitsReport.name}                                
+                                    <template for:each={preVisitsReport.tasks} for:item="task">
+                                        <lightning-accordion-section name={task.subject} label={task.subject} key={task.id}>
+                                            <div class="slds-media__body expandedDetails  slds-var-p-horizontal_small slds-var-p-vertical_xx-small forceRecordLayout">
+                                                <lightning-combobox name="status" value={task.status} options ={options} data-id={task.id} onchange={handleChange} label="Change Status"></lightning-combobox>
+                                                <div title="Crated time" class="slds-text-title slds-text-color_weak slds-truncate recordCell">
+                                                    <p>Created On: {task.createdDate}</p>
+                                                </div>
+                                                <div title="Type" class="slds-text-title slds-text-color_weak slds-truncate recordCell">
+                                                    <p>Type: {task.type}</p>
+                                                </div>
+                                                <div title="Description" class="slds-text-title slds-text-color_weak slds-truncate recordCell">
+                                                    <p>Description:</p>
+                                                </div>
+                                                <div class="slds-item_detail description bodyText tenLinesScroll">
+                                                    {task.description}
+                                                </div>
+                                            </div>
+                                        </lightning-accordion-section>
+                                    </template>
+                                </div>
+                                <div class="slds-no-flex duedate-wrap slds-var-p-left_xx-small slds-var-p-right_x-small">
+                                    <div class="slds-var-m-right_small dueDate overdue">
+                                        Created: {preVisitsReport.createdDate}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-accordion-section>
+                </template>
+            </div>
+        </lightning-accordion>
+    </lightning-card>
+</template>

@@ -1,0 +1,170 @@
+<apex:page applyHtmlTag="false" showHeader="false" standardController="Quote" extensions="QT_Controller"
+           language="{!If(quote.Language__c=='Mozambique - English' || quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Namibia - English' || quote.Language__c=='Botswana - English' ,'en',quote.Language__c)}" sidebar="false" renderAs="pdf" standardStylesheets="false" >
+    
+    <apex:variable var="index" value="{!1}"/>
+    <apex:variable var="index2" value="{!1}"/>
+    <apex:variable var="language" value="{! If(quote.Language__c=='Mozambique - English' || quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Namibia - English' || quote.Language__c=='Botswana - English' ,'en',quote.Language__c)}"/>
+    <apex:variable var="netAmount" value="{! quote.TaxFormula__c + quote.TotalPrice}"/>
+    
+    <div id="maincontainer" style="text-align:left;display:{! If(quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Mozambique - English' || quote.Language__c=='Botswana - English' || quote.Language__c=='Namibia - English' ,'block','none') }">
+                        <apex:pageblock >
+                            <table width="700px" style="margin-top:30px;border: 1px solid;border-collapse: collapse;">
+                                <tr style="height:23px;background-color: #c0c0c0;font-size:10px;text-align:center;">
+                                    <th style="border: 1px solid;">
+                                        <text style="display:{! If(Language=='en' ,'block','none') };text-align:center;font-size:9px;">LINE <br /> NO.</text>
+                                        <text style="display:{! If(Language=='es' ,'block','none') };text-align:center;font-size:9px;">Línea</text>
+                                        <text style="display:{! If(Language=='pt_BR' ,'block','none') };text-align:center;font-size:9px;">Linha</text>
+                                    </th>
+                                    <th style="border: 1px solid;text-align:left;">
+                                        <apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.Item_number__c.Label}"/>
+                                    </th>
+                                    <th style="border: 1px solid;text-align:left;">
+                                        <apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.Description__c.Label}"/> 
+                                    </th>
+                                    
+                                    <th style="border: 1px solid;">
+                                        <apex:outputLabel style="display:{! If(Language=='en' ,'block','none') };" value="{!$ObjectType.QuoteLineItem.fields.Quantity.Label}"/>
+                                        <apex:outputLabel style="display:{! If(Language=='es' ,'block','none') };" value="Cuantidad"/>
+                                        <apex:outputLabel style="display:{! If(Language=='pt_BR' ,'block','none') };" value="Quantidade"/>
+                                    </th>
+                                    
+                                    <th style="margin: auto;padding-top: 3px;height:23px;border-top: 1px solid;border-bottom: 1px solid;border-left:none;border-right: none;">
+                                        <apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.Unit_of_Measure__c.Label}"/>
+                                    </th> 
+                                    <th style="border: 1px solid;text-align:left;"> 
+                                        <apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.UnitPrice.Label}"/>
+                                    </th> 
+                                    
+                                    <th style="border: 1px solid;text-align:left;"> 
+                                        <apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.TotalPrice.Label}"/>
+                                    </th> 
+                                    <th style="display:{! If(quote.Language__c=='es' || quote.Language__c=='pt_BR' ,'','none') };">
+                                        <text style="display:{! If(Language!='en' ,'','none') };">
+                                            <apex:outputLabel style="display:{! If(Language!='es' ,'','none') };" value="Descuento (%) "/>
+                                            <apex:outputLabel style="display:{! If(Language!='pt_BR' ,'','none') };" value="Desconto (%) "/>
+                                        </text>
+                                    </th>  
+                                    <th style="text-align:left;margin: auto;padding-top: 3px;height:23px;border-right:none;border-top: 1px solid;border-bottom: 1px solid;display:{! If(Language!='es' && Language!='pt_BR' ,'','none') };">
+                                        Tax
+                                    </th>
+                                    <th style="text-align:left;border: 1px solid;">
+                                        Net Amount
+                                    </th>
+                                </tr>
+                                <apex:repeat value="{!QuoteLines}" var="line" id="theRepeat" >
+                                    <tr style="font-size:11px;border-bottom: 1px solid;">
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:center;">
+                                            <apex:outputLabel value="{!index2}" style="text-align:center"/>
+                                            <apex:variable var="index2" value="{!index2+1}"/>
+                                        </td>
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:left;"> {!line.Item_number__c}</td>
+                                        <td style="padding-left:3px;border-right: 1px solid;border-left: 1px solid;"> {!line.Description__c}</td>
+                                        
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:center">
+                                            <apex:outputText value="{0, number, 0.00}">
+                                                <apex:param value="{!line.Quantity}"/>
+                                            </apex:outputText>  
+                                        </td>
+                                        <td style="text-align:center;">
+                                            {!line.Unit_of_Measure__c}
+                                        </td>
+                                        
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:left">
+                                            <!--{!line.UnitPrice }-->
+                                            <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                                <apex:param value="{!line.UnitPrice}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:left">
+                                            <!--{!line.List Price }-->
+                                            <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                                <apex:param value="{!line.TotalPrice}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:left">
+                                            <!--{!line.UnitPrice }-->
+                                            <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                                <apex:param value="{!line.TaxFormula__c}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        <td style="border-right: 1px solid;border-left: 1px solid;text-align:left">
+                                            <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                                <apex:param value="{!line.TotalPrice + line.TaxFormula__c}"/>
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                                
+                                <tr style="font-size:11px;border-bottom: 1px solid;border-top: 1px solid;display:{! If(quote.Language__c!='es' && quote.Language__c!='pt_BR','','none')}"> 
+                                    <td style="padding-right:4px;border-right: 1px solid;border-left: 1px solid;border-top: 1px solid;text-align:right;border-bottom: 1px solid;" colspan="{! If(quote.Language__c=='Mozambique - English' || quote.Language__c=='en' ,'5','5') }">
+                                        <b><apex:outputLabel value="Total"/></b> 
+                                        
+                                    </td>
+                                    <td style="border-right: 1px solid;border-top: 1px solid;border-left: 1px solid;text-align:left;border-bottom: 1px solid;">
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                            <apex:param value="{!quote.Subtotal }"/>
+                                        </apex:outputText>
+                                    </td>
+                                   <td style="border-right: 1px solid;border-top: 1px solid;border-left: 1px solid;text-align:left;border-bottom: 1px solid;">
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                            <apex:param value="{!quote.TotalPrice }"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="border-right: 1px solid;border-left: 1px solid;border-top: 1px solid;text-align:left;border-bottom: 1px solid;">
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                            <apex:param value="{!quote.TaxFormula__c }"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    <td style="border-right: 1px solid;border-left: 1px solid;border-top: 1px solid;text-align:left;border-bottom: 1px solid;">
+                                        
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}">
+                                            <apex:param value="{!netAmount }"/>
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                
+                            </table> 
+                           <!-- <table width="{! If(quote.Language__c=='Mozambique - English','150','200')}px" style="float:right;margin-top:22px;border: 1px solid;border-collapse: collapse;margin-right:2px">
+                                <tr style="height:23px;font-size:12px;text-align:center;">
+                                    <td style="text-align:left;">
+                                        <b><apex:outputLabel style="display:{! If(quote.Language__c!='Zimbabwe - English' && quote.Language__c!='Botswana - English' && quote.Language__c!='Namibia - English' ,'block','none') }" value="{!$ObjectType.Quote.fields.Subtotal.Label}:"/>
+                                            <text style="text-align:left;display:{! If(quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Botswana - English' || quote.Language__c=='Namibia - English' ,'block','none') }"><apex:outputLabel value="{!$ObjectType.Quote.fields.Subtotal.Label}"/> ({! quote.CurrencyIsoCode}):</text></b>
+                                    </td>
+                                    <td style="text-align:right;padding-right:3px;">
+                                        <apex:outputText style="text-align:right;" value="{0,number,0.00}">
+                                            <apex:param value="{!quote.Subtotal }"/>
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr style="height:23px;font-size:12px;text-align:center;">
+                                    <td style="text-align:left;"> 
+                                        <b><apex:outputLabel style="display:{! If(quote.Language__c!='Zimbabwe - English' && quote.Language__c!='Botswana - English' && quote.Language__c!='Namibia - English' ,'block','none') }" value="{!$ObjectType.Quote.fields.Tax.Label}:"/>
+                                            <text style="text-align:left;display:{! If(quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Botswana - English' || quote.Language__c=='Namibia - English' ,'block','none') }"><apex:outputLabel value="{!$ObjectType.Quote.fields.Tax.Label}:"/> ({! quote.CurrencyIsoCode}):</text></b>
+                                        
+                                    </td>
+                                    <td style="text-align:right;padding-right:3px;">
+                                        <apex:outputText value="{0,number,0.00}" style="text-align:right;">
+                                            <apex:param value="{!quote.Tax }"/>
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr style="height:23px;font-size:12px;text-align:center;">
+                                    <td style="text-align:left;">
+                                        <b><apex:outputLabel style="display:{! If(quote.Language__c!='Zimbabwe - English' && quote.Language__c!='Botswana - English' && quote.Language__c!='Namibia - English' ,'block','none') }" value="{!$ObjectType.QuoteLineItem.fields.TotalPrice.Label}:"/>
+                                            <text style="text-align:left;display:{! If(quote.Language__c=='Zimbabwe - English' || quote.Language__c=='Botswana - English' || quote.Language__c=='Namibia - English' ,'block','none') }"><apex:outputLabel value="{!$ObjectType.QuoteLineItem.fields.TotalPrice.Label}"/> ({! quote.CurrencyIsoCode}):</text></b>
+                                    </td>
+                                    <td style="text-align:right;padding-right:3px;">  
+                                        <apex:outputText value="{0,number,0.00}" >
+                                            <apex:param value="{!quote.Subtotal }"/>
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </table>-->
+                        </apex:pageblock>
+                        
+                    </div>
+    
+    
+</apex:page>
