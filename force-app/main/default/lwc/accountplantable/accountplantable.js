@@ -45,13 +45,14 @@ export default class AccountPlanTable extends LightningElement {
                 this.existingRecords = result['existingRecords'];
                 let isEditable = result['isEditable'];
                 let typeOfField = result['typeOfField'];
+                let editableFields = result['editableFields'];
 
                 this.dataColumns = this.columns.map((column, index) => {
                     return {
                         label: column,
                         fieldName: this.apiFields[index],
                         type: isEditable ? typeOfField[index] : 'text',
-                        editable: isEditable
+                        editable: isEditable ? editableFields[index] : isEditable
 
                     };
                   });

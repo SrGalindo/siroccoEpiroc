@@ -22,6 +22,7 @@ public with sharing class AccountPlanTableController extends BaseController{
             }
 
             List<String> apiFieldsList = fieldsToQuery.split(',');
+            List<Boolean> editableFields = new List<Boolean>();
             if(isEditable){
                 sObject mySObject = Schema.getGlobalDescribe().get(objectName).newSObject();
                 Map<String,Schema.SObjectField> fieldsMap = mySObject.getSObjectType().getDescribe().fields.getMap();
@@ -29,10 +30,13 @@ public with sharing class AccountPlanTableController extends BaseController{
                     String fieldType = String.valueOf(fieldsMap.get(apiField).getDescribe().getType());
                     if(fieldType == 'Double' || fieldType == 'Integer' || fieldType == 'Long'){
                         typeOfField.add('number');
-                    }else if(fieldType == 'Percent'){
-                        typeOfField.add('percent');
                     }else{
                         typeOfField.add('text');
+                    }
+                    if(fieldsMap.get(apiField).getDescribe().isCalculated()){
+                        editableFields.add(false);
+                    }else{
+                        editableFields.add(true);
                     }
                 }
             }
@@ -42,6 +46,7 @@ public with sharing class AccountPlanTableController extends BaseController{
             result.put('apiFieldsList', apiFieldsList);
             result.put('isEditable', isEditable);
             result.put('typeOfField', typeOfField);
+            result.put('editableFields', editableFields);
             result.put('existingRecords', getExistingRecords(recordId, objectName, fieldsToQuery));
         }catch(Exception e) {
             result = getActionFailed(e);
