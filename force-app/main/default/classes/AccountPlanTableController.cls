@@ -8,6 +8,7 @@ public with sharing class AccountPlanTableController extends BaseController{
             String objectName = '';
             String fieldsToQuery = '';
             Boolean isEditable = false;
+            List<String> typeOfField = new List<String>();
             List<Account_Plan_Settings__mdt> accPlanSettings = [Select is_Editable__c, Tab_column__c, columns__c, object_name__c, Api_Fields_Name__c From Account_Plan_Settings__mdt where Tab_column__c = :tabName Limit 1];
             List<String> columnsList = new List<String>();
             
@@ -20,11 +21,27 @@ public with sharing class AccountPlanTableController extends BaseController{
                 isEditable = accPlanSetting.is_Editable__c;
             }
 
+            List<String> apiFieldsList = fieldsToQuery.split(',');
+            if(isEditable){
+                sObject mySObject = Schema.getGlobalDescribe().get(objectName).newSObject();
+                Map<String,Schema.SObjectField> fieldsMap = mySObject.getSObjectType().getDescribe().fields.getMap();
+                for(String apiField : apiFieldsList){
+                    String fieldType = String.valueOf(fieldsMap.get(apiField).getDescribe().getType());
+                    if(fieldType == 'Double' || fieldType == 'Integer' || fieldType == 'Long'){
+                        typeOfField.add('number');
+                    }else if(fieldType == 'Percent'){
+                        typeOfField.add('percent');
+                    }else{
+                        typeOfField.add('text');
+                    }
+                }
+            }
+
             result.put('accPlanSettings', accPlanSettings);
             result.put('columnsList', columnsList);
-            List<String> apiFieldsList = fieldsToQuery.split(','); 
             result.put('apiFieldsList', apiFieldsList);
             result.put('isEditable', isEditable);
+            result.put('typeOfField', typeOfField);
             result.put('existingRecords', getExistingRecords(recordId, objectName, fieldsToQuery));
         }catch(Exception e) {
             result = getActionFailed(e);

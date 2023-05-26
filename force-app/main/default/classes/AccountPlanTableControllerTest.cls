@@ -3,7 +3,9 @@ public class AccountPlanTableControllerTest {
     
 	@TestSetup
 	private static void createData() {
+        Account acc = TestDataFactory.createSingelAccount();
         Account_plan_2_0__c accountPlan = new Account_plan_2_0__c();
+        accountPlan.account__c = acc.Id;
         insert accountPlan;
         Account_Plan_Item__c accountPlanItem = new Account_Plan_Item__c();
         accountPlanItem.Account_plan_2_0__c = accountPlan.Id;
@@ -30,6 +32,30 @@ public class AccountPlanTableControllerTest {
         System.assertEquals(false, result.get('error'));
         System.assert(!((List<Account_Plan_Item__c>)result.get('existingRecords')).isEmpty());
         System.assertEquals(accountPlanItem.Id, ((List<Account_Plan_Item__c>)result.get('existingRecords')).get(0).Id);
+        System.assertEquals(apiFieldsList, (List<String>) result.get('apiFieldsList'));
+        System.assertEquals(columnList, (List<String>) result.get('columnsList'));
+    }
+
+    @IsTest
+    static void getAccountPlanTableSettingsAccount_success() {
+        // Given
+        Account_plan_2_0__c accountPlan = [Select Id, Account__c From Account_plan_2_0__c Limit 1].get(0);
+        Account_Plan_Accounts__c accountPlanAccount = new Account_Plan_Accounts__c(Account__c = accountPlan.Account__c, Account_plan_2_0__c = accountPlan.Id);
+        insert accountPlanAccount;
+
+        String tabName = 'Target Customers';
+        List<String> columnList = new List<String>{'Name','Market Segment'};
+        List<String> apiFieldsList = new List<String>{'Account__r.Name','Account__r.Market_Segment__c'};
+
+        // When
+        Test.startTest();
+        Map<String,Object> result = AccountPlanTableController.getAccountPlanTableSettings(tabName, accountPlan.id);
+        Test.stopTest();
+
+        // Then
+        System.assertEquals(false, result.get('error'),'error found: '+result.get('message'));
+        System.assert(!((List<Account_Plan_Accounts__c>)result.get('existingRecords')).isEmpty());
+        System.assertEquals(accountPlanAccount.Id, ((List<Account_Plan_Accounts__c>)result.get('existingRecords')).get(0).Id);
         System.assertEquals(apiFieldsList, (List<String>) result.get('apiFieldsList'));
         System.assertEquals(columnList, (List<String>) result.get('columnsList'));
     }
@@ -107,22 +133,20 @@ public class AccountPlanTableControllerTest {
         System.assertEquals(1, accountPlanContactList.size(), 'contact not linked correctly');
     }
 
-    //Create account fails due to a problem in the AccountTriggerHandler
-    // using a fake account Id instead
     @IsTest
-    static void linkAccount_fail() {
+    static void linkAccount_success() {
         // Given
         Account_plan_2_0__c accountPlan = [Select Id From Account_plan_2_0__c Limit 1].get(0);
-        Id accId = '001000000000001';
+        Account acc = [Select Id From Account limit 1].get(0);
 
         // When
         Test.startTest();
-        Map<String,Object> result = AccountPlanTableController.linkAccount(accountPlan.Id, accId);
+        Map<String,Object> result = AccountPlanTableController.linkAccount(accountPlan.Id, acc.Id);
         Test.stopTest();
 
         // Then
-        System.assertEquals(true, result.get('error'), 'error found: '+result.get('message'));
-        // List<Account_Plan_Accounts__c> accountPlanAccountList = [Select Id From Account_Plan_Accounts__c where Account_plan_2_0__c = :accountPlan.Id AND Account__c = :accId];
-        // System.assertEquals(1, accountPlanAccountList.size(), 'account not linked correctly');
+        System.assertEquals(false, result.get('error'), 'error found: '+result.get('message'));
+        List<Account_Plan_Accounts__c> accountPlanAccountList = [Select Id From Account_Plan_Accounts__c where Account_plan_2_0__c = :accountPlan.Id AND Account__c = :acc.Id];
+        System.assertEquals(1, accountPlanAccountList.size(), 'account not linked correctly');
     }
 }
