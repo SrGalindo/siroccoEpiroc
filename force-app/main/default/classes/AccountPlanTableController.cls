@@ -30,6 +30,8 @@ public with sharing class AccountPlanTableController extends BaseController{
                     String fieldType = String.valueOf(fieldsMap.get(apiField).getDescribe().getType());
                     if(fieldType == 'Double' || fieldType == 'Integer' || fieldType == 'Long'){
                         typeOfField.add('number');
+                    }else if(fieldType == 'Percent'){
+                        typeOfField.add('percent');
                     }else{
                         typeOfField.add('text');
                     }
