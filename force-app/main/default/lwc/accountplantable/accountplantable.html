@@ -14,11 +14,13 @@
                     onrowaction={handleAction}>
                 </lightning-datatable>
             </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-top_small">
-                    <lightning-button-group>
-                        <lightning-button label="New Row" onclick={handleNewRow}></lightning-button>
-                    </lightning-button-group>
-                </div>
+                <template lwc:if={showNewRowButton}>
+                    <div class="slds-col slds-size_1-of-2 slds-p-top_small">
+                        <lightning-button-group>
+                            <lightning-button label="New Row" onclick={handleNewRow}></lightning-button>
+                        </lightning-button-group>
+                    </div>
+                </template>
         </div>
     </div>
 
@@ -30,7 +32,7 @@
                 </lightning-record-edit-form>
             </div>
             <div class="slds-col">
-                <lightning-button label="Link Contact" onclick={handleLinkRecord}></lightning-button>
+                <lightning-button label="Link Contact as new Row" onclick={handleLinkRecord}></lightning-button>
             </div>
         </template>
         <template lwc:if={isAccount}>
@@ -40,7 +42,7 @@
                 </lightning-record-edit-form>
             </div>
             <div class="slds-col">
-                <lightning-button label="Link Account" onclick={handleLinkRecord}></lightning-button>
+                <lightning-button label="Link Account  as new Row" onclick={handleLinkRecord}></lightning-button>
             </div>
         </template>
     </div>

@@ -25,11 +25,19 @@ export default class AccountPlanTable extends LightningElement {
     isAccount;
     tempContactToLink;
     tempAccountToLink;
+    showNewRowButton;
 
     dataColumns = [];
     
     connectedCallback(){
         this.startTable();
+        if(this.objectName == 'Account_Plan_Contacts__c'){
+            this.isContact = true;
+        }else if(this.objectName == 'Account_Plan_Accounts__c'){
+            this.isAccount = true;
+        }else{
+            this.showNewRowButton = true;
+        }
     }
 
     startTable(){
@@ -108,22 +116,16 @@ export default class AccountPlanTable extends LightningElement {
 
 
     handleNewRow(){
-        if(this.objectName == 'Account_Plan_Contacts__c'){
-            this.isContact = true;
-        }else if(this.objectName == 'Account_Plan_Accounts__c'){
-            this.isAccount = true;
-        }else{
-            createRecord({
-                objectTypeName: this.objectName,
-                accountPlan: this.recordId
-            }).then((result) => {
-                if (result['error']) {
-                    fireToast(this, 'error', 'Error', result['message']);
-                }else{
-                    this.startTable();
-                }
-            });
-        }
+        createRecord({
+            objectTypeName: this.objectName,
+            accountPlan: this.recordId
+        }).then((result) => {
+            if (result['error']) {
+                fireToast(this, 'error', 'Error', result['message']);
+            }else{
+                this.startTable();
+            }
+        });
     }
 
     handleLinkRecord(event){
