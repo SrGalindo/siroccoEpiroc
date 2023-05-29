@@ -129,8 +129,9 @@ public with sharing class BaseControllerTest {
     private static void getActionFailedRollback_noMessage_defaultErrorMessageAndRollback() {
         // Given
         BaseController.setSavepoint();
-        Account testAccount = new Account(Name = 'Run out of imagination');
-        insert testAccount;
+        // Account testAccount = new Account(Name = 'Run out of imagination');
+        // insert testAccount;
+        Account testAccount = TestDataFactory.createSingelAccount();
 
         String customMessage = null;
 
@@ -153,8 +154,9 @@ public with sharing class BaseControllerTest {
     private static void getActionFailedRollback_customMessageSpecified_customErrorMessageReturnedAndRollback() {
         // Given
         BaseController.setSavepoint();
-        Account testAccount = new Account(Name = 'Run out of imagination');
-        insert testAccount;
+        // Account testAccount = new Account(Name = 'Run out of imagination');
+        // insert testAccount;
+        Account testAccount = TestDataFactory.createSingelAccount();
 
         String customMessage = 'October 21, 2015';
 
@@ -177,8 +179,9 @@ public with sharing class BaseControllerTest {
     private static void getActionFailedRollback_withException_exceptionMessageReturnedAndRollback() {
         // Given
         BaseController.setSavepoint();
-        Account testAccount = new Account(Name = 'Run out of imagination');
-        insert testAccount;
+        // Account testAccount = new Account(Name = 'Run out of imagination');
+        // insert testAccount;
+        Account testAccount = TestDataFactory.createSingelAccount();
 
         String customMessage = 'Too lazy';
         TestUtils.TestException testException = new TestUtils.TestException(customMessage);
@@ -229,8 +232,9 @@ public with sharing class BaseControllerTest {
     private static void rollbackSavepoint_savePointSet_rollbackPerformed() {
         // Given
         BaseController.setSavepoint();
-        Account testAccount = new Account(Name = 'McQueen95');
-        insert testAccount;
+        // Account testAccount = new Account(Name = 'Run out of imagination');
+        // insert testAccount;
+        Account testAccount = TestDataFactory.createSingelAccount();
 
         // When
         BaseController.rollbackSavepoint();
