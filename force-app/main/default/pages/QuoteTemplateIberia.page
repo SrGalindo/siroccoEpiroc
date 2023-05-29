@@ -66,7 +66,7 @@
                                         <!--<td style="border: 1px solid;"> {!line.LineNumber}</td>-->
                                         
                                         <td style="border-right: 1px solid;border-left: 1px solid;text-align:center">
-                                            <apex:outputText value="{0, number, 0.00}">
+                                            <apex:outputText value="{0, number, 0}">
                                                 <apex:param value="{!line.Quantity}"/>
                                             </apex:outputText>  
                                         </td>

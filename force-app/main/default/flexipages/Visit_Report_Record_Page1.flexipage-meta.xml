@@ -412,6 +412,10 @@
                     <value>Facet-6aaae273-b2ea-4a6d-9676-6566cfb68d5f</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                     <value>Visit Report Information</value>
                 </componentInstanceProperties>
@@ -424,6 +428,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-f3db9c23-a067-493d-8ec9-8470854288ea</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -440,6 +448,10 @@
                     <value>Facet-52c9ceb4-9a12-4d4c-9e9e-1dfbad191675</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                     <value>Visit Report</value>
                 </componentInstanceProperties>
@@ -452,6 +464,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-906762dd-354f-483e-9c79-a30e84dde943</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>

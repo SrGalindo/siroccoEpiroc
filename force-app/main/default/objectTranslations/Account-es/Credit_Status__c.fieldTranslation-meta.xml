@@ -15,6 +15,10 @@
         <translation></translation>
     </picklistValues>
     <picklistValues>
+        <masterLabel>Blocked</masterLabel>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
         <masterLabel>Not Approved</masterLabel>
         <translation></translation>
     </picklistValues>

@@ -36,7 +36,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Business_Line__c</field>
+                <field>Family__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>EDB - Epiroc Digital Business</fullName>
+        <default>false</default>
+        <label>EDB - Epiroc Digital Business</label>
+    </customValue>
+    <customValue>
+        <fullName>ADS - Epiroc Drilling Solutions</fullName>
+        <default>false</default>
+        <label>ADS - Epiroc Drilling Solutions</label>
+    </customValue>
+    <customValue>
+        <fullName>HAT - Hydraulic Attachment Tools Service</fullName>
+        <default>false</default>
+        <label>HAT - Hydraulic Attachment Tools Service</label>
+    </customValue>
+    <customValue>
+        <fullName>MRS - Mining &amp; Rock Excavation Services</fullName>
+        <default>false</default>
+        <label>MRS - Mining &amp; Rock Excavation Services</label>
+    </customValue>
+    <customValue>
+        <fullName>REX - Rock Drilling Tools - Exploration</fullName>
+        <default>false</default>
+        <label>REX - Rock Drilling Tools - Exploration</label>
+    </customValue>
+    <customValue>
+        <fullName>RGU - Rock Drilling Tools - Ground Support</fullName>
+        <default>false</default>
+        <label>RGU - Rock Drilling Tools - Ground Support</label>
+    </customValue>
+    <customValue>
+        <fullName>RDT - Rock Drilling Tools (Secoroc)</fullName>
+        <default>false</default>
+        <label>RDT - Rock Drilling Tools (Secoroc)</label>
+    </customValue>
+    <customValue>
+        <fullName>RVT - Rocvolt</fullName>
+        <default>false</default>
+        <label>RVT - Rocvolt</label>
+    </customValue>
+    <customValue>
+        <fullName>SED - Surface and Exploration Drilling</fullName>
+        <default>false</default>
+        <label>SED - Surface and Exploration Drilling</label>
+    </customValue>
+    <customValue>
+        <fullName>SMT - Surface Mining Technology</fullName>
+        <default>false</default>
+        <label>SMT - Surface Mining Technology</label>
+    </customValue>
+    <customValue>
+        <fullName>URE - Underground Rock Excavation</fullName>
+        <default>false</default>
+        <label>URE - Underground Rock Excavation</label>
+    </customValue>
+    <customValue>
+        <fullName>TIN - Technology &amp; Innovation</fullName>
+        <default>false</default>
+        <label>TIN - Technology &amp; Innovation</label>
+    </customValue>
+    <masterLabel>User BL Select</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Item_Name__c</fullName>
+    <externalId>false</externalId>
+    <label>Item Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Achieved (current)</fullName>
+                <default>false</default>
+                <label>Achieved (current)</label>
+            </value>
+            <value>
+                <fullName>Customer’s Requirement/objective/focus</fullName>
+                <default>false</default>
+                <label>Customer’s Requirement/objective/focus</label>
+            </value>
+            <value>
+                <fullName>Strategy (how)</fullName>
+                <default>false</default>
+                <label>Strategy (how)</label>
+            </value>
+            <value>
+                <fullName>SWOT Analysis</fullName>
+                <default>false</default>
+                <label>SWOT Analysis</label>
+            </value>
+            <value>
+                <fullName>Vision (what)</fullName>
+                <default>false</default>
+                <label>Vision (what)</label>
+            </value>
+            <value>
+                <fullName>What hasn’t worked well</fullName>
+                <default>false</default>
+                <label>What hasn’t worked well</label>
+            </value>
+            <value>
+                <fullName>What has worked well</fullName>
+                <default>false</default>
+                <label>What has worked well</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Market Share columns</label>
+    <protected>false</protected>
+    <values>
+        <field>Api_Fields_Name__c</field>
+        <value xsi:type="xsd:string">Size_Category__c,Market_Units__c,Company_Units__c,Company_Share__c,Dealer_Units__c,Dealer_Share__c</value>
+    </values>
+    <values>
+        <field>Tab_column__c</field>
+        <value xsi:type="xsd:string">Market Share</value>
+    </values>
+    <values>
+        <field>columns__c</field>
+        <value xsi:type="xsd:string">Size Category,Market Units,Company Units,Company Share,Dealer Units,Dealer Share</value>
+    </values>
+    <values>
+        <field>is_Editable__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>is_tab__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>object_name__c</field>
+        <value xsi:type="xsd:string">Account_Plan_MS__c</value>
+    </values>
+</CustomMetadata>

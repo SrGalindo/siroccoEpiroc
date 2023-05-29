@@ -6,4 +6,6 @@
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <tabs>standard-Chatter</tabs>
     <tabs>standard-File</tabs>
+    <tabs>Account_plan_2_0__c</tabs>
+    <tabs>Action_Plan_Template__c</tabs>
 </CustomApplication>

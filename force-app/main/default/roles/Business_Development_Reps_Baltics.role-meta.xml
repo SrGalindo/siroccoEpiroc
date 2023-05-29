@@ -4,6 +4,6 @@
     <contactAccessLevel>Edit</contactAccessLevel>
     <mayForecastManagerShare>false</mayForecastManagerShare>
     <name>Business Development Reps Baltics</name>
-    <opportunityAccessLevel>Edit</opportunityAccessLevel>
-    <parentRole>National_Sales_Manager_Finland</parentRole>
+    <opportunityAccessLevel>Read</opportunityAccessLevel>
+    <parentRole>Business_Development_Manager_Baltics</parentRole>
 </Role>

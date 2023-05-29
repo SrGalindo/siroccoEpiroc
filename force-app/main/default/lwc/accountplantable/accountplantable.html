@@ -1,0 +1,49 @@
+<template>
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-datatable
+                    key-field="Id"
+                    data={data}
+                    show-row-number-column
+                    hide-checkbox-column
+                    row-number-offset={rowOffset}
+                    columns={dataColumns}
+                    onsave={saveHandleAction}
+                    draft-values={fldsItemValues}
+                    onrowaction={handleAction}>
+                </lightning-datatable>
+            </div>
+                <template lwc:if={showNewRowButton}>
+                    <div class="slds-col slds-size_1-of-2 slds-p-top_small">
+                        <lightning-button-group>
+                            <lightning-button label="New Row" onclick={handleNewRow}></lightning-button>
+                        </lightning-button-group>
+                    </div>
+                </template>
+        </div>
+    </div>
+
+    <div class="slds-col slds-grid slds-gutters slds-p-top_small">
+        <template lwc:if={isContact}>
+            <div class="slds-col">
+                <lightning-record-edit-form flexibility="auto" size="10" object-api-name="Account_Plan_Contacts__c" id="createKeyContact" >
+                    <lightning-input-field field-name="Contact__c" variant="label-hidden" onchange={handleContactChanged}> </lightning-input-field>
+                </lightning-record-edit-form>
+            </div>
+            <div class="slds-col">
+                <lightning-button label="Link Contact as new Row" onclick={handleLinkRecord}></lightning-button>
+            </div>
+        </template>
+        <template lwc:if={isAccount}>
+            <div class="slds-col">
+                <lightning-record-edit-form flexibility="auto" size="10" object-api-name="Account_Plan_Accounts__c" id="createTargetCustomer" >
+                    <lightning-input-field field-name="Account__c" variant="label-hidden" onchange={handleAccountChanged}> </lightning-input-field>
+                </lightning-record-edit-form>
+            </div>
+            <div class="slds-col">
+                <lightning-button label="Link Account  as new Row" onclick={handleLinkRecord}></lightning-button>
+            </div>
+        </template>
+    </div>
+</template>

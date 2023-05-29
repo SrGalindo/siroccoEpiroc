@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>is_tab__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>checkbox to know if the record is for a tab settings</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>set to true if this setting is for a tabs</inlineHelpText>
+    <label>is tab</label>
+    <type>Checkbox</type>
+</CustomField>

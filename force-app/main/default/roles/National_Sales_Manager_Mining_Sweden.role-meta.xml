@@ -3,7 +3,7 @@
     <caseAccessLevel>None</caseAccessLevel>
     <contactAccessLevel>Edit</contactAccessLevel>
     <mayForecastManagerShare>false</mayForecastManagerShare>
-    <name>National Sales Manager Mining, Sweden</name>
-    <opportunityAccessLevel>Edit</opportunityAccessLevel>
-    <parentRole>Regional_Sales_Manager_Nordics_Baltics</parentRole>
+    <name>National Sales Manager Mining Sweden</name>
+    <opportunityAccessLevel>Read</opportunityAccessLevel>
+    <parentRole>Regional_Sales_Manager_NB</parentRole>
 </Role>

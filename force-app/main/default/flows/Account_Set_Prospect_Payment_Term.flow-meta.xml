@@ -27,7 +27,7 @@
         <name>Set_Payment_Term</name>
         <label>Set Payment Term</label>
         <locationX>176</locationX>
-        <locationY>311</locationY>
+        <locationY>287</locationY>
         <inputAssignments>
             <field>Payment_Terms__c</field>
             <value>

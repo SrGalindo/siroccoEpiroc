@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Target Customers columns</label>
+    <protected>false</protected>
+    <values>
+        <field>Api_Fields_Name__c</field>
+        <value xsi:type="xsd:string">Account__r.Name,Account__r.Market_Segment__c</value>
+    </values>
+    <values>
+        <field>Tab_column__c</field>
+        <value xsi:type="xsd:string">Target Customers</value>
+    </values>
+    <values>
+        <field>columns__c</field>
+        <value xsi:type="xsd:string">Name,Market Segment</value>
+    </values>
+    <values>
+        <field>is_Editable__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>is_tab__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>object_name__c</field>
+        <value xsi:type="xsd:string">Account_Plan_Accounts__c</value>
+    </values>
+</CustomMetadata>

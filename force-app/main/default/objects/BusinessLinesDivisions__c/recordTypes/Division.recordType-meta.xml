@@ -6,74 +6,74 @@
     <picklistValues>
         <picklist>Business_LinePL__c</picklist>
         <values>
-            <fullName>Epiroc Digital Business</fullName>
+            <fullName>ADS - Epiroc Drilling Solutions</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Epiroc Drilling Solutions</fullName>
+            <fullName>EDB - Epiroc Digital Business</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Hydraulic Attachment Tools Service</fullName>
+            <fullName>HAT - Hydraulic Attachment Tools Service</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Mining %26 Rock Excavation Services</fullName>
+            <fullName>MRS - Mining %26 Rock Excavation Services</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Rock Drilling Tools %28Secoroc%29</fullName>
+            <fullName>RDT - Rock Drilling Tools %28Secoroc%29</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Rock Drilling Tools - Exploration</fullName>
+            <fullName>REX - Rock Drilling Tools - Exploration</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Rock Drilling Tools - Ground Support</fullName>
+            <fullName>RGU - Rock Drilling Tools - Ground Support</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Rocvolt</fullName>
+            <fullName>RVT - Rocvolt</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Surface Mining Technology</fullName>
+            <fullName>SED - Surface and Exploration Drilling</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Surface and Exploration Drilling</fullName>
+            <fullName>SMT - Surface Mining Technology</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Underground Rock Excavation</fullName>
+            <fullName>URE - Underground Rock Excavation</fullName>
             <default>false</default>
         </values>
     </picklistValues>
     <picklistValues>
         <picklist>DivisionPL__c</picklist>
         <values>
-            <fullName>Digital Solutions Division</fullName>
+            <fullName>DSD - Digital Solutions Division</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Parts %26 Services</fullName>
+            <fullName>PSD - Parts %26 Services</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Surface</fullName>
+            <fullName>SRD - Surface</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Technology %26 Innovation</fullName>
+            <fullName>TIN - Technology %26 Innovation</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Tools %26 Attachments</fullName>
+            <fullName>TLD - Tools %26 Attachments</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Underground</fullName>
+            <fullName>UMR - Underground</fullName>
             <default>false</default>
         </values>
     </picklistValues>

@@ -4,8 +4,7 @@ public with sharing class QuoteTriggerHandler {
         Map<Id, List<Id>> opportunityQuotesMap = new Map<Id, List<Id>>();
         Map<Id, List<Id>> accountQuoteMap = new Map<Id, List<Id>>();
         Map<Id, Quote> quotesMap = new Map<Id, Quote>();
-        
-        VatCountryValidation(quotesInc);
+
         for(Quote quote : quotesInc){
             if(quote.OpportunityId != null){
                 List<Id> quotes = opportunityQuotesMap.get(quote.OpportunityId) == null ? new List<Id>() : opportunityQuotesMap.get(quote.OpportunityId);
@@ -26,18 +25,6 @@ public with sharing class QuoteTriggerHandler {
         mapAddressesWithOpp(opportunityQuotesMap, quotesMap);
         mapAccountFields(quotesMap, accountQuoteMap);
     }
-    
-    public static void VatCountryValidation(List<Quote> quotesInc){
-        string accCountry;
-        for(Quote looper: quotesInc){
-            accCountry = [select Id,Country__c from Account where Id =: looper.AccountID__c ].Country__c;
-            system.debug('looper.VAT_Country__c' + looper.VAT_Country__c);
-            system.debug('accCountry' + accCountry);
-            if(looper.VAT_Country__c  != accCountry && looper.VAT_Country__c  != Null){
-                looper.addError('VAT Country should be same as on Account');
-            }
-        }
-    }
 
     public static void beforeUpdate(List<Quote> quotesInc, Map<Id, Quote> quotesIncMapOld){
         //Prequeries
@@ -52,10 +39,10 @@ public with sharing class QuoteTriggerHandler {
             QuoteClass.connectBilltoAddresses(quote, newBillToAddress);
             }
         }
-        List<Country__c> vatCountrys = [SELECT Id, Tax_level__c FROM Country__c WHERE id = :quote.VAT_Country__c];
-        if(vatCountrys.size() >0){
-            Country__c vatCountry = vatCountrys[0];
-            if(quoteOld.VAT_Country__c != quote.VAT_Country__c){
+        if(quoteOld.VAT_Country__c != quote.VAT_Country__c){
+            List<Country__c> vatCountrys = [SELECT Id, Tax_level__c FROM Country__c WHERE id = :quote.VAT_Country__c];
+            if(vatCountrys.size() >0){
+                Country__c vatCountry = vatCountrys[0];
                 quote.TaxPerc__c = vatCountry.Tax_level__c;
             }
         }
@@ -107,9 +94,7 @@ public with sharing class QuoteTriggerHandler {
                     //Look for opportunity bill to
                     if(opp.Bill_to__C != null){
                         QuoteClass.connectBilltoAddresses(quote, opp);
-                        if(quote.TaxPerc__c == null){
-                            quote.TaxPerc__c = opp.Bill_to__r.Country__r.Tax_level__c;
-                        }
+                        quote.TaxPerc__c = opp.Bill_to__r.Country__r.Tax_level__c;
                         quote.VAT_Country__c = opp.Bill_to__r.Country__c;
                         System.debug('Quote total price: '+opp.Amount);
                         quote.tax = getQuoteTax(opp.Bill_to__r.Country__r.Tax_level__c, opp.Amount);
@@ -123,10 +108,7 @@ public with sharing class QuoteTriggerHandler {
                             QuoteClass.connectBilltoAddresses(quote, billAddressFromAccount);
                         }
                         //Set tax levels
-                        if(quote.TaxPerc__c == null){
-                            quote.TaxPerc__c = opp.Account.Country__r.Tax_level__c;
-                        }
-                        
+                        quote.TaxPerc__c = opp.Account.Country__r.Tax_level__c;
                         quote.VAT_Country__c = opp.Account.Country__c;
                         System.debug('find me');
                         System.debug(quote.TotalPrice);

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>POT And Rev Targets columns</label>
+    <protected>false</protected>
+    <values>
+        <field>Api_Fields_Name__c</field>
+        <value xsi:type="xsd:string">Category__c,Actual__c,Total_Market_Potential__c,Actual_Potential__c,X1_Yr__c,X2_Yr__c,X3_Yr__c</value>
+    </values>
+    <values>
+        <field>Tab_column__c</field>
+        <value xsi:type="xsd:string">POT And Rev Targets</value>
+    </values>
+    <values>
+        <field>columns__c</field>
+        <value xsi:type="xsd:string">Category,Actual,Total Market Potential,Actual Potential,1 Yr,2 Yr,3 Yr</value>
+    </values>
+    <values>
+        <field>is_Editable__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>is_tab__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>object_name__c</field>
+        <value xsi:type="xsd:string">Account_Plan_Target__c</value>
+    </values>
+</CustomMetadata>

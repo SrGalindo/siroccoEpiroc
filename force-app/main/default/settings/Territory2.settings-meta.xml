@@ -3,7 +3,7 @@
     <defaultAccountAccessLevel>Read</defaultAccountAccessLevel>
     <defaultCaseAccessLevel>None</defaultCaseAccessLevel>
     <defaultContactAccessLevel>Edit</defaultContactAccessLevel>
-    <defaultOpportunityAccessLevel>None</defaultOpportunityAccessLevel>
+    <defaultOpportunityAccessLevel>Read</defaultOpportunityAccessLevel>
     <enableTerritoryManagement2>true</enableTerritoryManagement2>
     <opportunityFilterSettings>
         <apexClassName>OppTerrAssignDefaultLogicFilter</apexClassName>

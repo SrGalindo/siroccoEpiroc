@@ -28,13 +28,19 @@ public with sharing class MolDataController {
     public static CallbackWrapper getMachinesByCustomerNumber(String recordId){
         
         CallbackWrapper callback = new CallbackWrapper();
-        Account account = [Select id, CCUST__c, FAM_Code__c From Account Where id =: recordId WITH SECURITY_ENFORCED];
-        if(account == null){
-            throw new AuraHandledException('Component only available on Account');
+        List<Account> accountList = [SELECT id, CCUST__c, FAM_Code__c From Account WHERE id =: recordId WITH SECURITY_ENFORCED];
+        List<Account_Plan__c> accPlanList = [SELECT id,Name,Account__r.CCUST__c,Account__r.FAM_Code__c FROM Account_Plan__c WHERE id =: recordId WITH SECURITY_ENFORCED];
+        String customerNumber;
+        String customerCenterFamCode;
+        if(accountList.size() >0){
+            customerNumber = String.valueOf(accountList[0].CCUST__c);
+            customerCenterFamCode = String.valueOf(accountList[0].FAM_Code__c);
+        } 
+        else if(accPlanList.size() >0){
+            customerNumber = String.valueOf(accPlanList[0].Account__r.CCUST__c);
+            customerCenterFamCode = String.valueOf(accPlanList[0].Account__r.FAM_Code__c);
         }
-
-        String customerNumber = String.valueOf(account.CCUST__c);
-        String customerCenterFamCode = String.valueOf(account.FAM_Code__c);
+        else throw new AuraHandledException('Component only available on account and account plan');
         Boolean isSandbox = [SELECT IsSandbox FROM Organization LIMIT 1][0].IsSandbox;
         if(isSandbox){
             //Map fam codes from test to prod

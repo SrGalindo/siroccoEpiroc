@@ -11,48 +11,48 @@
         <restricted>true</restricted>
         <valueSetName>Business_Lines</valueSetName>
         <valueSettings>
-            <controllingFieldValue>Parts &amp; Services</controllingFieldValue>
-            <valueName>Mining &amp; Rock Excavation Services</valueName>
+            <controllingFieldValue>PSD - Parts &amp; Services</controllingFieldValue>
+            <valueName>MRS - Mining &amp; Rock Excavation Services</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Surface</controllingFieldValue>
-            <valueName>Epiroc Drilling Solutions</valueName>
+            <controllingFieldValue>SRD - Surface</controllingFieldValue>
+            <valueName>ADS - Epiroc Drilling Solutions</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Surface</controllingFieldValue>
-            <valueName>Surface and Exploration Drilling</valueName>
+            <controllingFieldValue>SRD - Surface</controllingFieldValue>
+            <valueName>SED - Surface and Exploration Drilling</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Surface</controllingFieldValue>
-            <valueName>Surface Mining Technology</valueName>
+            <controllingFieldValue>SRD - Surface</controllingFieldValue>
+            <valueName>SMT - Surface Mining Technology</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
-            <valueName>Hydraulic Attachment Tools Service</valueName>
+            <controllingFieldValue>TLD - Tools &amp; Attachments</controllingFieldValue>
+            <valueName>HAT - Hydraulic Attachment Tools Service</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
-            <valueName>Rock Drilling Tools (Secoroc)</valueName>
+            <controllingFieldValue>TLD - Tools &amp; Attachments</controllingFieldValue>
+            <valueName>RDT - Rock Drilling Tools (Secoroc)</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
-            <valueName>Rock Drilling Tools - Exploration</valueName>
+            <controllingFieldValue>TLD - Tools &amp; Attachments</controllingFieldValue>
+            <valueName>REX - Rock Drilling Tools - Exploration</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Tools &amp; Attachments</controllingFieldValue>
-            <valueName>Rock Drilling Tools - Ground Support</valueName>
+            <controllingFieldValue>TLD - Tools &amp; Attachments</controllingFieldValue>
+            <valueName>RGU - Rock Drilling Tools - Ground Support</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Underground</controllingFieldValue>
-            <valueName>Rocvolt</valueName>
+            <controllingFieldValue>UMR - Underground</controllingFieldValue>
+            <valueName>RVT - Rocvolt</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Underground</controllingFieldValue>
-            <valueName>Underground Rock Excavation</valueName>
+            <controllingFieldValue>UMR - Underground</controllingFieldValue>
+            <valueName>URE - Underground Rock Excavation</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Digital Solutions Division</controllingFieldValue>
-            <valueName>Epiroc Digital Business</valueName>
+            <controllingFieldValue>DSD - Digital Solutions Division</controllingFieldValue>
+            <valueName>EDB - Epiroc Digital Business</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

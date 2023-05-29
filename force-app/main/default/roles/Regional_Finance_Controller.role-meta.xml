@@ -4,6 +4,6 @@
     <contactAccessLevel>Edit</contactAccessLevel>
     <mayForecastManagerShare>false</mayForecastManagerShare>
     <name>Regional Finance Controller</name>
-    <opportunityAccessLevel>Edit</opportunityAccessLevel>
-    <parentRole>General_Manager_Nordics_Baltics</parentRole>
+    <opportunityAccessLevel>Read</opportunityAccessLevel>
+    <parentRole>PLACEHOLDER_Mari_Vaaranen</parentRole>
 </Role>

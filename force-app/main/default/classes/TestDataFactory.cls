@@ -40,6 +40,8 @@ public class TestDataFactory {
     // }
 
     public static Opportunity createOppWithAccountWithAddress(String flavour) {
+        return createOppWithTypeWithAccountWithAddress(flavour, 'Simple Opportunity');
+        /*
         Country__c spain = new Country__c();
         spain.Alpha_2_Code__c = 'ES';
         insert spain;
@@ -78,6 +80,8 @@ public class TestDataFactory {
         System.debug(opp.id);
         System.debug(opp.name);
         return opp;
+
+         */
     }
 
     public static List<Address__c> createAddressesWithoutInsert(){
@@ -382,5 +386,68 @@ public class TestDataFactory {
         connectAdminProfile(user);
         insert user;
         return user;
+    }
+
+    public static ItemTemplateLwc createSimpleProductPickerItem() {
+        ItemTemplateLwc item = new ItemTemplateLwc();
+        item.itemNumber='123456';
+        item.itemDescription='Test Item Name';
+        item.extraItemDescription = 'Extra Description';
+        item.unitOfMessure = 'EA';
+        item.weight = 500;
+        item.productDivision = 'MR';
+        item.productLineCode = 'MRS';
+        item.gac = '94';
+        item.pgc = '948';
+        item.cPlistPrice = 1000000;
+        item.quantity=1;
+        item.productSourceType = 'Item';
+        return item;
+    }
+
+    public static ItemTemplateLwc createComplexProductPickerItem() {
+        ItemTemplateLwc item = new ItemTemplateLwc();
+        item.itemNumber='123456789';
+        item.itemDescription='Test Complex Item Name';
+        item.Business_Line = 'HAT PS'; // 'MRS'
+        item.productDivision = 'MR';
+        item.gac = '94';
+        item.cPlistPrice = 1000000;
+        item.quantity=1;
+        item.productSourceType = 'Product';
+        return item;
+    }
+
+    public static Opportunity createOppWithTypeWithAccountWithAddress(String flavour, String oppRecordType) {
+        Country__c spain = new Country__c();
+        spain.Alpha_2_Code__c = 'ES';
+        insert spain;
+        String genName = 'TestAccount' +flavour;
+        Account acct = new Account(Name=genName);
+        acct.Country__c = spain.id;
+        insert acct;
+
+        Address__c addr = createSingelAddress(acct, spain.id);
+        Address__c billToAddr = createSingleBilltoAddress(acct, spain.id);
+        Opportunity opp = new Opportunity();
+
+        opp.Name = 'Test Name 23';
+        opp.StageName='New';
+        opp.RecordTypeId=Schema.getGlobalDescribe().get('Opportunity').getDescribe().getRecordTypeInfosByName().get(oppRecordType).getRecordTypeId();
+        opp.CloseDate=System.today().addMonths(1);
+        opp.AccountId=acct.Id;
+        opp.Pricebook2Id = Test.getStandardPricebookId();
+        opp.Bill_To__c = billToAddr.Id;
+        opp.Ship_To__c = addr.Id;
+        opp.CurrencyIsoCode = 'EUR';
+        if (oppRecordType == 'Complex Opportunity') {
+            opp.Amount = 1000000;
+        }
+        insert opp;
+        return opp;
+    }
+
+    public static Opportunity createComplexOppWithAccountWithAddress(String flavour) {
+        return createOppWithTypeWithAccountWithAddress(flavour, 'Complex Opportunity');
     }
 }

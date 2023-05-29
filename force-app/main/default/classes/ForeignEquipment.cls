@@ -1,23 +1,27 @@
 public with sharing class ForeignEquipment {
     @AuraEnabled
         public static CallbackWrapper getItems(String recordId){
-            List<Account> accList = [SELECT Id, CCUST__c, FAM_Code__c FROM Account WHERE Id =: recordId WITH SECURITY_ENFORCED];
-            if(accList.size() == 0) {
-                throw new AuraHandledException('Component only available on Account');
+            List<Account> accountList = [SELECT Id, CCUST__c, FAM_Code__c FROM Account WHERE Id =: recordId WITH SECURITY_ENFORCED];
+            List<Account_Plan__c> accPlanList = [SELECT id,Name,Account__r.CCUST__c,Account__r.FAM_Code__c FROM Account_Plan__c WHERE id =: recordId WITH SECURITY_ENFORCED];
+            String customerNumber;
+            String customerCenterFamCode;
+            if(accountList.size() >0){
+                customerNumber = String.valueOf(accountList[0].CCUST__c);
+                customerCenterFamCode = String.valueOf(accountList[0].FAM_Code__c);
+            } 
+            else if(accPlanList.size() >0){
+                customerNumber = String.valueOf(accPlanList[0].Account__r.CCUST__c);
+                customerCenterFamCode = String.valueOf(accPlanList[0].Account__r.FAM_Code__c);
             }
-            
-            Account currentAcc = accList[0];
-            String ccust = String.valueOf(currentAcc.CCUST__c);
-            System.debug('start');
-            System.debug(ccust);
+            else throw new AuraHandledException('Component only available on account and account plan');
         CallbackWrapper callback = new CallbackWrapper();
         callback.status = 'error';
         callback.message = 'No data found';
         try {
             String argumentsString = '?pagingIndex=1&pagingSize=50&';
-            if(ccust != null){
-                argumentsString += '&CustomerNumber=' + ccust;
-                argumentsString += '&FamCode=' + currentAcc.FAM_code__c;
+            if(customerNumber != null){
+                argumentsString += '&CustomerNumber=' + customerNumber;
+                argumentsString += '&FamCode=' + customerCenterFamCode;
             } else {
                 return callback;
             }

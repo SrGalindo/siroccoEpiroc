@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <choices>
+        <name>Closed</name>
+        <choiceText>Closed</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Closed</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Down_Payment</name>
+        <choiceText>Down Payment</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Down Payment</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>New</name>
+        <choiceText>New</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>New</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Other</name>
+        <choiceText>Other</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Other</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Sent_to_Customer</name>
+        <choiceText>Sent to Customer</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Sent to Customer</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X10_DAYS</name>
+        <choiceText>10 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>10 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X15_DAYS</name>
+        <choiceText>15 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>15 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X20_DAYS</name>
+        <choiceText>20 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>20 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X30_DAYS</name>
+        <choiceText>30 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>30 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X45_DAYS</name>
+        <choiceText>45 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>45 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X60_DAYS</name>
+        <choiceText>60 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>60 DAYS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X90_DAYS</name>
+        <choiceText>90 DAYS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>90 DAYS</stringValue>
+        </value>
+    </choices>
+    <interviewLabel>Quote - New Quote Screen Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Quote - New Quote Screen Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>New_Quote</name>
+        <label>New Quote</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>New_Quote_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>New_Quote_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Quote_Name</name>
+                    <dataType>String</dataType>
+                    <fieldText>Quote Name</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>New_Quote_Section1_Column2</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Expiration_Date</name>
+                    <dataType>Date</dataType>
+                    <fieldText>Expiration Date</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <fields>
+                    <name>Syncing</name>
+                    <dataType>Boolean</dataType>
+                    <fieldText>Syncing</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <isRequired>true</isRequired>
+                </fields>
+                <fields>
+                    <name>Description</name>
+                    <fieldText>Description</fieldText>
+                    <fieldType>LargeTextArea</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <fields>
+                    <name>Quote_Stage</name>
+                    <choiceReferences>New</choiceReferences>
+                    <choiceReferences>Sent_to_Customer</choiceReferences>
+                    <choiceReferences>Closed</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Quote Stage</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <fields>
+                    <name>Payment_Terms</name>
+                    <choiceReferences>X10_DAYS</choiceReferences>
+                    <choiceReferences>X15_DAYS</choiceReferences>
+                    <choiceReferences>X20_DAYS</choiceReferences>
+                    <choiceReferences>X30_DAYS</choiceReferences>
+                    <choiceReferences>X45_DAYS</choiceReferences>
+                    <choiceReferences>X60_DAYS</choiceReferences>
+                    <choiceReferences>X90_DAYS</choiceReferences>
+                    <choiceReferences>Down_Payment</choiceReferences>
+                    <choiceReferences>Other</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Payment Terms</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>New_Quote</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+</Flow>

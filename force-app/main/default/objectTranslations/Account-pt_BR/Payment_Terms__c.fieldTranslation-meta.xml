@@ -3,19 +3,7 @@
     <label></label>
     <name>Payment_Terms__c</name>
     <picklistValues>
-        <masterLabel>0 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
         <masterLabel>10 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>105 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>120 DAYS</masterLabel>
         <translation></translation>
     </picklistValues>
     <picklistValues>
@@ -23,23 +11,7 @@
         <translation></translation>
     </picklistValues>
     <picklistValues>
-        <masterLabel>150 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>180 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
         <masterLabel>20 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>210 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>240 DAYS</masterLabel>
         <translation></translation>
     </picklistValues>
     <picklistValues>
@@ -52,22 +24,6 @@
     </picklistValues>
     <picklistValues>
         <masterLabel>60 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>70 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>75 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>80 DAYS</masterLabel>
-        <translation></translation>
-    </picklistValues>
-    <picklistValues>
-        <masterLabel>85 DAYS</masterLabel>
         <translation></translation>
     </picklistValues>
     <picklistValues>

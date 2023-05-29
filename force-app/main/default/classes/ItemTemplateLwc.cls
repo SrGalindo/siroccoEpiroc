@@ -47,4 +47,10 @@ public with sharing class ItemTemplateLwc {
     public Boolean cPlistPriceRetrieved { get; set;}
     @AuraEnabled
     public String Product_Family { get; set;}
+    @AuraEnabled
+    public String Business_Line { get; set;} //EP
+    @AuraEnabled
+    public String Product_Model_Code_Internal { get; set;} //EP perhaps not needed
+    @AuraEnabled
+    public String productSourceType { get; set;}
 }

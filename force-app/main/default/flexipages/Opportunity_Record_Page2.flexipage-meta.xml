@@ -17,6 +17,9 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Opportunity.Create_Quote</value>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Global.New_Activity_Serie</value>
                         </valueListItems>
                         <valueListItems>
@@ -654,16 +657,6 @@
                 <identifier>RecordApproval_criteria_GM_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Record_Under_Approval__c</fieldItem>
-                <identifier>RecordRecord_Under_Approval_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-8c71305f-f370-4024-b9d2-f6d4e63181b0</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -699,6 +692,10 @@
                     <value>Facet-22192809-9c29-4b6e-b02e-48b409cfa4a3</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                     <value>Opportunity</value>
                 </componentInstanceProperties>
@@ -711,6 +708,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-2dccc765-b876-4328-bdfa-57de2635dea0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -734,6 +735,10 @@
                     <value>Facet-08b42ee7-e2c6-422d-bed6-9369710633e1</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                     <value>Opportunity Details</value>
                 </componentInstanceProperties>
@@ -748,6 +753,10 @@
                     <value>Facet-721c08f3-1cba-4a6a-8613-0bc62ee8852e</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                     <value>Opportunity Checks</value>
                 </componentInstanceProperties>
@@ -760,6 +769,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-ec2d4830-c325-49b2-9e46-b97c2a30e1a5</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -781,6 +794,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-82dfc80c-b234-4afa-a3fe-7297585bdfa4</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -831,6 +848,31 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>height</name>
+                    <value>300</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>pageName</name>
+                    <value>ShowpadForSF__showpad_app_opportunity</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showLabel</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:visualforcePage</componentName>
+                <identifier>flexipage_visualforcePage</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-c770fba4-71f1-4374-b2a6-2ec57b73b243</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>active</name>
                     <value>true</value>
                 </componentInstanceProperties>
@@ -858,6 +900,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-c770fba4-71f1-4374-b2a6-2ec57b73b243</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Showpad</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab5</identifier>
             </componentInstance>
         </itemInstances>
         <name>maintabs</name>

@@ -119,9 +119,11 @@ public with sharing class QuoteProductPicker {
     }*/
 
     @AuraEnabled
-    public static CallbackWrapper getItemPricing(String famCode, String itemNumber, String currencyArg, Integer custNo, Decimal quantityArg){
+    public static CallbackWrapper getItemPricing(String famCode, String itemNumber, String currencyArg, String custNo, Decimal quantityArg, String sourceSystem){
         //famCode = Util.switchFamCode(famCode);
         CallbackWrapper callback = new CallbackWrapper();
+        System.debug('sourceSystem');
+        System.debug(sourceSystem);
         callback.status = 'error';
         callback.message = 'Invalid description or item number';
         try {
@@ -130,10 +132,7 @@ public with sharing class QuoteProductPicker {
                 System.debug('1');
                 
                 //itemNumber = itemNumber.replaceAll(' ', '%20');
-                //itemNumber = itemNumber.replaceAll('[^0-9]', '');
-                itemNumber = itemNumber.replaceAll('[^A-Za-z0-9()-_\\[\\]]', '');
-
-                //itemNumber = itemNumber.replaceAll('[^A-Za-z0-9()\\[\\]]', '');
+                itemNumber = itemNumber.replaceAll('[^0-9]', '');
                 System.debug('2');
                 //String regex='/[0-9]+/g';
                 //Matcher matcher = Pattern.compile(regex).matcher(itemNumber);
@@ -143,18 +142,22 @@ public with sharing class QuoteProductPicker {
                 //System.debug('Matching String: '+matcher.group(0));
                 //String xer = itemNumber = itemNumber.replaceAll('(\\s+)', '');
                 //System.debug('123: '+xer +'END');
-                argumentsString += '?cPfamCode=' +famCode + '&cPcurrency=' +currencyArg + '&cPcustNo=' + String.valueOf(custNo) + '&cPitemNumber=' + itemNumber + '&cPquantity=' +quantityArg;
+                argumentsString += 'currency=' +currencyArg + '&customerNumber=' + custNo + '&itemNumber=' + itemNumber + '&quantity=' +quantityArg;
             }
             
-            else return callback;
+            else {
+                System.debug('1');
+                return callback;
+            }
             System.debug('Argumentstring: '+argumentsString);
             HttpRequest req = new HttpRequest();
-            String uriWithParam = 'callout:azure_integration/erp-source/v1/item-net-price' +argumentsString;
+            String uriWithParam = 'callout:azure_dev_integration/erp/source/sales/v1/items/price?' +argumentsString;
             System.debug(uriWithParam);
-            req.setEndpoint('callout:azure_integration/erp-source/v1/item-net-price'+argumentsString);
+            req.setEndpoint('callout:azure_dev_integration/erp/source/sales/v1/items/price?'+argumentsString);
             req.setMethod('GET');
             req.setTimeout(120000); 
-            req.setHeader('UnitCode', famCode);
+            req.setHeader('unitCode', famCode);
+            req.setHeader('sourceSystem', sourceSystem);
             System.debug(req);
             Http http = new Http();
             HTTPResponse res = http.send(req);
@@ -167,7 +170,8 @@ public with sharing class QuoteProductPicker {
         }
     }
     @AuraEnabled
-    public static CallbackWrapper getItem(String famCode, String itemNumber){
+    public static CallbackWrapper getItem(String famCode, String itemNumber, String sourceSystem){
+        System.debug('sourceSystem: ' + sourceSystem);
         //famCode = Util.switchFamCode(famCode);
         CallbackWrapper callback = new CallbackWrapper();
         callback.status = 'error';
@@ -177,21 +181,20 @@ public with sharing class QuoteProductPicker {
             if(itemNumber != null){
                 //itemNumber = itemNumber.replaceAll(' ', '%20');
                 //itemNumber = itemNumber.replaceAll( '\\s+', '');
-                //itemNumber = itemNumber.replaceAll('[^0-9]', '');
-                itemNumber = itemNumber.replaceAll('[^A-Za-z0-9()-_\\[\\]]', '');
-
-                argumentsString += '?itemNumber=' + itemNumber;
+                itemNumber = itemNumber.replaceAll('[^0-9]', '');
+                argumentsString += itemNumber;
             }
             
             else return callback;
             System.debug('Argumentstring: '+argumentsString);
             HttpRequest req = new HttpRequest();
-            String uriWithParam = 'callout:azure_integration/erp-source/v1/item' +argumentsString;
+            String uriWithParam = 'callout:azure_dev_integration/erp/source/sales/v1/items/' +argumentsString;
             System.debug(uriWithParam);
-            req.setEndpoint('callout:azure_integration/erp-source/v1/item'+argumentsString);
+            req.setEndpoint('callout:azure_dev_integration/erp/source/sales/v1/items/'+argumentsString);
             req.setMethod('GET');
             req.setTimeout(120000);
-            req.setHeader('UnitCode', famCode);
+            req.setHeader('unitCode', famCode);
+            req.setHeader('sourceSystem', sourceSystem);
             System.debug(req);
             Http http = new Http();
             HTTPResponse res = http.send(req);
@@ -204,10 +207,10 @@ public with sharing class QuoteProductPicker {
         }
     }
     @AuraEnabled
-    public static CallbackWrapper getItems(String famCode, String description, String itemNumber){
+    public static CallbackWrapper getItems(String famCode, String description, String itemNumber, String sourceSystem){
+        System.debug('sourceSystem: ' + sourceSystem);
         CallbackWrapper callback = new CallbackWrapper();
         if(description != null) description = description.replaceAll(' ', '%20');
-        if(itemNumber != null) itemNumber = itemNumber.replaceAll('[^A-Za-z0-9()-_\\[\\]]', '');
         callback.status = 'error';
         callback.message = 'Invalid description or item number';
         try {
@@ -221,12 +224,13 @@ public with sharing class QuoteProductPicker {
             else return callback;
             System.debug('Argumentstring: '+argumentsString);
             HttpRequest req = new HttpRequest();
-            String uriWithParam = 'callout:azure_integration/erp-source/v1/items' +argumentsString;
+            String uriWithParam = 'callout:azure_dev_integration/erp/source/sales/v1/items' +argumentsString;
             System.debug(uriWithParam);
-            req.setEndpoint('callout:azure_integration/erp-source/v1/items'+argumentsString);
+            req.setEndpoint('callout:azure_dev_integration/erp/source/sales/v1/items'+argumentsString);
             req.setMethod('GET');
             req.setTimeout(120000);
             req.setHeader('UnitCode', famCode);
+            req.setHeader('SourceSystem', sourceSystem);
             System.debug(req);
             Http http = new Http();
             HTTPResponse res = http.send(req);
@@ -241,7 +245,7 @@ public with sharing class QuoteProductPicker {
     }
     @AuraEnabled
     public static CallbackWrapper getObjectData(String recordId){
-        List<Opportunity> oppList = [SELECT Id, RecordType.DeveloperName, CurrencyIsoCode, Account.CCUST__c, Account.FAM_Code__c FROM Opportunity WHERE Id = :recordId];
+        List<Opportunity> oppList = [SELECT Id, RecordType.DeveloperName, CurrencyIsoCode, Account.CCUST__c, Account.FAM_Code__c, Account.Source_System__c FROM Opportunity WHERE Id = :recordId];
         List<Quote> quoteList = [SELECT Id, Opportunity.RecordType.DeveloperName, Opportunity.CurrencyIsoCode, Account.CCUST__c, Account.FAM_Code__c FROM Quote WHERE Id = :recordId];
         Map<String, String> hybridObject = new Map<String, String>();
         CallbackWrapper cbw = new CallbackWrapper();
@@ -254,6 +258,7 @@ public with sharing class QuoteProductPicker {
                 hybridObject.put('custno', opp.Account.CCUST__c);
                 //String sandboxCompensatedFamcode = Util.switchFamCode(opp.Account.FAM_Code__c);
                 hybridObject.put('famCode', opp.Account.FAM_Code__c);
+                hybridObject.put('sourceSystem', opp.Account.Source_System__c);
             }
             else if (quoteList.size() > 0){
                 Quote quote = quoteList[0];

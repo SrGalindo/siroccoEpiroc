@@ -12,7 +12,7 @@ import PRODUCTJSON from '@salesforce/resourceUrl/Complex_Products_Nov_2022_V2';
 //export default class ProductPicker extends NavigationMixin(LightningElement) {
 export default class ProductPicker extends LightningElement {
     quantityChosen = 1;
-    productPickerName = '';
+    productPickerName = 'Product Picker';
     accountData  = {};
     @api recordId;
     itemList = [];
@@ -55,31 +55,12 @@ export default class ProductPicker extends LightningElement {
 
     //Search
     get searchProductOptions() {
-        if(this.simpleProductPickerActivated){
             return [
-                { label: 'Item', value: 'itemdesc' },
-                { label: 'Item number', value: 'itemno' },
+            { label: 'Items - Number', value: 'itemno' },
+            { label: 'Items - Name', value: 'itemdesc_simple' },
+            { label: 'Products - Name', value: 'itemdesc_complex' },
             ];
         }
-        else{
-            return [
-                { label: 'Item', value: 'itemdesc' },
-            ];
-        }
-    }
-
-    get searchProductTypePlaceholder() {
-        if(this.simpleProductPickerActivated){
-            return [
-                'Item no'
-            ];
-        }
-        else{
-            return [
-                'Item'
-            ];
-        }
-    }
 
     searchClicked() {
         console.log('handle searchClicked');
@@ -95,16 +76,16 @@ export default class ProductPicker extends LightningElement {
 
     doSearch() {
         this.hideProductDetails();
-        console.log(this.simpleProductPickerActivated);
         console.log(!this.accountData.famCode);
-        console.log(!this.accountData.custno);
+
+        /* console.log(!this.accountData.custno);
         if(this.simpleProductPickerActivated && (!this.accountData.famCode)){
             console.log('throwing');
             this.showErrorNotification('Salesforce misconfiguration', 'No Unit Code on Account found.');
             // Error err = new Errorr
             // throw new Error('Fam code or custNo not set');
         }
-        console.log('not throwing');
+        console.log('not throwing');*/
         this.displayedData = [];
         this.pageNumber = 0;
         this.pageNumberDisplayed = 1;
@@ -112,11 +93,19 @@ export default class ProductPicker extends LightningElement {
         //let queryTerm = evt.target.value; EP
         let queryTerm = this.template.querySelector('lightning-input[data-id="searchInput"]').value;
         this.activeSearch = true;
-        if(this.simpleProductPickerActivated){
+        //if(this.simpleProductPickerActivated){
             switch(this.searchOptionValue){
-                case 'itemdesc':
-                    console.log('itemdesc case');
-                    getItems({famCode: this.accountData.famCode, description: queryTerm, itemNumber: null})
+            case 'itemdesc_simple':
+                console.log('itemdesc_simple case');
+                this.simpleProductPickerActivated = true;
+                if(!this.accountData.famCode){
+                    console.log('throwing');
+                    this.showErrorNotification('Salesforce misconfiguration', 'No Unit Code on Account found.');
+                    // Error err = new Errorr
+                    // throw new Error('Fam code or custNo not set');
+                    break;
+                }
+                    getItems({famCode: this.accountData.famCode, description: queryTerm, itemNumber: null, sourceSystem: this.accountData.sourceSystem})
                     .then((result) => {
                         this.activeSearch = false;
                         console.log('status? '+result.status);
@@ -142,7 +131,11 @@ export default class ProductPicker extends LightningElement {
                             itemsParsed2.items = itemsParsed.items.map((elem) => ({
                                 ...elem,
                                 ...{
-                                    'currency': this.accountData.currency,
+                                    'currency': elem.currencyCode,
+                                    'gac': elem.groupAccountingCode,
+                                    'gacDescription': elem.groupAccountingCodeDescription,
+                                    'pgc': elem.productGroupCode,
+                                    'pgcDescription': elem.productGroupCodeDescription
                                 }
                             }));
                             console.log('past parsed  setter');
@@ -159,10 +152,18 @@ export default class ProductPicker extends LightningElement {
 
                 case 'itemno':
                     console.log('itemno case');
+                this.simpleProductPickerActivated = true;
                     console.log('this.accountData.famCode: '+this.accountData.famCode);
                     console.log('queryTerm: '+queryTerm);
+                if(!this.accountData.famCode){
+                    console.log('throwing');
+                    this.showErrorNotification('Salesforce misconfiguration', 'No Unit Code on Account found.');
+                    // Error err = new Errorr
+                    // throw new Error('Fam code or custNo not set');
+                    break;
+                }
                     //getItem({famCode: this.accountData.famCode, itemNumber: queryTerm, currencyArg: this.accountData.currency, custNo: this.accountData.custno})
-                    getItems({famCode: this.accountData.famCode, description: null, itemNumber: queryTerm})
+                    getItems({famCode: this.accountData.famCode, description: null, itemNumber: queryTerm, sourceSystem: this.accountData.sourceSystem})
                         .then((result) => {
                         this.activeSearch = false;
                         console.log('status? '+result.status);
@@ -186,7 +187,11 @@ export default class ProductPicker extends LightningElement {
                             itemsParsed2.items = itemsParsed.items.map((elem) => ({
                                 ...elem,
                                 ...{
-                                    'currency': this.accountData.currency,
+                                    'currency': elem.currencyCode,
+                                    'gac': elem.groupAccountingCode,
+                                    'gacDescription': elem.groupAccountingCodeDescription,
+                                    'pgc': elem.productGroupCode,
+                                    'pgcDescription': elem.productGroupCodeDescription
                                 }
                             }));
                             console.log('past parsed  setter');
@@ -202,9 +207,23 @@ export default class ProductPicker extends LightningElement {
                         this.showNotification('Error', error.body.message, 'error');
                     })
                     break;
+
+            case 'itemdesc_complex':
+                this.simpleProductPickerActivated = false;
+                if(queryTerm) queryTerm = queryTerm.toLowerCase();
+                console.log(queryTerm);
+                this.itemListsubset = this.itemList.filter(item => {
+                    if(item.Product_Model_Internal) return item.Product_Model_Internal.toLowerCase().includes(queryTerm);
+                })
+                console.log('december list');
+                console.log(this.itemListsubset.length);
+                console.log(this.itemListsubset);
+                this.updatePage();
+                this.activeSearch = false;
+                break;
             }
-        }
-        else {
+            this.assignColumns();
+        /* } else { complex
             if(queryTerm) queryTerm = queryTerm.toLowerCase();
             console.log(queryTerm);
             this.itemListsubset = this.itemList.filter(item => {
@@ -218,7 +237,7 @@ export default class ProductPicker extends LightningElement {
             console.log(this.itemListsubset);
             this.updatePage();
             this.activeSearch = false;
-        }
+        } */
     }
 
     handleChangeSearchProductType(event){
@@ -310,8 +329,14 @@ export default class ProductPicker extends LightningElement {
     availabilityColumns = [
         {
             type: 'text',
-            fieldName: 'warehouseName',
+            fieldName: 'warehouse',
             label: 'Warehouse'
+            //initialWidth: 250,
+        },
+        {
+            type: 'text',
+            fieldName: 'warehouseName',
+            label: 'Warehouse Name'
             //initialWidth: 250,
         },
         {
@@ -340,7 +365,6 @@ export default class ProductPicker extends LightningElement {
     }
     searchResultsClick(event){
         console.log('searchclick');
-        this.quantityChosen = 1;
         //this.setSelectedRows = event.detail.selectedRows; EP
         const selectedRows = event.detail.selectedRows;
         const selectedRow = selectedRows[0];
@@ -348,13 +372,14 @@ export default class ProductPicker extends LightningElement {
         if(!selectedRow) return;
         console.log('retrievedProduct');
         this.chosenProduct = selectedRow;
+        this.quantityChosen = 1;
         this.showProductDetails(); // EP - adjust grid column sizing
 
         if(this.simpleProductPickerActivated){
             if(!selectedRow.cPdiscountPercentRetrieved){
                 console.log('Fetching');
                 let calloutRefreshControl = 0;
-                getItemPricing({famCode: this.accountData.famCode, itemNumber: selectedRow.itemNumber, currencyArg: this.accountData.currency, custNo: this.accountData.custno, quantityArg: 1})
+                getItemPricing({famCode: this.accountData.famCode, itemNumber: selectedRow.itemNumber, currencyArg: this.accountData.currency, custNo: this.accountData.custno, quantityArg: 1, sourceSystem: this.accountData.sourceSystem})
                 .then((result) => {
                 if(result.status === 'error'){
                     console.log('Item price error');
@@ -374,12 +399,13 @@ export default class ProductPicker extends LightningElement {
                     //selectedRow.cPdiscountPercent = productParsed.cPdiscountPercent;
                     //selectedRow.cPlistPrice = productParsed.cPlistPrice.split('.')[0];
                     //selectedRow.listPrice = productParsed.cPlistPrice.split('.')[0];
-                    selectedRow.cPnetPrice = productParsed.cPnetPrice;
-                    selectedRow.cPdiscountPercent = productParsed.cPdiscountPercent;
-                    selectedRow.cPlistPrice = productParsed.cPlistPrice;
+                    selectedRow.cPnetPrice = productParsed.customerNetPrice;
+                    selectedRow.cPdiscountPercent = productParsed.customerDiscountPercent;
+                    selectedRow.cPlistPrice = productParsed.listPrice;
                     //selectedRow.listPrice = productParsed.cPlistPrice; EP
-                    selectedRow.cPcurrency = productParsed.cPcurrency;
-                    console.log('2');
+                    selectedRow.currency = productParsed.currencyCode;
+                    console.log('KOLLA');
+                    console.log(productParsed.customerNetPrice);
                     selectedRow.cPdiscountPercentRetrieved = true;
                     console.log('Retrieved');
                     console.log(selectedRow.itemNumber);
@@ -395,7 +421,7 @@ export default class ProductPicker extends LightningElement {
                 this.activeSearch = false;
                 this.showNotification('Error', error.body.message, 'error');
                 })
-                getItem({famCode: this.accountData.famCode, itemNumber: selectedRow.itemNumber})
+                getItem({famCode: this.accountData.famCode, itemNumber: selectedRow.itemNumber, sourceSystem: this.accountData.sourceSystem})
                 .then((result) => {
                 if(result.status === 'error'){
                     calloutRefreshControl++;
@@ -405,24 +431,30 @@ export default class ProductPicker extends LightningElement {
                     calloutRefreshControl++;
                     let productParsed = JSON.parse(result.message);
                     console.log('productParsed22freeStockDetail');
-                    console.log(productParsed.freeStockDetail);
+                    console.log(productParsed.freeStocks);
                     console.log('productParsed33productParsed');
                     console.log(productParsed);
                     let incrementor = 1;
-                    productParsed.freeStockDetail.map((looper) => {
-                        console.log('looping');
-                        console.log(looper);
-                        looper.id = incrementor;
-                        incrementor++;
-                        }
-                    )
-                    if(productParsed.freeStockDetail.length < 1){
-                        let emptyWarehouseRow = {warehouse: '0', warehouseName: 'No availability'};
-                        productParsed.freeStockDetail.push(emptyWarehouseRow);
+                    if(productParsed.freeStocks){
+
+                        productParsed.freeStocks.map((looper) => {
+                            console.log('looping');
+                            console.log(looper);
+                            looper.id = incrementor;
+                            incrementor++;
+                            }
+                        )
                     }
+                    console.log('survivinng');
                     console.log('almost end');
-                    this.chosenProduct.freeStockDetail = productParsed.freeStockDetail;
-                    selectedRow.freeStockDetail = productParsed.freeStockDetail;
+                    this.chosenProduct.freeStockDetail = productParsed.freeStocks;
+                    selectedRow.freeStockDetail = productParsed.freeStocks;
+                    if(productParsed.freeStocks){
+                        if(productParsed.freeStocks.length < 1){
+                            let emptyWarehouseRow = {warehouse: '0', warehouseName: 'No availability'};
+                            productParsed.freeStockDetail.push(emptyWarehouseRow);
+                        }
+                    }
                     if(calloutRefreshControl === 2) {
                         this.simpleProductPickerActivated = false;
                         this.simpleProductPickerActivated = true;
@@ -493,17 +525,49 @@ export default class ProductPicker extends LightningElement {
         }
     }
     removeItemIdFromBasketList(itemNrArg){
-        this.basketList.splice(this.basketList.findIndex(e => e.itemNumber === itemNrArg),1);
+        this.basketList.splice(this.basketList.findIndex(e => e.id === itemNrArg),1);
     }
     setBasketList(){
-        this.basketList = Array.from(this.basket.values());
         console.log('basketlist:');
-        console.log(this.basket.values());
+        console.log(this.basket.size);
+        for(let  i = 0; i < this.basket.size; i++){
+            console.log('Looggerloop');
+            console.log(Array.from(this.basket.values())[i]);
+        }
+        this.basketList = Array.from(this.basket.values());
+        //console.log(this.basket.values());
     }
     getDisplayName(quantity){
         let displayName = quantity+':';
         return displayName
 
+    }
+     assignId(){
+        while(true){
+            let possibleNewId = crypto.randomUUID();
+            //Check if id exists, if not, accept it as a new id.
+            //console.log(this.basket.get(possibleNewId));
+            if(!this.basket.get(possibleNewId)){
+                //basketItem.Id = possibleNewId;
+                //console.log('PossibleNewId: '+possibleNewId);
+                //console.log('BasketItem id: '+basketItem.Id);
+                return possibleNewId;
+            }
+            console.log('Still looping');
+        }
+    }
+     assignIdFromList(){
+        while(true){
+            console.log('ok');
+            let possibleNewId = crypto.randomUUID();
+            console.log(this.basketList.filter(e => e.id === possibleNewId).length);
+            console.log(this.basketList.filter(e => e.id === possibleNewId).length === 0);
+            //Check if id exists, if not, accept it as a new id.
+            if (this.basketList.filter(e => e.id === possibleNewId).length === 0) {
+                return possibleNewId;
+              }
+            console.log('Still looping');
+        }
     }
     getBasketExtraText(product){
         let extraTextOnBasket = product.productLineCode+', '+product.productDivision;
@@ -518,10 +582,18 @@ export default class ProductPicker extends LightningElement {
         this.chosenProduct.quantity = quantity;
         this.chosenProduct.displayName  = this.getDisplayName(quantity);
         this.chosenProduct.extraTextOnBasket  = this.getBasketExtraText(this.chosenProduct);
+        if (this.simpleProductPickerActivated) {
         this.chosenProduct.totalPrice = Math.round(quantity * this.chosenProduct.cPlistPrice * 100) / 100;
-        this.basket.set(currentItemNumber,this.chosenProduct);
-        console.log(this.chosenProduct.itemNumber);
-        console.log(this.basket.size);
+        this.chosenProduct.productSourceType = 'Item'; // Simple
+    } else {
+        this.chosenProduct.totalPrice = 0;
+        this.chosenProduct.productSourceType = 'Product'; // Complex
+    }
+        this.chosenProduct.id = this.assignId();
+        
+        this.basket.set(this.chosenProduct.id, {...this.chosenProduct});
+        console.log('Setting product in basket to: '+this.chosenProduct.id);
+        console.log('Basket size: '+this.basket.size);  
         this.setBasketList();
         this.basket.size > 0 ? this.anyProductsAdded = true : this.anyProductsAdded = false;
         this.unsavedChanges = true;
@@ -579,13 +651,15 @@ export default class ProductPicker extends LightningElement {
             console.log('DATA');
             console.log(mixedObjectData);
             this.accountData = mixedObjectData;
+            this.readComplexProductsList();
+            /* EP
             if(mixedObjectData.recordType == 'Simple_Opportunity'){
                 this.simpleProductPickerActivated = true;
-                this.productPickerName = 'Product Picker, Simple';
+                //this.productPickerName = 'Product Picker, Simple';
             }
             else if (mixedObjectData.recordType == 'Complex_bid') {
                 this.simpleProductPickerActivated = false;
-                this.productPickerName = 'Product Picker, Complex';
+                //this.productPickerName = 'Product Picker, Complex';
                 fetch(PRODUCTJSON)
                 .then((response) => response.json())
                 .then((data) => {
@@ -596,7 +670,8 @@ export default class ProductPicker extends LightningElement {
                     this.itemList = data.map((elem) => ({
                         ...elem,
                         ...{
-                            'itemNumber': elem.Product_Model_Internal,
+                            //'itemNumber': elem.Product_Model_Internal, edit EP
+                            'itemNumber': elem.Product_Model_Code_Internal, // edit EP
                             'itemDescription': elem.Product_Model_Internal,
                             'productLineCode': elem.Product_Line,
                             'productDivision': elem.Division
@@ -605,8 +680,30 @@ export default class ProductPicker extends LightningElement {
                     console.log(this.itemList);
                     console.log('end connected callback complex');
                 })
+            } */
+        })
             }
-            this.assignColumns();
+
+    readComplexProductsList() {
+        fetch(PRODUCTJSON)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(typeof data);
+            console.log(data);
+
+            this.itemList = data;
+            this.itemList = data.map((elem) => ({
+                ...elem,
+                ...{
+                    //'itemNumber': elem.Product_Model_Internal, edit EP
+                    'itemNumber': elem.Product_Model_Code_Internal, // edit EP
+                    'itemDescription': elem.Product_Model_Internal,
+                    'productLineCode': elem.Product_Line,
+                    'productDivision': elem.Division
+                }
+             }));
+            console.log(this.itemList);
+            console.log('end connected callback complex');
         })
       }
        
@@ -620,7 +717,16 @@ export default class ProductPicker extends LightningElement {
         this.pageNumberDisplayed = this.pageNumber +1;
         console.log('Update page');
         //this.chosenProduct = null;
-        this.setSelectedRows = [];
+        //this.setSelectedRows = []; // EP - this is not working
+        // but this works for some reason:
+        if (this.hasDataToDisplay) {
+            if (this.simpleProductPickerActivated) {
+                this.template.querySelector('[data-id="simpledt"]').selectedRows = [];
+            } else {
+                this.template.querySelector('[data-id="complexdt"]').selectedRows = [];
+            }
+        }
+        //this.hideProductDetails();
         //this.itemListsubset = this.itemList.slice(this.pageNumber*10, this.pageNumber*10+10);
         this.displayedData = this.itemListsubset.slice(this.pageNumber*10, ((this.pageNumber*10)+10));
         console.log('Update page2');
@@ -657,11 +763,13 @@ export default class ProductPicker extends LightningElement {
     quickAddSearch(clipboardData){
             let numberFinderReg = new RegExp('^[0-9]*$');
             this.quickProductsNotRealList = [];
+            this.basket = new Map();
+            this.basketList = [];
             console.log('start');
             console.log(clipboardData);
             console.log('quicksearch1');
             //const regex = /^[0-9]+[A-Z]+/g;
-            const regex = /[0-9]+/g;
+            const regex = /[a-zA-Z0-9_.-]+/g;
             //let numbersArray = clipboardData.match('[0-9]+/g');
             let numbersArray = clipboardData.match(regex);
             console.log('quicksearch2 first');
@@ -696,10 +804,12 @@ export default class ProductPicker extends LightningElement {
                 let newBasketItem = n;
                 newBasketItem.itemDescription = n.itemNumber;
                 newBasketItem.displayName = this.getDisplayName(n.quantity);
+                newBasketItem.id = this.assignIdFromList();
                 console.log('itemNumber:  '+n);
-                getItem({famCode: this.accountData.famCode, itemNumber: newBasketItem.itemNumber})
+                getItem({famCode: this.accountData.famCode, itemNumber: newBasketItem.itemNumber, sourceSystem: this.accountData.sourceSystem})
                     .then((result) => {
-                    console.log('Big-status? '+result.status);
+                    console.log('Item-specific? ');
+                    console.log(result.message);
                     console.log('Used:  '+n);
                     if(result.status === 'error'){
                         console.log('Big retrieve error');
@@ -715,7 +825,7 @@ export default class ProductPicker extends LightningElement {
                         console.log(result);
                         if(result.message  === ''){
                             this.quickProductsNotRealList.push(newBasketItem);
-                            this.removeItemIdFromBasketList(newBasketItem.itemNumber);
+                            this.removeItemIdFromBasketList(newBasketItem.id);
                             this.retrievedItemsCounter++;
                             this.setBasketListFromAsyncContext(basketItemsTempArray);
                         }
@@ -735,10 +845,22 @@ export default class ProductPicker extends LightningElement {
                             console.log(itemsParsed);
                             let oldQuantity = newBasketItem.quantity;
                             newBasketItem = itemsParsed;
+                            // newBasketItem.itemNumber = itemNumber;
+                            // newBasketItem.itemDescription = itemDescription;
+                            newBasketItem.currency = newBasketItem.currencyCode;
+                            newBasketItem.productSourceType = 'Item';
+                            newBasketItem.unitOfMessure = newBasketItem.unitOfMeasure;
+                            newBasketItem.weight = newBasketItem.weightInGrams;
+                            newBasketItem.gac = newBasketItem.groupAccountingCode;
+                            newBasketItem.gacDescription = newBasketItem.groupAccountingCodeDescription;
+                            newBasketItem.id = this.assignIdFromList();
                             newBasketItem.quantity = oldQuantity;
                             newBasketItem.displayName = this.getDisplayName(oldQuantity);
                             console.log('1111');
-                            getItemPricing({famCode: this.accountData.famCode, itemNumber: newBasketItem.itemNumber, currencyArg: this.accountData.currency, custNo: this.accountData.custno, quantityArg: newBasketItem.quantity})
+                            console.log(itemsParsed.itemNumber);
+                            console.log(newBasketItem.itemNumber);
+                            console.log('1111');
+                            getItemPricing({famCode: this.accountData.famCode, itemNumber: newBasketItem.itemNumber, currencyArg: this.accountData.currency, custNo: this.accountData.custno, quantityArg: newBasketItem.quantity, sourceSystem: this.accountData.sourceSystem})
                             .then((result) => {
                                 console.log('running individual callout');
                                 if(result.status === 'error'){
@@ -757,8 +879,12 @@ export default class ProductPicker extends LightningElement {
                                         console.log('Parsed');
                                         console.log(itemsParsed);
                                         //newBasketItem = itemsParsed;
-                                        newBasketItem = Object.assign(newBasketItem, itemsParsed);
+                                        //newBasketItem = Object.assign(newBasketItem, itemsParsed);
+                                        newBasketItem.cPlistPrice = itemsParsed.listPrice;
+                                        newBasketItem.cPnetPrice = itemsParsed.customerNetPrice;
+                                        newBasketItem.cPdiscountPercent = itemsParsed.customerDiscountPercent;
                                         newBasketItem.extraTextOnBasket = this.getBasketExtraText(newBasketItem);
+                                        newBasketItem.id = this.assignIdFromList();
                                         basketItemsTempArray.push(newBasketItem);
                                         console.log('new obj');
                                         this.retrievedItemsCounter++;
@@ -781,7 +907,7 @@ export default class ProductPicker extends LightningElement {
                         } else {
                             console.log(newBasketItem.itemNumber +' is now null');
                             this.quickProductsNotRealList.push(newBasketItem);
-                            this.removeItemIdFromBasketList(newBasketItem.itemNumber);
+                            this.removeItemIdFromBasketList(newBasketItem.id);
                             //newBasketItem = null;
                             this.retrievedItemsCounter++;
                             this.setBasketListFromAsyncContext(basketItemsTempArray);
@@ -815,6 +941,17 @@ export default class ProductPicker extends LightningElement {
     setProductsAdded(listInc){
         if(listInc.length >0) return true;
     }
+    setBasketFromBasketList(){
+        console.log('setting basket from basketList');
+        console.log(this.basketList.length);
+        this.basket = new Map();
+        this.basketList.forEach(looper =>{
+            this.basket.set(looper.id, {...looper});
+            console.log('New basketmap item:');
+            console.log(looper.id);
+            console.log(looper);
+        })
+    }
     basketGUIRefresh(){
         this.anyProductsAdded = false;
         this.anyProductsAdded = true;
@@ -827,17 +964,17 @@ export default class ProductPicker extends LightningElement {
     // Back to the beginning
     first() {
         this.pageNumber = 0;
-        this.updatePage()
+        this.updatePage();
     }
     // Forward a page
     next() {
         this.pageNumber++;
-        this.updatePage()
+        this.updatePage();
     }
     // Forward to the end
     last() {
         this.pageNumber = Math.ceil(((this.itemListsubset.length)/10)-1);
-        this.updatePage()
+        this.updatePage();
     }
     showErrorNotification(title, text){
         this.showNotification(title, text, 'error');
@@ -855,9 +992,9 @@ export default class ProductPicker extends LightningElement {
             this.basketList = [...tempArray2];
             this.basketGUIRefresh();
             this.basketList.forEach(looper =>{
-                this.basket.set(looper.itemNumber, {...looper});
-                console.log('looper');
-                console.log(looper);
+                this.basket.set(looper.id, {...looper});
+                console.log('basket setter produkt');
+                console.log(looper.id);
             })
         }
     }

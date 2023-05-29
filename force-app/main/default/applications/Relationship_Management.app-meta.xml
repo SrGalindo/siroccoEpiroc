@@ -28,6 +28,8 @@
     <tabs>Address__c</tabs>
     <tabs>Account_Plan__c</tabs>
     <tabs>Other_Business_Line__c</tabs>
+    <tabs>Account_plan_2_0__c</tabs>
+    <tabs>Action_Plan_Template__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Relationship_Management_UtilityBar</utilityBar>
 </CustomApplication>

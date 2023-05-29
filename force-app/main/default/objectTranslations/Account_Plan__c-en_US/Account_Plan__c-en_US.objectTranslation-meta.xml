@@ -16,4 +16,8 @@
         </sections>
     </layouts>
     <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label></label>
+        <name>Print_To_PDF</name>
+    </webLinks>
 </CustomObjectTranslation>

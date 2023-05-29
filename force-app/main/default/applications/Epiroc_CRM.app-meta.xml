@@ -20,7 +20,6 @@
     </actionOverrides>
     <brand>
         <headerColor>#34364B</headerColor>
-        <logo>Untitled</logo>
         <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
@@ -45,6 +44,8 @@
     <tabs>Monthly_Sales_Report__c</tabs>
     <tabs>Activity_Serie__c</tabs>
     <tabs>Apex_log__c</tabs>
+    <tabs>Account_plan_2_0__c</tabs>
+    <tabs>Action_Plan_Template__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Epiroc_CRM_UtilityBar</utilityBar>
 </CustomApplication>

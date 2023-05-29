@@ -1,7 +1,7 @@
 public with sharing class QuoteIntegration {
     @AuraEnabled
         public static CallbackWrapper getQuotes(String recordId){
-            List<Account> accList = [SELECT Id, CCUST__c, FAM_Code__c FROM Account WHERE Id =: recordId WITH SECURITY_ENFORCED];
+            List<Account> accList = [SELECT Id, CCUST__c, FAM_Code__c, Source_System__c FROM Account WHERE Id =: recordId WITH SECURITY_ENFORCED];
             if(accList.size() == 0){
                 throw new AuraHandledException('Component only available on Account');
             }
@@ -9,6 +9,7 @@ public with sharing class QuoteIntegration {
             Account currentAcc = accList[0];
             String ccust = String.valueOf(currentAcc.CCUST__c);
             String famCode = currentAcc.FAM_Code__c;
+            String sourceSystem = currentAcc.Source_System__c;
             Boolean isSandbox = [SELECT IsSandbox FROM Organization LIMIT 1][0].IsSandbox;
             if(isSandbox){
                 //Map fam codes from test to prod
@@ -22,26 +23,27 @@ public with sharing class QuoteIntegration {
             try {
                 String argumentsString = '';
                 if(ccust != null){
-                    argumentsString += '?oRcustNo=' + ccust;
-                    argumentsString += '&oRnumberQuotes=20';
+                    argumentsString += ccust;
+                    argumentsString += '?amountOfQuotes=20';
                 } else {
                     return callback;
                 }
                 
                 System.debug('Argumentstring: '+argumentsString);
                 HttpRequest req = new HttpRequest();
-                String uriWithParam = 'callout:azure_integration/erp-source/v1/quotes' +argumentsString;
+                String uriWithParam = 'callout:azure_dev_integration/erp/source/sales/v1/quotes/customers/' +argumentsString;
                 System.debug(uriWithParam);
-                req.setEndpoint('callout:azure_integration/erp-source/v1/quotes' +argumentsString);
+                req.setEndpoint('callout:azure_dev_integration/erp/source/sales/v1/quotes/customers/' +argumentsString);
                 req.setMethod('GET');
                 req.setTimeout(120000);
-                req.setHeader('UnitCode', famCode);
+                req.setHeader('unitCode', famCode);
+                req.setHeader('sourceSystem', sourceSystem);
                 System.debug(req);
                 Http http = new Http();
                 HTTPResponse res = http.send(req);
                 System.debug(res.getBody());
 
-                if(!res.getBody().contains('oRcustNo')){
+                if(!res.getBody().contains('orderNumber')){
                     return callback;
                 }
 

@@ -255,18 +255,294 @@ public with sharing class FieldMappingTables {
         }
         return calcCode;
     }
+    public static Boolean getTwoCharCountryConfirmation(String countryCode) {
+        Boolean calcCode = false;
+        switch on countryCode {
+            when 'AL' { calcCode = true;}
+            when 'DZ' { calcCode = true;}
+            when 'AS' { calcCode = true;}
+            when 'AD' { calcCode = true;}
+            when 'AF' { calcCode = true;}
+            when 'AO' { calcCode = true;}
+            when 'AI' { calcCode = true;}
+            when 'AQ' { calcCode = true;}
+            when 'AG' { calcCode = true;}
+            when 'AR' { calcCode = true;}
+            when 'AM' { calcCode = true;}
+            when 'AW' { calcCode = true;}
+            when 'AU' { calcCode = true;}
+            when 'AT' { calcCode = true;}
+            when 'AZ' { calcCode = true;}
+            when 'BS' { calcCode = true;}
+            when 'BH' { calcCode = true;}
+            when 'BD' { calcCode = true;}
+            when 'BB' { calcCode = true;}
+            when 'BY' { calcCode = true;}
+            when 'BE' { calcCode = true;}
+            when 'BZ' { calcCode = true;}
+            when 'BJ' { calcCode = true;}
+            when 'BM' { calcCode = true;}
+            when 'BT' { calcCode = true;}
+            when 'BO' { calcCode = true;}
+            when 'BQ' { calcCode = true;}
+            when 'BA' { calcCode = true;}
+            when 'BW' { calcCode = true;}
+            when 'BV' { calcCode = true;}
+            when 'BR' { calcCode = true;}
+            when 'IO' { calcCode = true;}
+            when 'BN' { calcCode = true;}
+            when 'BG' { calcCode = true;}
+            when 'BF' { calcCode = true;}
+            when 'BI' { calcCode = true;}
+            when 'CV' { calcCode = true;}
+            when 'KH' { calcCode = true;}
+            when 'CM' { calcCode = true;}
+            when 'CA' { calcCode = true;}
+            when 'KY' { calcCode = true;}
+            when 'CF' { calcCode = true;}
+            when 'TD' { calcCode = true;}
+            when 'CL' { calcCode = true;}
+            when 'CN' { calcCode = true;}
+            when 'CX' { calcCode = true;}
+            when 'CC' { calcCode = true;}
+            when 'CO' { calcCode = true;}
+            when 'KM' { calcCode = true;}
+            when 'CD' { calcCode = true;}
+            when 'CG' { calcCode = true;}
+            when 'CK' { calcCode = true;}
+            when 'CR' { calcCode = true;}
+            when 'HR' { calcCode = true;}
+            when 'CU' { calcCode = true;}
+            when 'CW' { calcCode = true;}
+            when 'CY' { calcCode = true;}
+            when 'CZ' { calcCode = true;}
+            when 'CI' { calcCode = true;}
+            when 'DK' { calcCode = true;}
+            when 'DJ' { calcCode = true;}
+            when 'DM' { calcCode = true;}
+            when 'DO' { calcCode = true;}
+            when 'EC' { calcCode = true;}
+            when 'EG' { calcCode = true;}
+            when 'SV' { calcCode = true;}
+            when 'GQ' { calcCode = true;}
+            when 'ER' { calcCode = true;}
+            when 'EE' { calcCode = true;}
+            when 'SZ' { calcCode = true;}
+            when 'ET' { calcCode = true;}
+            when 'FK' { calcCode = true;}
+            when 'FO' { calcCode = true;}
+            when 'FJ' { calcCode = true;}
+            when 'FI' { calcCode = true;}
+            when 'FR' { calcCode = true;}
+            when 'GF' { calcCode = true;}
+            when 'PF' { calcCode = true;}
+            when 'TF' { calcCode = true;}
+            when 'GA' { calcCode = true;}
+            when 'GM' { calcCode = true;}
+            when 'GE' { calcCode = true;}
+            when 'DE' { calcCode = true;}
+            when 'GH' { calcCode = true;}
+            when 'GI' { calcCode = true;}
+            when 'GR' { calcCode = true;}
+            when 'GL' { calcCode = true;}
+            when 'GD' { calcCode = true;}
+            when 'GP' { calcCode = true;}
+            when 'GU' { calcCode = true;}
+            when 'GT' { calcCode = true;}
+            when 'GG' { calcCode = true;}
+            when 'GN' { calcCode = true;}
+            when 'GW' { calcCode = true;}
+            when 'GY' { calcCode = true;}
+            when 'HT' { calcCode = true;}
+            when 'HM' { calcCode = true;}
+            when 'VA' { calcCode = true;}
+            when 'HN' { calcCode = true;}
+            when 'HK' { calcCode = true;}
+            when 'HU' { calcCode = true;}
+            when 'IS' { calcCode = true;}
+            when 'IN' { calcCode = true;}
+            when 'ID' { calcCode = true;}
+            when 'IR' { calcCode = true;}
+            when 'IQ' { calcCode = true;}
+            when 'IE' { calcCode = true;}
+            when 'IM' { calcCode = true;}
+            when 'IL' { calcCode = true;}
+            when 'IT' { calcCode = true;}
+            when 'JM' { calcCode = true;}
+            when 'JP' { calcCode = true;}
+            when 'JE' { calcCode = true;}
+            when 'JO' { calcCode = true;}
+            when 'KZ' { calcCode = true;}
+            when 'KE' { calcCode = true;}
+            when 'KI' { calcCode = true;}
+            when 'KP' { calcCode = true;}
+            when 'KR' { calcCode = true;}
+            when 'KW' { calcCode = true;}
+            when 'KG' { calcCode = true;}
+            when 'LA' { calcCode = true;}
+            when 'LV' { calcCode = true;}
+            when 'LB' { calcCode = true;}
+            when 'LS' { calcCode = true;}
+            when 'LR' { calcCode = true;}
+            when 'LY' { calcCode = true;}
+            when 'LI' { calcCode = true;}
+            when 'LT' { calcCode = true;}
+            when 'LU' { calcCode = true;}
+            when 'MO' { calcCode = true;}
+            when 'MG' { calcCode = true;}
+            when 'MW' { calcCode = true;}
+            when 'MY' { calcCode = true;}
+            when 'MV' { calcCode = true;}
+            when 'ML' { calcCode = true;}
+            when 'MT' { calcCode = true;}
+            when 'MH' { calcCode = true;}
+            when 'MQ' { calcCode = true;}
+            when 'MR' { calcCode = true;}
+            when 'MU' { calcCode = true;}
+            when 'YT' { calcCode = true;}
+            when 'MX' { calcCode = true;}
+            when 'FM' { calcCode = true;}
+            when 'MD' { calcCode = true;}
+            when 'MC' { calcCode = true;}
+            when 'MN' { calcCode = true;}
+            when 'ME' { calcCode = true;}
+            when 'MS' { calcCode = true;}
+            when 'MA' { calcCode = true;}
+            when 'MZ' { calcCode = true;}
+            when 'MM' { calcCode = true;}
+            when 'NA' { calcCode = true;}
+            when 'NR' { calcCode = true;}
+            when 'NP' { calcCode = true;}
+            when 'NL' { calcCode = true;}
+            when 'NC' { calcCode = true;}
+            when 'NZ' { calcCode = true;}
+            when 'NI' { calcCode = true;}
+            when 'NE' { calcCode = true;}
+            when 'NG' { calcCode = true;}
+            when 'NU' { calcCode = true;}
+            when 'NF' { calcCode = true;}
+            when 'MP' { calcCode = true;}
+            when 'NO' { calcCode = true;}
+            when 'OM' { calcCode = true;}
+            when 'PK' { calcCode = true;}
+            when 'PW' { calcCode = true;}
+            when 'PS' { calcCode = true;}
+            when 'PA' { calcCode = true;}
+            when 'PG' { calcCode = true;}
+            when 'PY' { calcCode = true;}
+            when 'PE' { calcCode = true;}
+            when 'PH' { calcCode = true;}
+            when 'PN' { calcCode = true;}
+            when 'PL' { calcCode = true;}
+            when 'PT' { calcCode = true;}
+            when 'PR' { calcCode = true;}
+            when 'QA' { calcCode = true;}
+            when 'MK' { calcCode = true;}
+            when 'RO' { calcCode = true;}
+            when 'RU' { calcCode = true;}
+            when 'RW' { calcCode = true;}
+            when 'RE' { calcCode = true;}
+            when 'BL' { calcCode = true;}
+            when 'SH' { calcCode = true;}
+            when 'KN' { calcCode = true;}
+            when 'LC' { calcCode = true;}
+            when 'MF' { calcCode = true;}
+            when 'PM' { calcCode = true;}
+            when 'VC' { calcCode = true;}
+            when 'WS' { calcCode = true;}
+            when 'SM' { calcCode = true;}
+            when 'ST' { calcCode = true;}
+            when 'SA' { calcCode = true;}
+            when 'SN' { calcCode = true;}
+            when 'RS' { calcCode = true;}
+            when 'SC' { calcCode = true;}
+            when 'SL' { calcCode = true;}
+            when 'SG' { calcCode = true;}
+            when 'SX' { calcCode = true;}
+            when 'SK' { calcCode = true;}
+            when 'SI' { calcCode = true;}
+            when 'SB' { calcCode = true;}
+            when 'SO' { calcCode = true;}
+            when 'ZA' { calcCode = true;}
+            when 'GS' { calcCode = true;}
+            when 'SS' { calcCode = true;}
+            when 'ES' { calcCode = true;}
+            when 'LK' { calcCode = true;}
+            when 'SD' { calcCode = true;}
+            when 'SR' { calcCode = true;}
+            when 'SJ' { calcCode = true;}
+            when 'SE' { calcCode = true;}
+            when 'CH' { calcCode = true;}
+            when 'SY' { calcCode = true;}
+            when 'TW' { calcCode = true;}
+            when 'TJ' { calcCode = true;}
+            when 'TZ' { calcCode = true;}
+            when 'TH' { calcCode = true;}
+            when 'TL' { calcCode = true;}
+            when 'TG' { calcCode = true;}
+            when 'TK' { calcCode = true;}
+            when 'TO' { calcCode = true;}
+            when 'TT' { calcCode = true;}
+            when 'TN' { calcCode = true;}
+            when 'TR' { calcCode = true;}
+            when 'TM' { calcCode = true;}
+            when 'TC' { calcCode = true;}
+            when 'TV' { calcCode = true;}
+            when 'UG' { calcCode = true;}
+            when 'UA' { calcCode = true;}
+            when 'AE' { calcCode = true;}
+            when 'GB' { calcCode = true;}
+            when 'UM' { calcCode = true;}
+            when 'US' { calcCode = true;}
+            when 'UY' { calcCode = true;}
+            when 'UZ' { calcCode = true;}
+            when 'VU' { calcCode = true;}
+            when 'VE' { calcCode = true;}
+            when 'VN' { calcCode = true;}
+            when 'VG' { calcCode = true;}
+            when 'VI' { calcCode = true;}
+            when 'WF' { calcCode = true;}
+            when 'EH' { calcCode = true;}
+            when 'YE' { calcCode = true;}
+            when 'ZM' { calcCode = true;}
+            when 'ZW' { calcCode = true;}
+            when 'AX' { calcCode = true;}
+            when else { calcCode = false;}
+        }
+        return calcCode;
+    }
 
     public static String getTwoCharCountryCodeWithBackup(String countryCode, String backupCustFamCode, String backupFamCode) {
-        backupFamCode = backupFamCode.toUpperCase().trim();
-        countryCode = countryCode.toUpperCase().trim();
+        if(backupFamCode != null){
+            backupFamCode = backupFamCode.toUpperCase().trim();
+        }
+        if(countryCode != null){
+            countryCode = countryCode.toUpperCase().trim();
+        }
         String possibleCountryCode = getTwoCharCountryCode(countryCode);
         System.debug('AfterTrimCountryCode: '+countryCode);
-        //Check countries if famcode might match. Both cmCustFam and cmFamCode
+        if(possibleCountryCode  == 'error'){
+            if(getTwoCharCountryConfirmation(countryCode)){
+                possibleCountryCode = countryCode;
+            } possibleCountryCode  = 'error';
+        }
+        //Check countries if famcode might match with a 3 char argument. Both cmCustFam and cmFamCode
+        if(possibleCountryCode  == 'error'){
+            possibleCountryCode = getTwoCharCountryCode(backupCustFamCode);
+        }
         if(possibleCountryCode  == 'error'){
             possibleCountryCode = getTwoCharCountryCode(backupFamCode);
         }
+        //Use customers country
         if(possibleCountryCode  == 'error'){
-            possibleCountryCode = getTwoCharCountryCode(backupCustFamCode);
+            if(getTwoCharCountryConfirmation(backupCustFamCode)){
+                possibleCountryCode = backupCustFamCode;
+            } else  possibleCountryCode  = 'error';
+        }
+        if(possibleCountryCode  == 'error'){
+            if(getTwoCharCountryConfirmation(backupFamCode)){
+                possibleCountryCode = backupFamCode;
+            } possibleCountryCode  = 'error';
         }
         //Check extra mapping tables due to bad ISO standard for countries
         if(possibleCountryCode  == 'error'){
@@ -289,6 +565,7 @@ public with sharing class FieldMappingTables {
         
         String calcCode = '';
         switch on famCode {
+            //BPCS
             when 'ARO' { calcCode = 'US';}
             when 'AUC' { calcCode = 'AU';}
             when 'BWA' { calcCode = 'BW';}
@@ -299,6 +576,12 @@ public with sharing class FieldMappingTables {
             when 'ZMB' { calcCode = 'ZM';}
             when 'NAM' { calcCode = 'NA';}
             when 'MZA' { calcCode = 'MZ';}
+            //SAP
+            when 'NNC' { calcCode = 'NO';}
+            when 'NFC' { calcCode = 'FI';}
+            when 'EEA' { calcCode = 'EE';}
+            when 'MCS' { calcCode = 'SE';}
+
             
             when  else { calcCode = 'error';}
         }
@@ -307,6 +590,7 @@ public with sharing class FieldMappingTables {
     }
 
     public static String getTwoCharCountryCodeDueToDataQualityIssues(String countryCode) {
+        if(countryCode == null) return 'error';
         String calcCode = '';
         if(countryCode.length() == 2) return countryCode;
         switch on countryCode {
@@ -829,8 +1113,35 @@ public with sharing class FieldMappingTables {
                     when 'PRC' {salesforceTerms = '150 DAYS';}
                 }}
             //ESC & PRC Mapping-End
-            
-            when else {salesforceTerms = null;}
+
+            //SAP Values
+            when 'Z001' {salesforceTerms = 'Down Payment';}
+            when 'ZFDP' {salesforceTerms = 'Down Payment';}
+            when 'ZD20' {salesforceTerms = '20 DAYS';}
+            when 'Z020' {salesforceTerms = '20 DAYS';}
+            when 'ZD60' {salesforceTerms = '60 DAYS';}
+            when 'Z000' {salesforceTerms = '0 DAYS';}
+            when 'Z004' {salesforceTerms = 'Down Payment';}
+            when 'Z010' {salesforceTerms = '10 DAYS';}
+            when 'Z030' {salesforceTerms = '30 DAYS';}
+            when 'Z045' {salesforceTerms = '45 DAYS';}
+            when 'Z060' {salesforceTerms = '60 DAYS';}
+            when 'Z090' {salesforceTerms = '90 DAYS';}
+            when 'ZADV' {salesforceTerms = 'Down Payment';}
+            when 'ZD45' {salesforceTerms = '45 DAYS';}
+            when 'Z005' {salesforceTerms = '5 DAYS';}
+            when 'Z007' {salesforceTerms = '7 DAYS';}
+            when 'Z014' {salesforceTerms = '14 DAYS';}
+            when 'Z021' {salesforceTerms = '21 DAYS';}
+            when 'ZNE1' {salesforceTerms = 'Netting (FDM + 1)';}
+            when 'ZNET' {salesforceTerms = 'Netting (FDM)';}
+            when 'Z025' {salesforceTerms = '25 DAYS';}
+            when 'Z040' {salesforceTerms = '40 DAYS';}
+            when 'Z019' {salesforceTerms = '19 DAYS';}
+            when 'Z015' {salesforceTerms = '15 DAYS';}
+            when 'Z018' {salesforceTerms = '18 DAYS';}
+        
+            when else {salesforceTerms = '';}
         }
         return salesforceTerms;
     }
@@ -886,16 +1197,16 @@ public with sharing class FieldMappingTables {
         return isPartner;
     }
 
-    public static String getCreditStatus(String status) {
-        //erpTerms = erpTerms.toUpperCase();
-        String calcStatus = '';
-        switch on status {
-            //Blocked
-            when 'S' {calcStatus = 'Not Approved';}
-            when else {calcStatus = null;}
-        }
-        return calcStatus;
-    }
+    // public static String getCreditStatus(String status) {
+    //     //erpTerms = erpTerms.toUpperCase();
+    //     String calcStatus = '';
+    //     switch on status {
+    //         //Blocked
+    //         when 'S' {calcStatus = 'Not Approved';}
+    //         when else {calcStatus = null;}
+    //     }
+    //     return calcStatus;
+    // }
     public static String getExternalState(String state1, String state2) {
         String calcStatus = '';
         switch on state1 {
@@ -909,6 +1220,85 @@ public with sharing class FieldMappingTables {
                 when 'CZ' {calcStatus = 'Dead';}
                 when else {calcStatus = null;}
             }
+        }
+        return calcStatus;
+    }
+
+     /*
+    *   EP:
+    *   Product field "Family" contains the "original" business line value.
+    *   In addition to that, field "Epiroc_Business_Line__c" contains fixed values
+    *   (defaults to original Family field, some values are replaced)
+    */
+    public static String getEpirocBusinessLineBasedOnFamily(String family){
+        System.debug('getEpirocBusinessLineBasedOnFamily: ' + family);
+        String epirocBusinessLine = family;
+        switch on family {
+            when 'HAT PS' { epirocBusinessLine = 'HAT';}
+            when 'TLD' { epirocBusinessLine = 'RDD';}
+        }
+        return epirocBusinessLine;
+    }
+    public static String getCreditStatus(Boolean input) {
+        if(input == true) return 'Blocked';
+        else return '';
+    }
+    public static String getStateCode(String state, String countryCode) {
+        String calcStatus = '';
+        switch on state {
+            when '01' {calcStatus = 'VI';}
+            when '02' {calcStatus = 'AB';}
+            when '03' {calcStatus = 'A';}
+            when '04' {calcStatus = 'AL';}
+            when '05' {calcStatus = 'AV';}
+            when '06' {calcStatus = 'BA';}
+            when '07' {calcStatus = 'PM';}
+            when '08' {calcStatus = 'B';}
+            when '09' {calcStatus = 'BU';}
+            when '10' {calcStatus = 'CC';}
+            when '11' {calcStatus = 'Cadiz';}
+            when '12' {calcStatus = 'Castellon';}
+            when '13' {calcStatus = 'Ciudad Real';} 
+            when '14' {calcStatus = 'Cordoba';}
+            when '15' {calcStatus = 'La Coruna';} 
+            when '16' {calcStatus = 'Cuenca';}
+            when '17' {calcStatus = 'Gerona';}
+            when '18' {calcStatus = 'Granada';}
+            when '19' {calcStatus = 'Guadalajara';}
+            when '20' {calcStatus = 'Guipuzcoa';}
+            when '21' {calcStatus = 'Huelva';}
+            when '22' {calcStatus = 'Huesca';}
+            when '23' {calcStatus = 'Jaen';}
+            when '24' {calcStatus = 'Leon';}
+            when '25' {calcStatus = 'Lerida';}
+            when '26' {calcStatus = 'La Rioja';} 
+            when '27' {calcStatus = 'Lugo';}
+            when '28' {calcStatus = 'Madrid';}
+            when '29' {calcStatus = 'Malaga';}
+            when '30' {calcStatus = 'Murcia';}
+            when '31' {calcStatus = 'Navarra';}
+            when '32' {calcStatus = 'Orense';}
+            when '33' {calcStatus = 'Asturias';}
+            when '34' {calcStatus = 'Palencia';}
+            when '35' {calcStatus = 'Las Palmas';}
+            when '36' {calcStatus = 'Pontevedra';}
+            when '37' {calcStatus = 'Salamanca';}
+            when '38' {calcStatus = 'Sta.Cruz Tenerife';}
+            when '39' {calcStatus = 'Cantabria';}
+            when '40' {calcStatus = 'Segovia';}
+            when '41' {calcStatus = 'Sevilla';}
+            when '42' {calcStatus = 'Soria';}
+            when '43' {calcStatus = 'Tarragona';}
+            when '44' {calcStatus = 'Teruel';}
+            when '45' {calcStatus = 'Toledo';}
+            when '46' {calcStatus = 'Valencia';}
+            when '47' {calcStatus = 'Valladolid';}
+            when '48' {calcStatus = 'Vizcaya';}
+            when '49' {calcStatus = 'Zamora';}
+            when '50' {calcStatus = 'Zaragoza';}
+            when '51' {calcStatus = 'Ceuta';}
+            when '52' {calcStatus = 'Melilla';}
+            when else {calcStatus = '';}
         }
         return calcStatus;
     }

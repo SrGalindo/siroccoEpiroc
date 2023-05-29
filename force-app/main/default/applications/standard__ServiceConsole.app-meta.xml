@@ -180,7 +180,15 @@
     <tabs>standard-Case</tabs>
     <tabs>standard-Opportunity</tabs>
     <tabs>standard-Lead</tabs>
+    <tabs>Account_plan_2_0__c</tabs>
+    <tabs>Action_Plan_Template__c</tabs>
     <workspaceConfig>
+        <mappings>
+            <tab>Account_plan_2_0__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Action_Plan_Template__c</tab>
+        </mappings>
         <mappings>
             <tab>standard-Account</tab>
         </mappings>

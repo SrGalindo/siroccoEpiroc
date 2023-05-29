@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>Parts &amp; Services</fullName>
+        <fullName>PSD - Parts &amp; Services</fullName>
         <default>false</default>
-        <label>Parts &amp; Services</label>
+        <label>PSD - Parts &amp; Services</label>
     </customValue>
     <customValue>
-        <fullName>Surface</fullName>
+        <fullName>SRD - Surface</fullName>
         <default>false</default>
-        <label>Surface</label>
+        <label>SRD - Surface</label>
     </customValue>
     <customValue>
-        <fullName>Tools &amp; Attachments</fullName>
+        <fullName>TLD - Tools &amp; Attachments</fullName>
         <default>false</default>
-        <label>Tools &amp; Attachments</label>
+        <label>TLD - Tools &amp; Attachments</label>
     </customValue>
     <customValue>
-        <fullName>Underground</fullName>
+        <fullName>UMR - Underground</fullName>
         <default>false</default>
-        <label>Underground</label>
+        <label>UMR - Underground</label>
     </customValue>
     <customValue>
-        <fullName>Technology &amp; Innovation</fullName>
+        <fullName>TIN - Technology &amp; Innovation</fullName>
         <default>false</default>
-        <label>Technology &amp; Innovation</label>
+        <label>TIN - Technology &amp; Innovation</label>
     </customValue>
     <customValue>
-        <fullName>Digital Solutions Division</fullName>
+        <fullName>DSD - Digital Solutions Division</fullName>
         <default>false</default>
-        <label>Digital Solutions Division</label>
-    </customValue>
-    <customValue>
-        <fullName>All</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>All</label>
+        <label>DSD - Digital Solutions Division</label>
     </customValue>
     <customValue>
         <fullName>Hydraulics</fullName>
@@ -47,6 +41,12 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>Technology &amp; Digital</label>
+    </customValue>
+    <customValue>
+        <fullName>All</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>All</label>
     </customValue>
     <masterLabel>Division</masterLabel>
     <sorted>false</sorted>

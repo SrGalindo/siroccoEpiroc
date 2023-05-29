@@ -11,23 +11,9 @@
 **/
 
 public with sharing class OpportunityTriggerHandler {
-    public static void afterUpdate(List<Opportunity> opportunitiesInc,Map<Id,Opportunity> OldOps){
+    public static void afterUpdate(List<Opportunity> opportunitiesInc){
         System.debug('afterUpdate Opportunity');
-        if(TriggerContextUtility.isFirstRun()){
-            for(Opportunity record:opportunitiesInc){
-                system.debug('Old Owner' + record.Owner_Name__c);
-                system.debug('New Owner' + OldOps.get(record.Id).Owner_Name__c);
-                if(record.OwnerId != OldOps.get(record.Id).OwnerId){
-                    TriggerContextUtility.setFirstRunFalse();
-                }
-                else{
-                    oliUpdates(opportunitiesInc);
-                }
-                
-                
-            }
-        }
-        
+        oliUpdates(opportunitiesInc);
         addressUpdates(opportunitiesInc);
     }
 
@@ -66,18 +52,14 @@ public with sharing class OpportunityTriggerHandler {
             opIds.add(opp.Id);
         }
 
-        List<QuoteLineItem> quoteLines = [SELECT Id, Name__c,Item_number__c, Description,Unit_of_Measure__c,Business_Line__c, Division__c, List_price__c, GAC__c, OpportunityLineItemId FROM QuoteLineItem WHERE QuoteId IN :syncedQuoteIds ];
-        Map<Id, OpportunityLineItem> opLineItems = new Map<Id, OpportunityLineItem>([SELECT Id,Unit_of_Measure__c,Business_Line__c,GAC__c,List_price__c,Division__c,Item_number__c,Description, Name__c FROM OpportunityLineItem WHERE OpportunityId IN :opIds ]);
+        List<QuoteLineItem> quoteLines = [SELECT Id, Name__c,Item_number__c, Description,Unit_of_Measure__c,Business_Line__c, Division__c, List_price__c, GAC__c, OpportunityLineItemId FROM QuoteLineItem WHERE QuoteId IN :syncedQuoteIds WITH SECURITY_ENFORCED];
+        Map<Id, OpportunityLineItem> opLineItems = new Map<Id, OpportunityLineItem>([SELECT Id, Name__c FROM OpportunityLineItem WHERE OpportunityId IN :opIds WITH SECURITY_ENFORCED]);
         
         List<OpportunityLineItem> oppLinItemsToUpdate = new List<OpportunityLineItem>();
-        boolean updateOI = false;
         if(quoteLines.size()>0){
         for(QuoteLineItem ql : quoteLines){
             OpportunityLineItem referencedOi = opLineItems.get(ql?.OpportunityLineItemId);
             if(referencedOi != null){
-                if(referencedOi.Name__c != ql.Name__c || referencedOi.Description != ql.Description || referencedOi.Item_number__c != ql.Item_number__c || referencedOi.Division__c != ql.Division__c || referencedOi.List_price__c != ql.List_price__c || referencedOi.GAC__c != ql.GAC__c || referencedOi.Business_Line__c != ql.Business_Line__c || referencedOi.Unit_of_Measure__c != ql.Unit_of_Measure__c){
-                    updateOI = true;
-                }
                 referencedOi.Name__c = ql.Name__c;
                 referencedOi.Description = ql.Description;
                 referencedOi.Item_number__c = ql.Item_number__c;
@@ -87,14 +69,11 @@ public with sharing class OpportunityTriggerHandler {
                 referencedOi.Business_Line__c = ql.Business_Line__c;
                 referencedOi.Unit_of_Measure__c = ql.Unit_of_Measure__c;
                 oppLinItemsToUpdate.add(referencedOi);
-                
             }
         }
         }
-        if(updateOI){
-            update oppLinItemsToUpdate;
-        }
         
+        update oppLinItemsToUpdate;
     }
 
     public static void beforeInsert(List<Opportunity> opportunitiesInc){
