@@ -41,6 +41,11 @@
     </types>
     <types>
         <members>Account_plan_2_0__c.Account__c</members>
+        <members>Account_plan_2_0__c.Division__c</members>
+        <members>Account_plan_2_0__c.Final_Version__c</members>
+        <members>Account_plan_2_0__c.Status__c</members>
+        <members>Account_plan_2_0__c.Total_Customer_Opportunity_Value__c</members>
+        <members>Account_plan_2_0__c.Valid_until_date__c</members>
         <members>Account_Plan_Accounts__c.Account__c</members>
         <members>Account_Plan_Accounts__c.Account_plan_2_0__c</members>
         <members>Account_Plan_Contacts__c.Account_plan_2_0__c</members>
