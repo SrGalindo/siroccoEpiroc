@@ -191,10 +191,12 @@ public class TestDataFactory {
         Country__c spain = new Country__c();
         spain.Alpha_2_Code__c = 'ES';
         insert spain;
+        Decimal d = math.random() * 1000;
         Account acct = new Account(
-            Name='TestAccount',
-            CCUST__c = '220005', 
+            Name='TestAccount'+d.intValue(),
+            CCUST__c = '220005'+d.intValue(), 
             FAM_Code__c = 'ZAT',
+            Source_System__c = 'SAP',
             Country__c = spain.id);
             insert acct;
             Address__c addr = createSingelAddress(acct, spain.id);

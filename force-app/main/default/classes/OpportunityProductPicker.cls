@@ -1,6 +1,7 @@
-public with sharing class OpportunityProductPicker {
+public with sharing class OpportunityProductPicker extends BaseController{
     @AuraEnabled
-    public static String addProductToOpportunity(String opportunityId, List<ItemTemplateLwc> itemsArg){
+    public static Map<String, Object> addProductToOpportunity(String opportunityId, List<ItemTemplateLwc> itemsArg){
+        Map<String, Object> result = getActionSuccessful(null);
         System.debug(itemsArg.size());
         System.debug(itemsArg);
         System.debug(itemsArg[0].itemDescription);
@@ -81,13 +82,10 @@ public with sharing class OpportunityProductPicker {
                 //System.debug('entry');
                 //System.debug(entry);
                 insert oliList;
-                return 'success';
             } catch (Exception e) {
-                throw new AuraHandledException(e.getMessage());
+                result = getActionFailed(e);
             }
-
-        }
-        else if(quoteList.size() > 0){
+        }else if(quoteList.size() > 0){
             try {
                 Quote quote = quoteList[0];
                 Map<Id, Id> productIdToStandardPBEIdMap = ProductHandler.findOrCreateStandardPBEsForProducts(itemNumberToProductIdMap.values(), quote.CurrencyIsoCode);
@@ -147,11 +145,10 @@ public with sharing class OpportunityProductPicker {
                 //System.debug('entry');
                 //System.debug(entry);
                 insert qlList;
-                return 'success';
             } catch (Exception e) {
-                throw new AuraHandledException(e.getMessage());
+                result = getActionFailed(e);
             }
         }
-    return 'error';
+        return result;
     }
 }

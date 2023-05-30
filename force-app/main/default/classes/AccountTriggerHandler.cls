@@ -1,6 +1,6 @@
 public with sharing class AccountTriggerHandler {
     public static void afterInsert(List<Account> accountList){
-        //calculateTerritory(accountList);
+        calculateTerritory(accountList);
     }
     
     public static void beforeInsert(List<Account> accountList){

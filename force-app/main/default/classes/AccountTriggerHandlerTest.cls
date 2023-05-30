@@ -1,38 +1,31 @@
 @isTest
-
 public class AccountTriggerHandlerTest {
     
-    @testSetup
-    public static void setup(){
+    // @testSetup
+    // public static void setup(){    
+    //     Account acc = TestDataFactory.createSingelAccount();
+    //     User usr = [Select id from User where Id = :UserInfo.getUserId()];
         
-        Account acc = TestDataFactory.createSingelAccount();
-        
-        User usr = [Select id from User where Id = :UserInfo.getUserId()];
-        
-        System.RunAs(usr)
-        {
-            Test.startTest();
-               insertTestTerritory(acc.Id);
-            Test.stopTest();
-        }
-    }
+    //     System.RunAs(usr){
+    //         Test.startTest();
+    //            insertTestTerritory(acc.Id);
+    //         Test.stopTest();
+    //     }
+    // }
     
-    @isTest static void beforeInsertTest(){
-        
-        List<Account> accList = [Select Id from Account Limit 1];
-        
-        
-        
+    @isTest static void beforeInsertTest(){        
         Test.startTest();
-        //List<Account> accList = [Select Id from Account Limit 1];
-        //System.assertEquals(acc_St.Stakeholder__c, stk.Id);
+        Account acc = TestDataFactory.createSingelAccount();
         Test.stopTest();
+
+        List<Account> accList = [Select Id From Account];
+        System.assertEquals(1, accList.size(), 'Size of accounts is different than expected');
+        System.assertEquals(acc.Id, accList.get(0).Id, 'Account retrieved is not the one expected');
     }
     
-     private static void insertTestTerritory(Id AccId)
-    {
+    private static void insertTestTerritory(Id AccId){
         
-        List<Territory2Type> terriType   = [SELECT id, DeveloperName from Territory2Type where  DeveloperName = 'Country'];
+        List<Territory2Type> terriType = [SELECT id, DeveloperName from Territory2Type where  DeveloperName = 'Country'];
         system.debug('terriType' + terriType.size());
         List<Profile> adminProfile = [select id, name from Profile where  name = 'System Administrator'];
 
@@ -51,8 +44,8 @@ public class AccountTriggerHandlerTest {
         User u = new User(firstname= 'Test',
                   lastname='XXXX',
                   Alias='Test',
-                  email = 'test1234@test.com',
-                  username= 'test1234xxx@test.com', 
+                  email = 'test1234@randomEmail.com',
+                  username= 'test1234xxx@randomEmail.com', 
                   profileId= p.id, 
                   emailencodingkey='UTF-8',
                   languagelocalekey='en_US',
@@ -62,9 +55,9 @@ public class AccountTriggerHandlerTest {
         
         User u2 = new User(firstname= 'Test',
                   lastname='XXXX',
-                  Alias='Test',
-                  email = 'test1234122@test.com',
-                  username= 'test1234xxx123@test.com', 
+                  Alias='Test1234',
+                  email = 'test1234122@randomEmail.com',
+                  username= 'test1234xxx123@randomEmail.com', 
                   profileId= p.id, 
                   emailencodingkey='UTF-8',
                   languagelocalekey='en_US',
@@ -76,9 +69,7 @@ public class AccountTriggerHandlerTest {
         insert objUserTerritory2Association;
 
         UserTerritory2Association objUserTerritory2Association2 = new UserTerritory2Association(Territory2Id= objTerr.Id, UserId= u2.Id, RoleInTerritory2='Sales / Marketing Administrator');
-        insert objUserTerritory2Association2 ;
-
-        
+        insert objUserTerritory2Association2 ; 
     }
 
 }

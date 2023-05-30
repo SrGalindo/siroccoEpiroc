@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 //import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 //import { NavigationMixin } from 'lightning/navigation';
 import LightningConfirm from 'lightning/confirm';
+import {getDetailsFromError, fireToast} from 'c/lwcutils';
 import addProductToOpportunity from "@salesforce/apex/OpportunityProductPicker.addProductToOpportunity";
 import getItem from "@salesforce/apex/QuoteProductPicker.getItem";
 import getItems from "@salesforce/apex/QuoteProductPicker.getItems";
@@ -485,20 +486,18 @@ export default class ProductPicker extends LightningElement {
         this.activeSearch = true;
         addProductToOpportunity({opportunityId: this.recordId, itemsArg: this.basketList})
         .then((result) => {
-        if(result === 'error'){
+            if (result['error']) {
+                fireToast(this, 'error', 'Error', result['message']);
+                this.activeSearch = false;
+            }else{
+                this.activeSearch = false;
+                this.unsavedChanges = false;
+                fireToast(this, 'success', 'Success', 'Product added');
+                this.navigateToQuote();
+            }
+        }).catch((error) => {
             this.activeSearch = false;
-            this.showErrorNotification(result.message, result.message2);
-        }
-        else if(result ==='success'){
-            this.activeSearch = false;
-            this.unsavedChanges = false;
-            this.showNotification('Success', 'Product added', 'success');
-            this.navigateToQuote();
-        }
-        })
-        .catch((error) => {
-            this.activeSearch = false;
-            this.showNotification('Error', error.body.message, 'error');
+            fireToast(this, 'error', 'Error', error.body.message);
         })
     }
     removePillItem(event) {
