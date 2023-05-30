@@ -357,10 +357,10 @@
                     <name>columns</name>
                     <value>Facet-3f9a913a-f59e-4136-b746-5b519fd9ae14</value>
                 </componentInstanceProperties>
-                <componentInstanceProperties>
+                <!-- <componentInstanceProperties>
                     <name>horizontalAlignment</name>
                     <value>false</value>
-                </componentInstanceProperties>
+                </componentInstanceProperties> -->
                 <componentInstanceProperties>
                     <name>label</name>
                     <value>Section</value>
