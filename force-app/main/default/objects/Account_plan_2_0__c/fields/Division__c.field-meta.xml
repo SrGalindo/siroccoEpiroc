@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Division__c</fullName>
+    <externalId>false</externalId>
+    <label>Division</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Parts &amp; Services</fullName>
+                <default>false</default>
+                <label>Parts &amp; Services</label>
+            </value>
+            <value>
+                <fullName>Surface</fullName>
+                <default>false</default>
+                <label>Surface</label>
+            </value>
+            <value>
+                <fullName>Tools &amp; Attachments</fullName>
+                <default>false</default>
+                <label>Tools &amp; Attachments</label>
+            </value>
+            <value>
+                <fullName>Underground</fullName>
+                <default>false</default>
+                <label>Underground</label>
+            </value>
+            <value>
+                <fullName>Technology &amp; Digital</fullName>
+                <default>false</default>
+                <label>Technology &amp; Digital</label>
+            </value>
+            <value>
+                <fullName>Digital Solutions Division</fullName>
+                <default>false</default>
+                <label>Digital Solutions Division</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
